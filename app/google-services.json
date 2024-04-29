@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928178915932",
+    "project_id": "smartdiet-a0fa6",
+    "storage_bucket": "smartdiet-a0fa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928178915932:android:068718475873ea389f3499",
+        "android_client_info": {
+          "package_name": "com.tfg.smartdiet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD79xV8SDSfzuwvefsO6A7YN3hMq37-Sho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
