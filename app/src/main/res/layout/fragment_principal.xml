@@ -5,10 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ProgressBar
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="25dp"
+        android:backgroundTint="@color/red"
+        android:progress="0"
+        android:max="100" />
+
+    <Button
+        android:id="@+id/BotonB"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:backgroundTint="@color/red"/>
+
+    <EditText
+        android:id="@+id/ET"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"/>
+
 
 </FrameLayout>
