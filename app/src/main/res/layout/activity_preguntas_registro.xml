@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".iu.Registro.PreguntasRegistroActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccione su genero"
+            android:layout_gravity="center"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/HombreB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hombre"/>
+            <RadioButton
+                android:id="@+id/MujerB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mujer"/>
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Que quieres hacer"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/PerderGRasaB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perder grasa"/>
+            <RadioButton
+                android:id="@+id/AumentarVolumenB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aumentar Volumen"/>
+            <RadioButton
+                android:id="@+id/EstarFormaB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estar en forma"/>
+        </RadioGroup>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewWidth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="@color/red"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewMale">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Peso"
+                    android:textAllCaps="true"
+                    android:textColor="@color/background_botton_Main" />
+
+                <TextView
+                    android:id="@+id/tvWidth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="120 kg"
+                    android:textColor="@color/white"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/rsWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:valueFrom="50"
+                    android:valueTo="150" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/PREntrar"
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/red"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="Entrar"/>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

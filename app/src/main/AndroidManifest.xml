@@ -13,6 +13,10 @@
         android:theme="@style/Theme.SmartDiet"
         tools:targetApi="31">
         <activity
+            android:name=".iu.Registro.PreguntasRegistroActivity"
+            android:exported="true" >
+        </activity>
+        <activity
             android:name=".iu.PaginaPrincipal.MainActivity"
             android:exported="false" />
         <activity
@@ -25,7 +29,7 @@
             android:name=".iu.Bienvenida.BienvenidaActivity"
             android:exported="true"
             android:label="@string/title_activity_bienvenida"
-            android:theme="@style/Theme.SmartDiet" >
+            android:theme="@style/Theme.SmartDiet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
