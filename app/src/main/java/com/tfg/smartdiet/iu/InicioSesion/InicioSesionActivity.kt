@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tfg.smartdiet.databinding.ActivityInicioSesionBinding
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
+import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
 class InicioSesionActivity : AppCompatActivity() {
 
@@ -27,6 +28,12 @@ class InicioSesionActivity : AppCompatActivity() {
     private fun initListener() {
         binding.InicioSesionBtnEntrar.setOnClickListener {
             signInAuth()
+        }
+
+        binding.InicioSesionTvTextoSubrayado.setOnClickListener {
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

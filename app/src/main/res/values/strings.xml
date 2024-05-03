@@ -49,4 +49,10 @@
     <string name="userQuestion">¿No eres usuario?</string>
     <string name="textEnter">Registrate</string>
     <string name="IniciaSesion">Inicia Sesion</string>
+    <string name="usuario">Usuario</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="eresUsuario">¿Eres usuario?</string>
+    <string name="formatoEmail">Formato de email no válido</string>
+    <string name="passwordLength">La contraseña debe tener al menos 6 caracteres</string>
 </resources>
