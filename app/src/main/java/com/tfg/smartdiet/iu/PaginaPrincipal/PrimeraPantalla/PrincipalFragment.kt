@@ -1,9 +1,11 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.tfg.smartdiet.R
@@ -14,8 +16,16 @@ class PrincipalFragment : Fragment() {
 
     private var _binding: FragmentPrincipalBinding? = null
     private val binding get() = _binding!!
+
     private var calorias=15
-    private var MAX_CALORIAS_DIARIAS=100.0f
+    private var proteinas = 0
+    private var grasas = 0
+    private var carbohidratos = 0
+
+    private var MAX_CALORIAS_DIARIAS=300.0f
+    private var MAX_PROTEINAS_DIARIAS=100.0f
+    private var MAX_GRASAS_DIARIAS=100.0f
+    private var MAX_CARBOHIDRATOS_DIARIOS=100.0f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,28 +44,57 @@ class PrincipalFragment : Fragment() {
 
     private fun initListener() {
         binding.BotonB.setOnClickListener {
-            calorias += 45
-            initUI()
+            showAddDataDialog()
         }
     }
 
     private fun initUI() {
-        // Obtén una referencia al ProgressBar
-        val progressBar: ProgressBar = binding.progressBar
+        // Actualiza la barra de progreso para las calorías
+        binding.progressBarCalorias.progress = calcularProgreso(calorias, MAX_CALORIAS_DIARIAS)
+        binding.textViewCalorias.text = "$calorias/$MAX_CALORIAS_DIARIAS"
 
-        // Supongamos que tienes una variable que almacena las calorías consumidas
-        val caloriasConsumidas: Int = obtenerCaloriasConsumidas()
+        // Actualiza la barra de progreso para las proteínas
+        binding.progressBarProteinas.progress = calcularProgreso(proteinas, MAX_PROTEINAS_DIARIAS)
+        binding.textViewProteinas.text = "$proteinas/$MAX_PROTEINAS_DIARIAS"
 
-        // Calcula el progreso como un porcentaje
-        val progreso: Int = (caloriasConsumidas / MAX_CALORIAS_DIARIAS.toFloat() * 100).toInt()
+        // Actualiza la barra de progreso para las grasas
+        binding.progressBarGrasas.progress = calcularProgreso(grasas, MAX_GRASAS_DIARIAS)
+        binding.textViewGrasas.text = "$grasas/$MAX_GRASAS_DIARIAS"
 
-        // Actualiza el progreso del ProgressBar
-        progressBar.progress = progreso
+        // Actualiza la barra de progreso para los carbohidratos
+        binding.progressBarCarbohidratos.progress = calcularProgreso(carbohidratos, MAX_CARBOHIDRATOS_DIARIOS)
+        binding.textViewCarbohidratos.text = "$carbohidratos/$MAX_CARBOHIDRATOS_DIARIOS"
     }
 
-    private fun obtenerCaloriasConsumidas(): Int {
-        return this.calorias
+    private fun calcularProgreso(valor: Int, maximo: Float): Int {
+        return ((valor.toFloat() / maximo) * 100).toInt()
     }
 
+    private fun showAddDataDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_data, null)
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setTitle("Añadir Datos")
+            .setPositiveButton("Añadir") { _, _ ->
+                val newCalorias = dialogView.findViewById<EditText>(R.id.etNewCalorias).text.toString().toInt()
+                val newProteinas = dialogView.findViewById<EditText>(R.id.etNewProteinas).text.toString().toInt()
+                val newGrasas = dialogView.findViewById<EditText>(R.id.etNewGrasas).text.toString().toInt()
+                val newCarbohidratos = dialogView.findViewById<EditText>(R.id.etNewCarbohidratos).text.toString().toInt()
+
+                // Actualizar las variables con los nuevos valores
+                calorias += newCalorias
+                proteinas += newProteinas
+                grasas += newGrasas
+                carbohidratos += newCarbohidratos
+
+                // Actualizar las barras de progreso
+                initUI()
+            }
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        dialog.show()
+    }
 
 }

@@ -10,4 +10,7 @@
     <color name="background_botton_Main2">#FFE57F</color>
     <color name="red">#FC1403</color>
     <color name="background_botton_Main">#B9F6CA</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#FFFF00</color>
 </resources>

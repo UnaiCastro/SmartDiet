@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/introduceDatosRegistro"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etNewCalorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/calorias"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etNewProteinas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/proteinas"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etNewGrasas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/grasas"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etNewCarbohidratos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/carbs"
+        android:inputType="number"/>
+
+</LinearLayout>

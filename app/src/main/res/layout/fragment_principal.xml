@@ -5,31 +5,170 @@
     android:layout_height="match_parent"
     tools:context=".iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment">
 
-    <ProgressBar
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="16dp"
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <!-- Barra de progreso para calorías -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:backgroundTint="@color/red"
-        android:progress="0"
-        android:max="100" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calorias"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/textViewCalorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="0/100"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarCalorias"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/yellow"
+            android:progress="0"
+            android:max="100" />
+    </LinearLayout>
+
+    <!-- Barra de progreso para proteínas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/proteinas"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/textViewProteinas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="0/100"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarProteinas"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/red"
+            android:progress="0"
+            android:max="100" />
+    </LinearLayout>
+
+    <!-- Barra de progreso para grasas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grasas"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/textViewGrasas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="0/100"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarGrasas"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/blue"
+            android:progress="0"
+            android:max="100" />
+    </LinearLayout>
+
+    <!-- Barra de progreso para carbohidratos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carbs"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/textViewCarbohidratos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="0/100"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarCarbohidratos"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/green"
+            android:progress="0"
+            android:max="100" />
+    </LinearLayout>
+
+    <!-- Botón para ingresar datos -->
     <Button
         android:id="@+id/BotonB"
-        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:backgroundTint="@color/red"/>
-
-    <EditText
-        android:id="@+id/ET"
-        android:layout_width="match_parent"
-        android:inputType="number"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"/>
+        android:text="@string/nuevoRegistro"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="170dp"/>
 
 
 </FrameLayout>

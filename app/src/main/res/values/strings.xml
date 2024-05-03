@@ -55,4 +55,11 @@
     <string name="eresUsuario">¿Eres usuario?</string>
     <string name="formatoEmail">Formato de email no válido</string>
     <string name="passwordLength">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="calorias">Calorías</string>
+    <string name="proteinas">Proteínas</string>
+    <string name="grasas">Grasas</string>
+    <string name="carbs">Carbohidratos</string>
+    <string name="introduceDatosRegistro">Introduce los datos del nuevo registro</string>
+    <string name="nombre">Nombre</string>
+    <string name="nuevoRegistro">Registrar nuevos datos</string>
 </resources>
