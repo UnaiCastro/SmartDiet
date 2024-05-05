@@ -1,6 +1,7 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.FragmentPrincipalBinding
+
 
 class PrincipalFragment : Fragment() {
 
@@ -40,6 +42,7 @@ class PrincipalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initUI()
         initListener()
+        checkReset()
     }
 
     private fun initListener() {
@@ -95,6 +98,24 @@ class PrincipalFragment : Fragment() {
             .create()
 
         dialog.show()
+    }
+
+    private fun checkReset(){
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val resetRequired = sharedPreferences.getBoolean("reset", false)
+
+        if (resetRequired) {
+            //TODO: Guardar los valores actuales en la base de datos
+
+            calorias = 0
+            proteinas = 0
+            grasas = 0
+            carbohidratos = 0
+
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("reset", false)
+            editor.apply()
+        }
     }
 
 }
