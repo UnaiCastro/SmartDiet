@@ -1,0 +1,6 @@
+androidx.fragment.app.FragmentManagerKt
+androidx.fragment.app.FragmentViewModelLazyKt
+androidx.fragment.app.FragmentViewModelLazyKt$activityViewModels$1
+androidx.fragment.app.FragmentViewModelLazyKt$createViewModelLazy$factoryPromise$1
+androidx.fragment.app.FragmentViewModelLazyKt$viewModels$1
+androidx.fragment.app.FragmentViewModelLazyKt$viewModels$2

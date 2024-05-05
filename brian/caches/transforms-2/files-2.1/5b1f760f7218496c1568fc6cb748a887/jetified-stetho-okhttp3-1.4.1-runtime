@@ -1,0 +1,5 @@
+com.facebook.stetho.okhttp3.BuildConfig
+com.facebook.stetho.okhttp3.StethoInterceptor
+com.facebook.stetho.okhttp3.StethoInterceptor$ForwardingResponseBody
+com.facebook.stetho.okhttp3.StethoInterceptor$OkHttpInspectorRequest
+com.facebook.stetho.okhttp3.StethoInterceptor$OkHttpInspectorResponse
