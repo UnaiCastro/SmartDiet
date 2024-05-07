@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            app:cardBackgroundColor="@color/red"
+
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,14 +84,14 @@
                     android:layout_height="wrap_content"
                     android:text="Peso"
                     android:textAllCaps="true"
-                    android:textColor="@color/background_botton_Main" />
+                     />
 
                 <TextView
                     android:id="@+id/tvWidth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="120 kg"
-                    android:textColor="@color/white"
+
                     android:textSize="38sp"
                     android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
         <Button
             android:id="@+id/PREntrar"
             android:layout_width="match_parent"
-            android:backgroundTint="@color/red"
+
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:text="Entrar"/>

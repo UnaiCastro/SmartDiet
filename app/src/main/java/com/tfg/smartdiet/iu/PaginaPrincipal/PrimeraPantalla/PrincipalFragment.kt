@@ -76,7 +76,7 @@ class PrincipalFragment : Fragment() {
     private fun showAddDataDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_data, null)
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext(), R.style.AppTheme)
             .setView(dialogView)
             .setTitle("Añadir Datos")
             .setPositiveButton("Añadir") { _, _ ->
