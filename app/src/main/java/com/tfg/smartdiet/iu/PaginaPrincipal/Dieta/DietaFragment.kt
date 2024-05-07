@@ -1,4 +1,4 @@
-package com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla
+package com.tfg.smartdiet.iu.PaginaPrincipal.Dieta
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.FragmentPrincipalBinding
 
-class PrincipalFragment : Fragment() {
+class DietaFragment : Fragment() {
 
 
     private var _binding: FragmentPrincipalBinding? = null

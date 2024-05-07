@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/primeraFragment"
-        android:title="Primera">
+        android:id="@+id/dietaFragment"
+        android:icon="@drawable/ic_casa"
+        android:title="Dieta">
 
     </item>
     <item
-        android:id="@+id/segundaFragment"
-        android:title="Segunda">
+        android:id="@+id/alimentosFragment"
+        android:icon="@drawable/ic_alimentos"
+        android:title="Alimentos">
+
+    </item>
+
+    <item
+        android:id="@+id/infoFragment"
+        android:icon="@drawable/ic_info"
+        android:title="Informacion">
 
     </item>
 </menu>
