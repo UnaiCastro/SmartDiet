@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.Registro
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityRegistroBinding
+import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Usuario
 import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
@@ -68,6 +70,9 @@ class RegistroActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(etEmail, etContrasena).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 registrarUsuarioEnFirestore(etNombre,etEmail)
+                //Se guarda la sesión
+                val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
+                conf.setInicioSesion(etNombre)
                 val i = Intent(this, PreguntasRegistroActivity::class.java)
                 startActivity(i)
 

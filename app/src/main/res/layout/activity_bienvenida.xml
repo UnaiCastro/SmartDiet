@@ -9,24 +9,36 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="436dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:layout_margin="16dp"
             android:id="@+id/BienvenidaBtnInicioSesion"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inicio Sesion"/>
+            android:layout_margin="16dp"
+            android:backgroundTint="#CDC79D"
+            android:elevation="10dp"
+            android:text="Inicio Sesion"
+            android:textColor="#87800E"
+            app:background="@color/background_botton_Main" />
 
         <Button
-            android:layout_margin="16dp"
             android:id="@+id/BienvenidaBtnRegistro"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro"/>
+            android:layout_margin="16dp"
+            android:backgroundTint="#CDC79D"
+            android:elevation="10dp"
+            android:text="Registro"
+            android:textColor="#87800E"
+            app:background="@color/background_botton_Main" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.InicioSesion
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tfg.smartdiet.databinding.ActivityInicioSesionBinding
+import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
@@ -51,19 +53,20 @@ class InicioSesionActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.i("InicioSesion", "Logueado el usuario $correoUsuario ")
-                    pasarAlMenu()
+                    pasarAlMenu(correoUsuario)
                 } else {
                     handleAuthError(task.exception)
                 }
             }
     }
 
-    private fun pasarAlMenu() {
+    private fun pasarAlMenu(correoUsuario: String) {
         println(auth.currentUser?.uid)
         if (auth.currentUser?.uid == null) {
             return
         }
-
+        val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
+        conf.setInicioSesion(correoUsuario)
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
     }
