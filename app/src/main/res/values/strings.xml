@@ -62,4 +62,9 @@
     <string name="introduceDatosRegistro">Introduce los datos del nuevo registro</string>
     <string name="nombre">Nombre</string>
     <string name="nuevoRegistro">Registrar nuevos datos</string>
+    <string name="deleteConf">¿Seguro que quieres borrar la entrada?</string>
+    <string name="y">Sí</string>
+    <string name="n">No</string>
+    <string name="annadir">Añadir</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
