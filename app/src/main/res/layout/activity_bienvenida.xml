@@ -7,14 +7,23 @@
     tools:context=".iu.Bienvenida.BienvenidaActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="436dp"
+        android:layout_width="423dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:orientation="vertical"
+        app:background="@color/background_botton_Main"
+        app:backgroundTint="@color/background_botton_Main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoBienvenida"
+            android:layout_width="275dp"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <Button
             android:id="@+id/BienvenidaBtnInicioSesion"
