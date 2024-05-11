@@ -22,7 +22,7 @@ import java.util.Locale
 
 
 
-class PrincipalFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
+class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
 
 
