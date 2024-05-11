@@ -1,15 +1,13 @@
-package com.tfg.smartdiet.iu.PaginaPrincipal.SegundaPantalla
+package com.tfg.smartdiet.iu.PaginaPrincipal.Alimento
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.tfg.smartdiet.R
-import com.tfg.smartdiet.databinding.FragmentPrincipalBinding
 import com.tfg.smartdiet.databinding.FragmentSegundaBinding
 
-class SegundaFragment : Fragment() {
+class AlimentoFragment : Fragment() {
 
     private var _binding: FragmentSegundaBinding? = null
     private val binding get() = _binding!!

@@ -1,4 +1,4 @@
-package com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla
+package com.tfg.smartdiet.iu.PaginaPrincipal.Dieta
 
 import EntryAdapter
 import android.app.AlertDialog
@@ -13,13 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tfg.smartdiet.R
+
+
 import com.tfg.smartdiet.databinding.FragmentPrincipalBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 
+
 class PrincipalFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
+
 
 
     private var _binding: FragmentPrincipalBinding? = null

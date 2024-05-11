@@ -3,16 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/primeraFragment">
+    app:startDestination="@id/dietaFragment">
 
     <fragment
-        android:id="@+id/primeraFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment"
+        android:id="@+id/dietaFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
         android:label="fragment_principal"
         tools:layout="@layout/fragment_principal" />
     <fragment
-        android:id="@+id/segundaFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.SegundaPantalla.SegundaFragment"
+        android:id="@+id/alimentosFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Alimento.AlimentoFragment"
         android:label="fragment_segunda"
         tools:layout="@layout/fragment_segunda" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Info.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+
+
 </navigation>
