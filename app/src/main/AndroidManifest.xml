@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".iu.PaginaPrincipal.Historico.HistoricoActivity"
+            android:name=".iu.Bienvenida.BienvenidaActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
             android:name=".iu.InicioSesion.InicioSesionActivity"
             android:exported="false" />
         <activity
-            android:name=".iu.Bienvenida.BienvenidaActivity"
+            android:name=".iu.PaginaPrincipal.Historico.HistoricoActivity"
             android:exported="true"
             android:label="@string/title_activity_bienvenida"
             android:theme="@style/AppTheme">

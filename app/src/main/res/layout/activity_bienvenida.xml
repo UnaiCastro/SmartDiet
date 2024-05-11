@@ -12,8 +12,6 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:background="@color/background_botton_Main"
-        app:backgroundTint="@color/background_botton_Main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +32,7 @@
             android:backgroundTint="#CDC79D"
             android:elevation="10dp"
             android:text="Inicio Sesion"
-            android:textColor="#87800E"
-            app:background="@color/background_botton_Main" />
+            android:textColor="#87800E" />
 
         <Button
             android:id="@+id/BienvenidaBtnRegistro"
@@ -46,8 +43,7 @@
             android:backgroundTint="#CDC79D"
             android:elevation="10dp"
             android:text="Registro"
-            android:textColor="#87800E"
-            app:background="@color/background_botton_Main" />
+            android:textColor="#87800E" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

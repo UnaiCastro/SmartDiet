@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.tfg.smartdiet.databinding.ActivityBienvenidaBinding
-import com.tfg.smartdiet.databinding.ActivityMainBinding
+//import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
-import com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment
+//import com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment
 import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
 class BienvenidaActivity : AppCompatActivity() {
