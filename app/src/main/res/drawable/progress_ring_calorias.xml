@@ -16,7 +16,7 @@
             android:thickness="25dp"
             android:useLevel="true">
 
-            <solid android:color="@color/md_theme_primaryFixed_highContrast"/>
+            <solid android:color="@color/anillo_calorias"/>
         </shape>
     </item>
 

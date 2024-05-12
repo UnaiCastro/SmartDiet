@@ -140,4 +140,10 @@
     <color name="md_theme_surfaceContainer_highContrast">#291D19</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#352723</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#40312D</color>
+
+    <!-- Anillos -->
+    <color name="anillo_calorias">#FFB266</color>
+    <color name="anillo_proteinas">#800000</color>
+    <color name="anillo_grasas">#3B5323</color>
+    <color name="anillo_carbs">#4169E1</color>
 </resources>
