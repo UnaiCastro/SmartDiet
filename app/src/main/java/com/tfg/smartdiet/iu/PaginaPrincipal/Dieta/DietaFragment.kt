@@ -4,6 +4,7 @@ import EntryAdapter
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
 
 
 import com.tfg.smartdiet.databinding.FragmentPrincipalBinding
+import com.tfg.smartdiet.domain.ConfigUsuario
+import com.tfg.smartdiet.domain.Usuario
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -29,12 +34,12 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private var _binding: FragmentPrincipalBinding? = null
     private val binding get() = _binding!!
 
-    private var calorias=15
+    private var calorias = 0
     private var proteinas = 0
     private var grasas = 0
     private var carbohidratos = 0
 
-    private var MAX_CALORIAS_DIARIAS=300.0f
+    private var MAX_CALORIAS_DIARIAS=100.0f
     private var MAX_PROTEINAS_DIARIAS=100.0f
     private var MAX_GRASAS_DIARIAS=100.0f
     private var MAX_CARBOHIDRATOS_DIARIOS=100.0f
@@ -43,6 +48,13 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private lateinit var recyclerViewEntries: RecyclerView
 
     private val allEntries: MutableList<HashMap<String, Any>> = mutableListOf()
+
+    private val entryIds: MutableList<String> = mutableListOf()
+
+
+    private lateinit var db:FirebaseFirestore
+
+    private var dietaActID: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,11 +67,16 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView()
-        addTestEntries() // Test con entradas existentes (cambiar por lectura de db)
-        initUI()
-        initListener()
-        checkReset()
+        obtenerDietaActual { dietaActID ->
+            this.dietaActID = dietaActID
+            initRecyclerView()
+//            addTestEntries() // Test con entradas existentes (cambiar por lectura de db)
+            initUI()
+            initListener()
+            checkReset()
+            Log.i("DietaFragment_DB", "ID dieta actual: ${this.dietaActID}")
+        }
+//        crearDietaUsuario() // SOLO USAR UNA VEZ PARA AÑADIR DIETA DE PRUEBA
     }
 
     private fun initRecyclerView() {
@@ -102,7 +119,9 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         // Notify the adapter of the data change
         entryAdapter.notifyDataSetChanged()
 
-        // TODO: Añadir en la base de datos etc...
+        //Añadir en la base de datos
+        annadirEntradaEnFirestore(entryData)
+
     }
 
     private fun initListener() {
@@ -157,6 +176,9 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 val hora = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
                 newEntryData["hora"] = hora
 
+                // Añadir la dieta actual
+                newEntryData["dietaActID"] = dietaActID ?: "" // Sin esto pone type mismatch
+
                 // Add the new entry
                 addEntry(newEntryData)
 
@@ -192,10 +214,35 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     }
 
     private fun deleteEntry(position: Int) {
-        allEntries.removeAt(position)
-        entryAdapter.notifyDataSetChanged()
-        // TODO: Borrar de la base de datos etc...
+        val entryToDelete = allEntries[position]
+        // Retrieve the entry ID from entryIds based on the position
+        val entryIdToDelete = entryIds[position]
+
+        // Log the entryToDelete to verify its contents
+        Log.d("DietaFragment_DB", "Entry to delete: $entryToDelete, ID: $entryIdToDelete")
+
+        db = FirebaseFirestore.getInstance()
+
+
+
+        // Delete the entry from Firestore using the retrieved entry ID
+        db.collection("entries")
+            .document(entryIdToDelete)
+            .delete()
+            .addOnSuccessListener {
+                Log.i("DietaFragment_DB", "Entry deleted successfully")
+                // Remove the entry ID from entryIds array
+                entryIds.removeAt(position)
+                // Remove the entry from the list and notify adapter
+                allEntries.removeAt(position)
+                entryAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error deleting entry: ${e.message}")
+            }
     }
+
+
 
     private fun checkReset(){
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -214,5 +261,105 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
             editor.apply()
         }
     }
+
+    private fun annadirEntradaEnFirestore(entrada: HashMap<String, Any>) {
+        db = FirebaseFirestore.getInstance()
+
+        db.collection("entries")
+            .add(entrada)
+            .addOnSuccessListener { documentReference ->
+                val entryId = documentReference.id
+                entryIds.add(entryId)
+                Log.i("DietaFragment_DB", "Añadida entrada $entrada con ID: $entryId")
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "La entrada $entrada no se pudo añadir ${e.message}")
+            }
+    }
+
+    private fun obtenerDietaActual(callback: (String?) -> Unit) {
+        // Obtener el correo del usuario desde las preferencias
+        val sharedPreferences = requireContext().getSharedPreferences("Configuracion", Context.MODE_PRIVATE)
+        val correo = sharedPreferences.getString("USUARIO", "")
+
+        db = FirebaseFirestore.getInstance()
+
+        // Obtener el id de la dieta actual del usuario a partir de su correo
+        db.collection("users")
+            .whereEqualTo("correo", correo)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val dietaActID = documents.documents[0].getString("dietaActID")
+                    Log.i("DietaFragment_DB", "Dieta actual: $dietaActID")
+                    callback(dietaActID) // Return the dietaActID through the callback
+                } else {
+                    Log.e("DietaFragment_DB", "No se encontró ningún usuario con el correo proporcionado: $correo")
+                    callback(null) // Return null through the callback if no user is found
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error al buscar usuario: ${e.message}")
+                callback(null) // Return null through the callback in case of failure
+            }
+    }
+
+
+    private fun crearDietaUsuario(){
+        val sharedPreferences = requireContext().getSharedPreferences("Configuracion", Context.MODE_PRIVATE)
+        val correo = sharedPreferences.getString("USUARIO", "")
+
+        // Obtener el id del usuario a partir de su correo
+        db.collection("users")
+            .whereEqualTo("correo", correo)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val userID = documents.documents[0].id
+
+                    // Añadir dieta
+                    val newDieta: HashMap<String, Any> = hashMapOf(
+                        "userID" to userID,
+                        "caloriasObj" to "2000",
+                        "proteinasObj" to "100",
+                        "grasasObj" to "50",
+                        "carbohidratosObj" to "100",
+                        "caloriasAct" to "200",
+                        "proteinasAct" to "20",
+                        "grasasAct" to "30",
+                        "carbohidratosAct" to "40",
+                        "fecha" to "12-05-2024"
+                    )
+
+                    db.collection("dietas")
+                        .add(newDieta)
+                        .addOnSuccessListener { dietaDocRef ->
+                            Log.i("DietaFragment_DB", "Añadida la dieta $newDieta")
+
+                            // Update the user document with the dietaActID
+                            db.collection("users")
+                                .document(userID)
+                                .update("dietaActID", dietaDocRef.id)
+                                .addOnSuccessListener {
+                                    Log.i("DietaFragment_DB", "Actualizado dietaActID en el usuario: $userID")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.e("DietaFragment_DB", "Error al actualizar dietaActID en el usuario: $userID, ${e.message}")
+                                }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("DietaFragment_DB", "La dieta $newDieta no se pudo añadir ${e.message}")
+                        }
+
+                } else {
+                    Log.e("DietaFragment_DB", "No se encontró ningún usuario con el correo proporcionado: $correo")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error al buscar usuario: ${e.message}")
+            }
+    }
+
+
 
 }
