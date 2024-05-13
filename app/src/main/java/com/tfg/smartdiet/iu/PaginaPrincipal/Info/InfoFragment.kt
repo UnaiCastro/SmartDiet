@@ -43,12 +43,12 @@ class InfoFragment : Fragment() {
         setNombre(view)
         pd = ProgressDialog(this.context)
             editNom.setOnClickListener{
-                editarNom()
+                editarNom(view)
             }
 
     }
 //Editar nombre
-    private fun editarNom() {
+    private fun editarNom(vista: View) {
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Cambiar nombre") //cambiar por strings
         val layout = LinearLayout(this.context)
@@ -70,13 +70,12 @@ class InfoFragment : Fragment() {
                 if (userId != null) {
                     val userRef = db.collection("users").document(userId)
                     val nuevoNombre = hashMapOf(
-                        value to "nombreUsuario"
+                        "nombreUsuario" to value
                     )
                     userRef.update(nuevoNombre as Map<String, Any>).addOnSuccessListener {
                         pd.dismiss()
-
-                        // after updated we will show updated
                         Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                        setNombre(vista)
                     }
                     .addOnFailureListener {
                         pd.dismiss()
@@ -94,17 +93,6 @@ class InfoFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser
         if (userId != null) {
-            val usersCollection = db.collection("users")
-
-            usersCollection.get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        Log.d("TAG", "${document.id} => ${document.data}")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.w("TAG", "Error getting documents: ", exception)
-                }
             val userRef = db.collection("users").document(userId.uid)
             userRef.get()
                 .addOnSuccessListener { documentSnapshot ->
