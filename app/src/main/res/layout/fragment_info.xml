@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="TextView"
+            android:text="Error"
             android:textSize="20sp" />
 
         <Button
@@ -56,6 +56,27 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/correoInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Error"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/editarMailInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Editar correo"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+
 
         <Button
             android:id="@+id/cambiarContrInfo"

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
+import org.w3c.dom.Text
 
 class InfoFragment : Fragment() {
     private lateinit var set: ImageView
@@ -27,6 +28,8 @@ class InfoFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var nombre: TextView
+    private lateinit var correoUsuario: TextView
+    private lateinit var editCorreo: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,11 +43,16 @@ class InfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         editNom = view.findViewById(R.id.editarNombreInfo)
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
+        editCorreo = view.findViewById(R.id.editarMailInfo)
         setNombre(view)
+        setCorreo(view)
         pd = ProgressDialog(this.context)
-            editNom.setOnClickListener{
-                editarNom(view)
-            }
+        editNom.setOnClickListener{
+            editarNom(view)
+        }
+        editCorreo.setOnClickListener{
+            editarMail(view)
+        }
 
     }
 //Editar nombre
@@ -117,6 +125,80 @@ class InfoFragment : Fragment() {
 
         }
     }
+
+    private fun setCorreo(vista: View){
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId.uid)
+            userRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        // Obtener el valor actual del campo "nombreUsuario"
+                        val correo = documentSnapshot.getString("correo")
+                        if (correo != null) {
+                            correoUsuario = vista.findViewById(R.id.correoInfo)
+                            correoUsuario.text = correo
+                            Log.d("TAG", "El correo del usuario es: $correo")
+                        } else {
+                            Log.d("TAG", "No se encontró el campo 'nombreUsuario'")
+                        }
+                    } else {
+                        Log.d("TAG", "No se encontró el documento del usuario")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Error al obtener el documento
+                    Log.w("TAG", "Error getting document", e)
+                }
+
+        }
+    }
+
+    private fun editarMail(vista: View) {
+        val builder = AlertDialog.Builder(this.context)
+        builder.setTitle("Cambiar correo") //cambiar por strings
+        val layout = LinearLayout(this.context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(10, 10, 10, 10)
+        val editText = EditText(this.context)
+        editText.hint = "Actualiza tu correo: "
+        layout.addView(editText)
+        builder.setView(layout)
+        builder.setPositiveButton("Actualizar") { dialog, _ ->
+            val value = editText.text.toString().trim()
+            val emailRegex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
+            if (!emailRegex.matches(value)) {
+                Toast.makeText(this.context, "Introduce un correo válido", Toast.LENGTH_LONG).show()
+            }else if(value.isNotEmpty()) {
+                pd.show()
+
+                // Here we are updating the new name
+                db = FirebaseFirestore.getInstance()
+                auth = FirebaseAuth.getInstance()
+                val userId = auth.currentUser?.uid
+                if (userId != null) {
+                    val userRef = db.collection("users").document(userId)
+                    val nuevoCorreo = hashMapOf(
+                        "correo" to value
+                    )
+                    userRef.update(nuevoCorreo as Map<String, Any>).addOnSuccessListener {
+                        pd.dismiss()
+                        Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                        setCorreo(vista)
+                    }
+                        .addOnFailureListener {
+                            pd.dismiss()
+                            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                        }
+                }
+
+            }
+        }
+        builder.show()
+    }
+
 }
 
 /*
