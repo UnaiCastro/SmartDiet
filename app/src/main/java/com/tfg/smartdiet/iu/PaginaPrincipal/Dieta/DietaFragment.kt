@@ -39,10 +39,10 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private var grasas = 0
     private var carbohidratos = 0
 
-    private var MAX_CALORIAS_DIARIAS=100.0f
-    private var MAX_PROTEINAS_DIARIAS=100.0f
-    private var MAX_GRASAS_DIARIAS=100.0f
-    private var MAX_CARBOHIDRATOS_DIARIOS=100.0f
+    private var MAX_CALORIAS_DIARIAS=100
+    private var MAX_PROTEINAS_DIARIAS=100
+    private var MAX_GRASAS_DIARIAS=100
+    private var MAX_CARBOHIDRATOS_DIARIOS=100
 
     private lateinit var entryAdapter: EntryAdapter
     private lateinit var recyclerViewEntries: RecyclerView
@@ -69,8 +69,11 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
         obtenerDietaActual { dietaActID ->
             this.dietaActID = dietaActID
+            dietaActID?.let {
+                setDietaObjectives(it)
+                setCurrentValues(it)
+                fetchEntries(it)}
             initRecyclerView()
-//            addTestEntries() // Test con entradas existentes (cambiar por lectura de db)
             initUI()
             initListener()
             checkReset()
@@ -119,8 +122,9 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         // Notify the adapter of the data change
         entryAdapter.notifyDataSetChanged()
 
-        //Añadir en la base de datos
+        // Añadir en la base de datos
         annadirEntradaEnFirestore(entryData)
+
 
     }
 
@@ -148,7 +152,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         binding.textViewCarbohidratos.text = "$carbohidratos/$MAX_CARBOHIDRATOS_DIARIOS"
     }
 
-    private fun calcularProgreso(valor: Int, maximo: Float): Int {
+    private fun calcularProgreso(valor: Int, maximo: Int): Int {
         return ((valor.toFloat() / maximo) * 100).toInt()
     }
 
@@ -235,11 +239,15 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 entryIds.removeAt(position)
                 // Remove the entry from the list and notify adapter
                 allEntries.removeAt(position)
+                // Recalcular totales y actualizar
+                updateAndRetrieveTotalValues()
                 entryAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
                 Log.e("DietaFragment_DB", "Error deleting entry: ${e.message}")
             }
+
+
     }
 
 
@@ -271,6 +279,8 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 val entryId = documentReference.id
                 entryIds.add(entryId)
                 Log.i("DietaFragment_DB", "Añadida entrada $entrada con ID: $entryId")
+                // Recalcular totales y actualizar
+                updateAndRetrieveTotalValues()
             }
             .addOnFailureListener { e ->
                 Log.e("DietaFragment_DB", "La entrada $entrada no se pudo añadir ${e.message}")
@@ -359,6 +369,155 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 Log.e("DietaFragment_DB", "Error al buscar usuario: ${e.message}")
             }
     }
+
+    private fun setDietaObjectives(dietaID: String) {
+        db.collection("dietas")
+            .document(dietaID)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val caloriasObj = document.getString("caloriasObj")?.toIntOrNull() ?: 0
+                    val proteinasObj = document.getString("proteinasObj")?.toIntOrNull() ?: 0
+                    val grasasObj = document.getString("grasasObj")?.toIntOrNull() ?: 0
+                    val carbohidratosObj = document.getString("carbohidratosObj")?.toIntOrNull() ?: 0
+
+                    // Set the attributes with the retrieved objectives
+                    MAX_CALORIAS_DIARIAS = caloriasObj
+                    MAX_PROTEINAS_DIARIAS = proteinasObj
+                    MAX_GRASAS_DIARIAS = grasasObj
+                    MAX_CARBOHIDRATOS_DIARIOS = carbohidratosObj
+                    initUI()
+                } else {
+                    Log.e("DietaFragment_DB", "No existe la dieta con ID: $dietaID")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error al obtener la dieta con ID $dietaID: ${e.message}")
+            }
+    }
+
+
+    private fun setCurrentValues(dietaID: String) {
+        db.collection("dietas")
+            .document(dietaID)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val caloriasAct = document.getString("caloriasAct")?.toIntOrNull() ?: 0
+                    val proteinasAct = document.getString("proteinasAct")?.toIntOrNull() ?: 0
+                    val grasasAct = document.getString("grasasAct")?.toIntOrNull() ?: 0
+                    val carbohidratosAct = document.getString("carbohidratosAct")?.toIntOrNull() ?: 0
+
+                    // Set the variables with the retrieved current values
+                    calorias = caloriasAct
+                    proteinas = proteinasAct
+                    grasas = grasasAct
+                    carbohidratos = carbohidratosAct
+                    initUI()
+                } else {
+                    Log.e("DietaFragment_DB", "No existe la dieta con ID: $dietaID")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error al obtener la dieta con ID $dietaID: ${e.message}")
+            }
+    }
+
+    private fun fetchEntries(dietaID: String) {
+        db.collection("entries")
+            .whereEqualTo("dietaActID", dietaID)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val entryData = document.data
+                    val entryId = document.id
+
+                    // Convert numerical values to Int
+                    val calorias = (entryData["calorias"] as? Long)?.toInt() ?: 0
+                    val proteinas = (entryData["proteinas"] as? Long)?.toInt() ?: 0
+                    val grasas = (entryData["grasas"] as? Long)?.toInt() ?: 0
+                    val carbohidratos = (entryData["carbohidratos"] as? Long)?.toInt() ?: 0
+
+                    // Add entry data to allEntries list
+                    val entryMap: HashMap<String, Any> = hashMapOf(
+                        "nombre" to entryData["nombre"].toString(),
+                        "calorias" to calorias,
+                        "proteinas" to proteinas,
+                        "grasas" to grasas,
+                        "carbohidratos" to carbohidratos,
+                        "hora" to entryData["hora"].toString()
+                    )
+                    allEntries.add(entryMap)
+
+                    // Add entry ID to entryIds list
+                    entryIds.add(entryId)
+                }
+                updateAndRetrieveTotalValues()
+
+                // Notify adapter of data change after all entries are fetched
+                entryAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error al obtener las entradas de la dieta con ID $dietaID: ${e.message}")
+            }
+    }
+
+
+    private fun updateAndRetrieveTotalValues() {
+        // Log all the entries
+        Log.i("DietaFragment_DB", "All Entries: $allEntries")
+
+        var totalCalorias = 0
+        var totalProteinas = 0
+        var totalGrasas = 0
+        var totalCarbohidratos = 0
+
+        // Iterate through each entry in allEntries
+        for (entryData in allEntries) {
+            // Log the types of values
+            Log.d("DietaFragment_DB", "Type of calorias: ${entryData["calorias"]?.javaClass?.simpleName}")
+            Log.d("DietaFragment_DB", "Type of proteinas: ${entryData["proteinas"]?.javaClass?.simpleName}")
+            Log.d("DietaFragment_DB", "Type of grasas: ${entryData["grasas"]?.javaClass?.simpleName}")
+            Log.d("DietaFragment_DB", "Type of carbohidratos: ${entryData["carbohidratos"]?.javaClass?.simpleName}")
+
+            // Sum up the values for each field
+            totalCalorias += (entryData["calorias"] as? Int) ?: 0
+            totalProteinas += (entryData["proteinas"] as? Int) ?: 0
+            totalGrasas += (entryData["grasas"] as? Int) ?: 0
+            totalCarbohidratos += (entryData["carbohidratos"] as? Int) ?: 0
+        }
+
+
+        // Log the calculated total values
+        Log.i("DietaFragment_DB", "Total Calorias: $totalCalorias")
+        Log.i("DietaFragment_DB", "Total Proteinas: $totalProteinas")
+        Log.i("DietaFragment_DB", "Total Grasas: $totalGrasas")
+        Log.i("DietaFragment_DB", "Total Carbohidratos: $totalCarbohidratos")
+
+        // Update the total values in the database
+        val dietaID = dietaActID ?: return // Exit if dietaActID is null
+
+        db.collection("dietas")
+            .document(dietaID)
+            .update(
+                mapOf(
+                    "caloriasAct" to totalCalorias.toString(),
+                    "proteinasAct" to totalProteinas.toString(),
+                    "grasasAct" to totalGrasas.toString(),
+                    "carbohidratosAct" to totalCarbohidratos.toString()
+                )
+            )
+            .addOnSuccessListener {
+                Log.i("DietaFragment_DB", "Total values updated successfully in the database")
+                // Once values are updated, retrieve them again from the database
+                setCurrentValues(dietaID)
+            }
+            .addOnFailureListener { e ->
+                Log.e("DietaFragment_DB", "Error updating total values in the database: ${e.message}")
+            }
+    }
+
+
 
 
 
