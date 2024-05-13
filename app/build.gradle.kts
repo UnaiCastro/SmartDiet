@@ -77,6 +77,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("com.google.android.material:material:1.13.0-alpha01")
+    implementation("com.google.android.material:material:1.13.0-alpha02")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
 }

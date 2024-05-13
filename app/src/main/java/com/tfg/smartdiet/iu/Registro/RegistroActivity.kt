@@ -12,7 +12,6 @@ import com.tfg.smartdiet.databinding.ActivityRegistroBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Usuario
 import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
-import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -99,10 +98,9 @@ class RegistroActivity : AppCompatActivity() {
             nombreUsuario = etNombre,
             correo = etEmail,
         ).toMap()
-
-        db.collection("users").add(user).addOnSuccessListener {
+        usuarioID?.let { db.collection("users").document(it).set(user) }?.addOnSuccessListener {
             Log.i("Registro","Creado usuario $usuarioID")
-        }.addOnFailureListener {
+        }?.addOnFailureListener {
             Log.e("Registro","Creacion de Usuario $usuarioID fallida ${it.message}")
         }
     }

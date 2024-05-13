@@ -4,21 +4,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 //Método usado para las preferencias del usuario
 class ConfigUsuario(private val prefs: SharedPreferences)  {
-    val sesionAbierta: Boolean
+    private lateinit var auth:FirebaseAuth
 
-        //Devuelve si hay una sesión o no
-        get() =//SharedPreferences.Editor editor = prefs.edit();
+    fun sesionAbierta():Boolean{
+        val sesion=prefs.getBoolean("SESION", false)
 
-            prefs.getBoolean("SESION", false)
+        return sesion
+    }
 
     fun setInicioSesion(mail: String) {
 
         val editor = prefs.edit()
         editor.putBoolean("SESION",true)
-        editor.putString("USUARIO", mail)
         editor.apply()
     }
     val getMail: String
