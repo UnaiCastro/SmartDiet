@@ -7,12 +7,14 @@ import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +28,15 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -56,6 +63,7 @@ class InfoFragment : Fragment() {
     private lateinit var nombre: TextView
     private lateinit var correoUsuario: TextView
     private lateinit var editCorreo: Button
+    private lateinit var storage:StorageReference
     private val pickImageLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
@@ -84,17 +92,15 @@ class InfoFragment : Fragment() {
                 File(eldirectorio, "$nombrefichero.jpg")
             val os: OutputStream
             try {
-                os = FileOutputStream(imagenFich)
-                laminiatura!!.compress(
-                    Bitmap.CompressFormat.JPEG,
-                    100,
-                    os
-                )
                 set =
                     view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
-                set.setImageBitmap(laminiatura)
-                os.flush()
-                os.close()
+                //set.setImageBitmap(laminiatura)
+                Picasso.get().load(imagenFich).
+                fit().centerCrop().
+                into(set)
+                if (laminiatura != null) {
+                    subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg")
+                }
             } catch (e: Exception) {
                 Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
             }
@@ -118,7 +124,7 @@ class InfoFragment : Fragment() {
         editCorreo = view.findViewById(R.id.editarMailInfo)
         setNombre(view)
         setCorreo(view)
-
+        setFoto()
 
 
         pd = ProgressDialog(this.context)
@@ -325,13 +331,19 @@ class InfoFragment : Fragment() {
             // Obtener la InputStream de la imagen seleccionada
             val inputStream: InputStream? =
                 this.context?.contentResolver?.openInputStream(selectedImageUri)
-
+            var nombreArchivo: String? = null
             // Decodificar la InputStream en un Bitmap
+            val timeStamp = SimpleDateFormat(
+                "yyyyMMdd_HHmmss",
+                Locale.getDefault()
+            ).format(Date())
+            val nombrefichero = "IMG_" + timeStamp + "_" + FirebaseAuth.getInstance()
+                .currentUser?.uid
             val bitmap = BitmapFactory.decodeStream(inputStream)
-
             // Mostrar el Bitmap en un ImageView
-            view?.findViewById<ImageView>(R.id.imgPerfilInfo)?.setImageBitmap(bitmap)
-
+            //view?.findViewById<ImageView>(R.id.imgPerfilInfo)?.setImageBitmap(bitmap)
+            Picasso.get().load(selectedImageUri.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
+            subirFoto(selectedImageUri,bitmap, "$nombrefichero.jpg")
             // Cerrar la InputStream
             inputStream?.close()
         } catch (e: java.lang.Exception) {
@@ -339,15 +351,90 @@ class InfoFragment : Fragment() {
         }
     }
 
-    // checking camera permission ,if given then we can click image using our camera
+    // Comprobar si los permisos de la cámara están activados
     private fun checkCameraPermission(): Boolean {
         val result = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.CAMERA) } == PackageManager.PERMISSION_GRANTED
         val result1 = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PackageManager.PERMISSION_GRANTED
         return result && result1
     }
 
-    // requesting for camera permission if not given
+    // Pedir que se actitven los permisos de la cámara
     private fun requestCameraPermission() {
         requestPermissions(cameraPermission, CAMERA_REQUEST)
+    }
+
+    private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String){
+        storage = FirebaseStorage.getInstance().getReference("perfil/$nomFoto")
+        val nuevoNomFoto = nomFoto.split(".")[0]
+
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val data = baos.toByteArray()
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser?.uid
+        //val storageRef = storage.child("perfil/$nomFoto")
+        if (userId != null) {
+            // Subir la imagen al almacenamiento de Firebase Storage
+            val uploadTask = storage.putFile(uri)
+
+            uploadTask.addOnSuccessListener {
+                storage.downloadUrl.addOnSuccessListener { uri ->
+                    // Guardar la URL de descarga en el documento del usuario en Firestore
+                    val imageUrl = uri.toString()
+
+                    val userRef = db.collection("users").document(userId)
+                    userRef.update("foto", imageUrl)
+                        .addOnSuccessListener {
+                            Log.d("TAG", "URL de imagen actualizada exitosamente en Firestore")
+                            Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                        }
+                }.addOnFailureListener {
+                    Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                }
+            }.addOnFailureListener {
+                // Obtener la URL de descarga de la imagen subida
+                Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+
+            }
+        }
+    }
+
+    private fun setFoto(){
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId.uid)
+            userRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        // Obtener el valor actual del campo "nombreUsuario"
+                        val foto = documentSnapshot.getString("foto")
+                        if (foto != null) {
+                            set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
+                            Picasso.get().load(foto.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
+                            Log.d("TAG", "La foto del usuario es: $foto")
+                        } else {
+
+                            set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
+                            Picasso.get().load(R.drawable.default_profile_picture_grey_male_icon).
+                            fit().centerCrop().
+                            into(set)
+                            Log.d("TAG", "No se encontró el campo 'foto'")
+                        }
+                    } else {
+                        Log.d("TAG", "No se encontró el documento del usuario")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Error al obtener el documento
+                    Log.w("TAG", "Error getting document", e)
+                }
+
+        }
     }
 }
