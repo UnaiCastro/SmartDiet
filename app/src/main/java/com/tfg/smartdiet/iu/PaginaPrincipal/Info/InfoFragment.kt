@@ -1,8 +1,18 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Info
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +23,29 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
-import org.w3c.dom.Text
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class InfoFragment : Fragment() {
+    private companion object {
+        private const val CAMERA_REQUEST = 100
+        private const val STORAGE_REQUEST = 200
+        private const val IMAGEPICK_GALLERY_REQUEST = 300
+        private const val IMAGE_PICKCAMERA_REQUEST = 400
+    }
+    private lateinit var cameraPermission: Array<String>
     private lateinit var set: ImageView
     private lateinit var editImgPerfil: Button
     private lateinit var editNom: Button
@@ -30,6 +56,51 @@ class InfoFragment : Fragment() {
     private lateinit var nombre: TextView
     private lateinit var correoUsuario: TextView
     private lateinit var editCorreo: Button
+    private val pickImageLauncher = registerForActivityResult<Intent, ActivityResult>(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            result.data!!.data?.let { handleImageResult(it) }
+        }
+    }
+    private val takePictureLauncher = registerForActivityResult<Intent, ActivityResult>(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            val bundle = result.data!!.extras
+            val laminiatura =
+                bundle!!["data"] as Bitmap?
+            //GUARDAR COMO FICHERO
+// Memoria externa
+            val eldirectorio: File? =
+                this.context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val timeStamp = SimpleDateFormat(
+                "yyyyMMdd_HHmmss",
+                Locale.getDefault()
+            ).format(Date())
+            val nombrefichero = "IMG_" + timeStamp + "_" + FirebaseAuth.getInstance()
+                .currentUser?.uid
+            val imagenFich =
+                File(eldirectorio, "$nombrefichero.jpg")
+            val os: OutputStream
+            try {
+                os = FileOutputStream(imagenFich)
+                laminiatura!!.compress(
+                    Bitmap.CompressFormat.JPEG,
+                    100,
+                    os
+                )
+                set =
+                    view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
+                set.setImageBitmap(laminiatura)
+                os.flush()
+                os.close()
+            } catch (e: Exception) {
+                Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,11 +112,15 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         editNom = view.findViewById(R.id.editarNombreInfo)
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
         editCorreo = view.findViewById(R.id.editarMailInfo)
         setNombre(view)
         setCorreo(view)
+
+
+
         pd = ProgressDialog(this.context)
         editNom.setOnClickListener{
             editarNom(view)
@@ -53,9 +128,13 @@ class InfoFragment : Fragment() {
         editCorreo.setOnClickListener{
             editarMail(view)
         }
-
+        editImgPerfil.setOnClickListener{
+            editarFoto();
+        }
     }
-//Editar nombre
+
+
+    //Editar nombre
     private fun editarNom(vista: View) {
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Cambiar nombre") //cambiar por strings
@@ -199,364 +278,76 @@ class InfoFragment : Fragment() {
         builder.show()
     }
 
-}
-
-/*
-    builder.setNegativeButton("Cancel") { dialog, _ ->
-        pd.dismiss()
-    }
-    builder.create().show()
-}
-/*private lateinit var firebaseAuth: FirebaseAuth
-private lateinit var firebaseUser: FirebaseUser
-private lateinit var firebaseDatabase: FirebaseDatabase
-private lateinit var databaseReference: DatabaseReference
-private lateinit var storageReference: StorageReference
-private val storagepath = "Users_Profile_Cover_image/"
-private lateinit var uid: String
-private lateinit var set: ImageView
-private lateinit var profilepic: TextView
-private lateinit var editname: TextView
-private lateinit var editpassword: TextView
-private lateinit var pd: ProgressDialog
-private companion object {
-    private const val CAMERA_REQUEST = 100
-    private const val STORAGE_REQUEST = 200
-    private const val IMAGEPICK_GALLERY_REQUEST = 300
-    private const val IMAGE_PICKCAMERA_REQUEST = 400
-}
-private lateinit var cameraPermission: Array<String>
-private lateinit var storagePermission: Array<String>
-private var imageuri: Uri? = null
-private var profileOrCoverPhoto: String? = null
-override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-): View? {
-    // Inflate the layout for this fragment
-
-    return inflater.inflate(R.layout.fragment_info, container, false)
-}
-
-override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    profilepic = findViewById(R.id.profilepic)
-    editname = findViewById(R.id.editname)
-    set = findViewById(R.id.setting_profile_image)
-    pd = ProgressDialog(this)
-    pd.setCanceledOnTouchOutside(false)
-    editpassword = findViewById(R.id.changepassword)
-    firebaseAuth = FirebaseAuth.getInstance()
-    firebaseUser = firebaseAuth.currentUser!!
-    firebaseDatabase = FirebaseDatabase.getInstance()
-    storageReference = FirebaseStorage.getInstance().reference
-    databaseReference = firebaseDatabase.reference.child("Users")
-    cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    storagePermission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    val query = databaseReference.orderByChild("email").equalTo(firebaseUser.email)
-    query.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            for (dataSnapshot1 in dataSnapshot.children) {
-                val image = "" + dataSnapshot1.child("image").value
-                try {
-                    Glide.with(this@EditProfilePage).load(image).into(set)
-                } catch (e: Exception) {
-                }
-            }
-        }
-
-        override fun onCancelled(databaseError: DatabaseError) {}
-    })
-
-    editpassword.setOnClickListener {
-        pd.setMessage("Changing Password")
-        showPasswordChangeDailog()
-    }
-
-    profilepic.setOnClickListener {
-        pd.setMessage("Updating Profile Picture")
-        profileOrCoverPhoto = "image"
-        showImagePicDialog()
-    }
-
-    editname.setOnClickListener {
-        pd.setMessage("Updating Name")
-        showNamephoneupdate("name")
-    }
-}
-@Override
-override fun onPause() {
-    super.onPause()
-    val query = databaseReference.orderByChild("email").equalTo(firebaseUser.email)
-    query.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            for (dataSnapshot1 in dataSnapshot.children) {
-                val image = "" + dataSnapshot1.child("image").value
-                try {
-                    Glide.with(this@InfoFragment).load(image).into(set)
-                } catch (e: Exception) {
-                }
-            }
-        }
-
-        fun onCancelled(databaseError: DatabaseError) {}
-    })
-
-    editpassword.setOnClickListener {
-        pd.setMessage("Changing Password")
-        showPasswordChangeDailog()
-    }
-}
-
-override fun onStart() {
-    super.onStart()
-    val query = databaseReference.orderByChild("email").equalTo(firebaseUser.email)
-    query.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            for (dataSnapshot1 in dataSnapshot.children) {
-                val image = "" + dataSnapshot1.child("image").value
-                try {
-                    Glide.with(this@InfoFragment).load(image).into(set)
-                } catch (e: Exception) {
-                }
-            }
-        }
-
-        override fun onCancelled(databaseError: DatabaseError) {
-        }
-    })
-    editpassword.setOnClickListener {
-        pd.setMessage("Changing Password")
-        showPasswordChangeDailog()
-    }
-}
-
-// checking storage permission ,if given then we can add something in our storage
-private fun checkStoragePermission(): Boolean {
-    val result = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PackageManager.PERMISSION_GRANTED
-    return result
-}
-
-// requesting for storage permission
-private fun requestStoragePermission() {
-    requestPermissions(storagePermission, STORAGE_REQUEST)
-}
-
-// checking camera permission ,if given then we can click image using our camera
-private fun checkCameraPermission(): Boolean {
-    val result = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.CAMERA) } == PackageManager.PERMISSION_GRANTED
-    val result1 = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PackageManager.PERMISSION_GRANTED
-    return result && result1
-}
-
-// requesting for camera permission if not given
-private fun requestCameraPermission() {
-    requestPermissions(cameraPermission, CAMERA_REQUEST)
-}
-
-// We will show an alert box where we will write our old and new password
-private fun showPasswordChangeDailog() {
-    val view = LayoutInflater.from(this.context).inflate(R.layout.dialog_update_password, null)
-    val oldpass = view.findViewById<EditText>(R.id.oldpasslog)
-    val newpass = view.findViewById<EditText>(R.id.newpasslog)
-    val editpass = view.findViewById<Button>(R.id.updatepass)
-    val builder = AlertDialog.Builder(this.context)
-    builder.setView(view)
-    val dialog = builder.create()
-    dialog.show()
-    editpass.setOnClickListener {
-        val oldp = oldpass.text.toString().trim()
-        val newp = newpass.text.toString().trim()
-        if (TextUtils.isEmpty(oldp)) {
-            Toast.makeText(this@InfoFragment, "Current Password cant be empty", Toast.LENGTH_LONG).show()
-            return@setOnClickListener
-        }
-        if (TextUtils.isEmpty(newp)) {
-            Toast.makeText(this@InfoFragment, "New Password cant be empty", Toast.LENGTH_LONG).show()
-            return@setOnClickListener
-        }
-        dialog.dismiss()
-        updatePassword(oldp, newp)
-    }
-}
-
-// Updating name
-private fun showNamephoneupdate(key: String) {
-    val builder = AlertDialog.Builder(this.context)
-    builder.setTitle("Update $key")
-
-    // creating a layout to write the new name
-    val layout = LinearLayout(this.context)
-    layout.orientation = LinearLayout.VERTICAL
-    layout.setPadding(10, 10, 10, 10)
-    val editText = EditText(this.context)
-    editText.hint = "Enter $key"
-    layout.addView(editText)
-    builder.setView(layout)
-
-    builder.setPositiveButton("Update") { dialog, _ ->
-        val value = editText.text.toString().trim()
-        if (value.isNotEmpty()) {
-            pd.show()
-
-            // Here we are updating the new name
-            val result = hashMapOf(key to value)
-            databaseReference.child(firebaseUser.uid).updateChildren(result)
-                .addOnSuccessListener {
-                    pd.dismiss()
-
-                    // after updated we will show updated
-                    Toast.makeText(this@InfoFragment, " updated ", Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener {
-                    pd.dismiss()
-                    Toast.makeText(this@InfoFragment, "Unable to update", Toast.LENGTH_LONG).show()
+    private fun editarFoto(){
+        val builder = AlertDialog.Builder(this.context)
+        builder.setTitle("Actualizar imagen de perfil")
+        val layout = LinearLayout(this.context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(10, 10, 10, 10)
+        builder.setView(layout)
+        builder.setItems(
+            arrayOf<CharSequence>(
+                "Galería",
+                "Cámara"
+            )
+        ) { dialog: DialogInterface?, which: Int ->
+            when (which) {
+                0 -> {
+                    // Abrir galería
+                    val galleryIntent = Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                    galleryIntent.setType("image/*")
+                    pickImageLauncher.launch(galleryIntent)
                 }
 
-            if (key == "name") {
-                val databaser = FirebaseDatabase.getInstance().reference("Posts")
-                val query = databaser.orderByChild("uid").equalTo(uid)
-                query.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        for (dataSnapshot1 in dataSnapshot.children) {
-                            val child = databaser.key
-                            dataSnapshot1.ref.child("uname").setValue(value)
+                1 -> {
+                    try {
+                        if (!checkCameraPermission()) {
+                            requestCameraPermission()
                         }
+                        // Abrir cámara
+                        val cameraIntent =
+                            Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        takePictureLauncher.launch(cameraIntent)
+                    }catch(e:Exception){
+                        Toast.makeText(this.context, "No tienes permisos para usar la cámara", Toast.LENGTH_LONG).show()
                     }
-
-                    override fun onCancelled(databaseError: DatabaseError) {}
-                })
-            }
-        } else {
-            Toast.makeText(this@InfoFragment, "Unable to update", Toast.LENGTH_LONG).show()
-        }
-    }
-*/
-/*
-    builder.setNegativeButton("Cancel") { dialog, _ ->
-        pd.dismiss()
-    }
-    builder.create().show()
-}
-
-private fun showImagePicDialog() {
-    val options = arrayOf("Camera", "Gallery")
-    val builder = AlertDialog.Builder(this.context)
-    builder.setTitle("Pick Image From")
-    builder.setItems(options) { dialog, which ->
-        // if access is not given then we will request for permission
-        if (which == 0) {
-            if (!checkCameraPermission()) {
-                requestCameraPermission()
-            } else {
-                pickFromCamera()
-            }
-        } else if (which == 1) {
-            if (!checkStoragePermission()) {
-                requestStoragePermission()
-            } else {
-                pickFromGallery()
-            }
-        }
-    }
-    builder.create().show()
-}
-
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (resultCode == Activity.RESULT_OK) {
-        if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
-            imageuri = data?.data
-            uploadProfileCoverPhoto(imageuri)
-        }
-        if (requestCode == IMAGE_PICKCAMERA_REQUEST) {
-            uploadProfileCoverPhoto(imageuri)
-        }
-    }
-}
-
-override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-    when (requestCode) {
-        CAMERA_REQUEST -> {
-            if (grantResults.isNotEmpty()) {
-                val cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
-                val writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
-                if (cameraAccepted && writeStorageAccepted) {
-                    pickFromCamera()
-                } else {
-                    Toast.makeText(this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show()
                 }
             }
         }
-        STORAGE_REQUEST -> {
-            if (grantResults.isNotEmpty()) {
-                val writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
-                if (writeStorageAccepted) {
-                    pickFromGallery()
-                } else {
-                    Toast.makeText(this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show()
-                }
-            }
+        builder.show()
+    }
+
+    private fun handleImageResult(selectedImageUri: Uri) {
+        try {
+            // Obtener la InputStream de la imagen seleccionada
+            val inputStream: InputStream? =
+                this.context?.contentResolver?.openInputStream(selectedImageUri)
+
+            // Decodificar la InputStream en un Bitmap
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+
+            // Mostrar el Bitmap en un ImageView
+            view?.findViewById<ImageView>(R.id.imgPerfilInfo)?.setImageBitmap(bitmap)
+
+            // Cerrar la InputStream
+            inputStream?.close()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
         }
     }
-}
-*/
-/*
-// Here we will click a photo and then go to startactivityforresult for updating data
-private fun pickFromCamera() {
-    val contentValues = ContentValues()
-    contentValues.put(MediaStore.Images.Media.TITLE, "Temp_pic")
-    contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp Description")
-    imageuri = this.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-    val camerIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-    camerIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageuri)
-    startActivityForResult(camerIntent, IMAGE_PICKCAMERA_REQUEST)
-}
-*/
-// We will select an image from gallery
-/*    private fun pickFromGallery() {
-    val galleryIntent = Intent(Intent.ACTION_PICK)
-    galleryIntent.type = "image/*"
-    startActivityForResult(galleryIntent, IMAGEPICK_GALLERY_REQUEST)
-}
-*/
-/*
- */
-// We will upload the image from here.
-private fun uploadProfileCoverPhoto(uri: Uri) {
-    pd.show()
 
-    // We are taking the filepath as storagepath + firebaseauth.getUid()+".png"
-    val filepathname = storagepath + "" + profileOrCoverPhoto + "_" + firebaseUser.uid
-    val storageReference1: StorageReference = storageReference.child(filepathname)
-    storageReference1.putFile(uri).addOnSuccessListener(OnSuccessListener<Any> { taskSnapshot ->
-        val uriTask: Task<Uri> = taskSnapshot.getStorage().getDownloadUrl()
-        while (!uriTask.isSuccessful);
+    // checking camera permission ,if given then we can click image using our camera
+    private fun checkCameraPermission(): Boolean {
+        val result = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.CAMERA) } == PackageManager.PERMISSION_GRANTED
+        val result1 = this.context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PackageManager.PERMISSION_GRANTED
+        return result && result1
+    }
 
-        // We will get the url of our image using uritask
-        val downloadUri = uriTask.result
-        if (uriTask.isSuccessful) {
-
-            // updating our image url into the realtime database
-            val hashMap = HashMap<String, Any>()
-            hashMap[profileOrCoverPhoto!!] = downloadUri.toString()
-            databaseReference.child(firebaseUser.uid).updateChildren(hashMap)
-                .addOnSuccessListener(
-                    OnSuccessListener<Void?> {
-                        pd.dismiss()
-                        Toast.makeText(this@InfoFragment, "Updated", Toast.LENGTH_LONG)
-                            .show()
-                    }).addOnFailureListener(OnFailureListener {
-                    pd.dismiss()
-                    Toast.makeText(this@InfoFragment, "Error Updating ", Toast.LENGTH_LONG)
-                        .show()
-                })
-        } else {
-            pd.dismiss()
-            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-        }
-    }).addOnFailureListener(OnFailureListener {
-        pd.dismiss()
-        Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-    })
-}*/
+    // requesting for camera permission if not given
+    private fun requestCameraPermission() {
+        requestPermissions(cameraPermission, CAMERA_REQUEST)
+    }
+}
