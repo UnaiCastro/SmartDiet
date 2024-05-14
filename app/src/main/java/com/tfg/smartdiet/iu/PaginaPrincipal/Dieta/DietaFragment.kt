@@ -273,8 +273,11 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private fun annadirEntradaEnFirestore(entrada: HashMap<String, Any>) {
         db = FirebaseFirestore.getInstance()
 
+        // Convert the values in the entrada HashMap to strings
+        val stringEntry: HashMap<String, String> = entrada.mapValues { it.value.toString() } as HashMap<String, String>
+
         db.collection("entries")
-            .add(entrada)
+            .add(stringEntry) // Upload the string entry to Firestore
             .addOnSuccessListener { documentReference ->
                 val entryId = documentReference.id
                 entryIds.add(entryId)
@@ -286,6 +289,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 Log.e("DietaFragment_DB", "La entrada $entrada no se pudo añadir ${e.message}")
             }
     }
+
 
     private fun obtenerDietaActual(callback: (String?) -> Unit) {
         // Obtener el correo del usuario desde las preferencias
@@ -432,11 +436,11 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                     val entryData = document.data
                     val entryId = document.id
 
-                    // Convert numerical values to Int
-                    val calorias = (entryData["calorias"] as? Long)?.toInt() ?: 0
-                    val proteinas = (entryData["proteinas"] as? Long)?.toInt() ?: 0
-                    val grasas = (entryData["grasas"] as? Long)?.toInt() ?: 0
-                    val carbohidratos = (entryData["carbohidratos"] as? Long)?.toInt() ?: 0
+                    // Retrieve the values as strings and then convert them to Int
+                    val calorias = entryData["calorias"]?.toString()?.toIntOrNull() ?: 0
+                    val proteinas = entryData["proteinas"]?.toString()?.toIntOrNull() ?: 0
+                    val grasas = entryData["grasas"]?.toString()?.toIntOrNull() ?: 0
+                    val carbohidratos = entryData["carbohidratos"]?.toString()?.toIntOrNull() ?: 0
 
                     // Add entry data to allEntries list
                     val entryMap: HashMap<String, Any> = hashMapOf(
@@ -461,6 +465,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 Log.e("DietaFragment_DB", "Error al obtener las entradas de la dieta con ID $dietaID: ${e.message}")
             }
     }
+
 
 
     private fun updateAndRetrieveTotalValues() {
