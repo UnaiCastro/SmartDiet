@@ -67,4 +67,34 @@
     <string name="n">No</string>
     <string name="annadir">Añadir</string>
     <string name="cancelar">Cancelar</string>
+
+    <!-- Layout: fragment_ejercicio.xml -->
+    <string name="key_to_weight_loss">CLAVES PARA PERDER PESO</string>
+    <string name="more_exercise_button">CONSEJOS PARA MAXIMIZAR EL ENTRENAMIENTO</string>
+
+    <!-- Layout: fragment_perder_peso.xml -->
+    <string name="key_to_weight_loss_2">CLAVES PARA PERDER PESO</string>
+    <string name="key_to_weight_loss_tip_1">1. La clave para perder peso con éxito es desarrollar
+        hábitos de vida saludables basados en la alimentación y el ejercicio. Puede que no le gusten
+        esas palabras: alimentación y ejercicio. Pero tampoco hay que obsercionarse con ellas.
+        Alimentación sólo significa comer sano y con menos calorías. <br></br>Hacer ejercicio
+        significa ser más activo físicamente.</string>
+    <string name="key_to_weight_loss_tip_2">2. Aunque la gente suele centrarse en la dieta cuando
+        intenta perder peso, mantenerse activo también es un componente esencial de un programa de
+        adelgazamiento. Cuando estás activo, tu cuerpo utiliza energía (calorías) para moverse, lo
+        que ayuda a quemar las calorías que ingieres con los alimentos que comes.</string>
+    <string name="key_to_weight_loss_tip_3">3. Sea cual sea la actividad que elija, hágala con
+        regularidad. Intente realizar al menos 150 minutos semanales de actividad física moderada
+        o 75 minutos semanales de actividad aeróbica intensa, preferiblemente repartidos a lo largo
+        de la semana. Tenga en cuenta que puede necesitar más actividad física para perder peso y
+        mantenerlo.</string>
+
+    <!-- Layout: fragment_maximizar_entrenamientos.xml -->
+    <string name="home_button"></string>
+    <string name="home_button"></string>
+
+    <!-- Layout: fragment_perder_peso.xml and fragment_maximizar_entrenamientos.xml -->
+    <string name="home_button">INICIO</string>
+    <string name="recipe_button">RECETAS</string>
+    <string name="calorie_button">CALORÍAS</string>
 </resources>
