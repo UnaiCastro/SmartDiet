@@ -434,6 +434,8 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     }
 
     private fun fetchEntries(dietaID: String) {
+        allEntries.clear()
+        entryIds.clear()
         db.collection("entries")
             .whereEqualTo("dietaActID", dietaID)
             .get()
