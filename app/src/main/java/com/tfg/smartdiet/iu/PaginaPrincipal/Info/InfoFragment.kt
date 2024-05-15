@@ -364,42 +364,42 @@ class InfoFragment : Fragment() {
     }
 
     private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String){
-        storage = FirebaseStorage.getInstance().getReference("perfil/$nomFoto")
-        val nuevoNomFoto = nomFoto.split(".")[0]
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference
+        //val nuevoNomFoto = nomFoto.split(".")[0]
 
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        val data = baos.toByteArray()
+        //val data = baos.toByteArray()
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        val userId = auth.currentUser?.uid
-        //val storageRef = storage.child("perfil/$nomFoto")
-        if (userId != null) {
-            // Subir la imagen al almacenamiento de Firebase Storage
-            val uploadTask = storage.putFile(uri)
+        val userId = auth.currentUser?.uid!!
+        val perfilRef = storageRef.child("perfil/$nomFoto")
 
-            uploadTask.addOnSuccessListener {
-                storage.downloadUrl.addOnSuccessListener { uri ->
-                    // Guardar la URL de descarga en el documento del usuario en Firestore
-                    val imageUrl = uri.toString()
+        // Subir la imagen al almacenamiento de Firebase Storage
+        val uploadTask = perfilRef.putFile(uri)
 
-                    val userRef = db.collection("users").document(userId)
-                    userRef.update("foto", imageUrl)
-                        .addOnSuccessListener {
-                            Log.d("TAG", "URL de imagen actualizada exitosamente en Firestore")
-                            Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-                        }
-                }.addOnFailureListener {
-                    Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-                }
+        uploadTask.addOnSuccessListener {
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                // Guardar la URL de descarga en el documento del usuario en Firestore
+                val imageUrl = uri.toString()
+
+                val userRef = db.collection("users").document(userId)
+                userRef.update("foto", imageUrl)
+                    .addOnSuccessListener {
+                        Log.d("TAG", "URL de imagen actualizada exitosamente en Firestore")
+                        Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                    }
             }.addOnFailureListener {
-                // Obtener la URL de descarga de la imagen subida
                 Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-
             }
+        }.addOnFailureListener {
+            // Obtener la URL de descarga de la imagen subida
+            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+
         }
     }
 
