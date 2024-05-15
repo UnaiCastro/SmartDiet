@@ -55,6 +55,8 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private lateinit var db:FirebaseFirestore
 
     private var dietaActID: String? = null
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -292,9 +294,11 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
 
     private fun obtenerDietaActual(callback: (String?) -> Unit) {
-        // Obtener el correo del usuario desde las preferencias
-        val sharedPreferences = requireContext().getSharedPreferences("Configuracion", Context.MODE_PRIVATE)
-        val correo = sharedPreferences.getString("USUARIO", "")
+        // Obtener el correo del usuario desde firebase
+
+        auth = FirebaseAuth.getInstance()
+        val correo = auth.currentUser?.email
+
 
         db = FirebaseFirestore.getInstance()
 
@@ -320,8 +324,10 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
 
     private fun crearDietaUsuario(){
-        val sharedPreferences = requireContext().getSharedPreferences("Configuracion", Context.MODE_PRIVATE)
-        val correo = sharedPreferences.getString("USUARIO", "")
+        // Obtener el correo del usuario desde firebase
+
+        auth = FirebaseAuth.getInstance()
+        val correo = auth.currentUser?.email
 
         // Obtener el id del usuario a partir de su correo
         db.collection("users")
