@@ -7,14 +7,12 @@ import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +28,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -38,12 +37,12 @@ import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 class InfoFragment : Fragment() {
     private companion object {
@@ -122,6 +121,7 @@ class InfoFragment : Fragment() {
         editNom = view.findViewById(R.id.editarNombreInfo)
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
         editCorreo = view.findViewById(R.id.editarMailInfo)
+        editCont = view.findViewById(R.id.cambiarContrInfo)
         setNombre(view)
         setCorreo(view)
         setFoto()
@@ -135,7 +135,10 @@ class InfoFragment : Fragment() {
             editarMail(view)
         }
         editImgPerfil.setOnClickListener{
-            editarFoto();
+            editarFoto()
+        }
+        editCont.setOnClickListener{
+            editarCont()
         }
     }
 
@@ -148,7 +151,7 @@ class InfoFragment : Fragment() {
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         val editText = EditText(this.context)
-        editText.hint = "Actualiza tu nombre: "
+        editText.hint = "Actualiza tu nombre"
         layout.addView(editText)
         builder.setView(layout)
         builder.setPositiveButton("Actualizar") { dialog, _ ->
@@ -248,7 +251,7 @@ class InfoFragment : Fragment() {
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         val editText = EditText(this.context)
-        editText.hint = "Actualiza tu correo: "
+        editText.hint = "Actualiza tu correo"
         layout.addView(editText)
         builder.setView(layout)
         builder.setPositiveButton("Actualizar") { dialog, _ ->
@@ -268,6 +271,7 @@ class InfoFragment : Fragment() {
                     val nuevoCorreo = hashMapOf(
                         "correo" to value
                     )
+                    //auth.currentUser?.verifyBeforeUpdateEmail(value)
                     userRef.update(nuevoCorreo as Map<String, Any>).addOnSuccessListener {
                         pd.dismiss()
                         Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
@@ -279,6 +283,84 @@ class InfoFragment : Fragment() {
                         }
                 }
 
+            }
+        }
+        builder.show()
+    }
+
+    private fun editarCont() {
+        val builder = AlertDialog.Builder(this.context)
+        builder.setTitle("Cambiar contraseña") //cambiar por strings
+        val layout = LinearLayout(this.context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(10, 10, 10, 10)
+        val editContActu = EditText(this.context)
+        editContActu.hint = "Introduce tu contraseña actual"
+        layout.addView(editContActu)
+        val editCon = EditText(this.context)
+        editCon.hint = "Introduce una nueva contraseña"
+        layout.addView(editCon)
+        val editCon2 = EditText(this.context)
+        editCon2.hint = "Confirma la contraseña"
+        layout.addView(editCon2)
+        builder.setView(layout)
+        builder.setPositiveButton("Actualizar") { dialog, _ ->
+            val antCont = editContActu.text.toString().trim()
+            val newCont = editCon.text.toString().trim()
+            val newCont2 = editCon2.text.toString().trim()
+            if(newCont.length>=6 && newCont == newCont2) {
+                pd.show()
+                db = FirebaseFirestore.getInstance()
+                auth = FirebaseAuth.getInstance()
+                val authCredential =
+                    EmailAuthProvider.getCredential(auth.currentUser?.email!!, antCont)
+                // Here we are updating the new name
+                val userId = auth.currentUser?.uid
+                val user = auth.currentUser
+                if (userId != null && user != null) {
+                    // Reautenticar al usuario antes de actualizar la contraseña
+                    user.reauthenticate(authCredential)
+                        .addOnSuccessListener {
+                            // Actualizar la contraseña
+                            user.updatePassword(newCont)
+                                .addOnSuccessListener {
+                                    pd.dismiss()
+                                    Toast.makeText(
+                                        this.context,
+                                        "Se ha cambiado la contraseña",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }.addOnFailureListener { e ->
+                                    pd.dismiss()
+                                    Log.e("TAG", "Error al actualizar la contraseña: ${e.message}", e)
+                                    Toast.makeText(
+                                        this.context,
+                                        "Error al actualizar la contraseña: ${e.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                        }.addOnFailureListener { e ->
+                            pd.dismiss()
+                            Log.e("TAG", "Error al reautenticar al usuario: ${e.message}", e)
+                            Toast.makeText(
+                                this.context,
+                                "Error al reautenticar al usuario: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                } else {
+                    // La credencial de autenticación es nula
+                    pd.dismiss()
+                    Toast.makeText(
+                        this.context,
+                        "Error: Credencial de autenticación nula",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }else{
+                pd.dismiss()
+                Toast.makeText(this.context, "La contraseña debe tener 6 caracteres como mínimo y coincidir", Toast.LENGTH_LONG).show()
             }
         }
         builder.show()

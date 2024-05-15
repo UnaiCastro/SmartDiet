@@ -5,88 +5,93 @@
     android:layout_height="match_parent"
     tools:context=".iu.PaginaPrincipal.Info.InfoFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/tituloInfo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Mi perfil"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="26sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgPerfilInfo"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/ic_users" />
+            <TextView
+                android:id="@+id/tituloInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Mi perfil"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="26sp" />
 
-        <Button
-            android:id="@+id/actuPerfilInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Actualizar imagen de perfil"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPerfilInfo"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/ic_users" />
 
-        <TextView
-            android:id="@+id/nombreInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Error"
-            android:textSize="20sp" />
+            <Button
+                android:id="@+id/actuPerfilInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Actualizar imagen de perfil"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/editarNombreInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Editar nombre"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/nombreInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Error"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/correoInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Error"
-            android:textSize="20sp" />
+            <Button
+                android:id="@+id/editarNombreInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Editar nombre"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/editarMailInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Editar correo"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/correoInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Error"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/editarMailInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Editar correo"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
 
+            <Button
+                android:id="@+id/cambiarContrInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cambiar contraseña"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/cambiarContrInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Cambiar contraseña"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </FrameLayout>
