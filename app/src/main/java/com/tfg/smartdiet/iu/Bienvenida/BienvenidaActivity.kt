@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityBienvenidaBinding
 //import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
@@ -17,12 +19,15 @@ class BienvenidaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBienvenidaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
+        Thread.sleep(3000)
         binding =
             ActivityBienvenidaBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
-        if (!conf.sesionAbierta) {
+        conf.initTema()
+        if (!conf.sesionAbierta()) {
             initListener()
         }
         else{
