@@ -26,11 +26,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".splash.Splash"
-            android:exported="true"
-            android:theme="@style/SplashTheme">
-
-        </activity>
         <activity
             android:name=".iu.Registro.PreguntasRegistroActivity"
             android:exported="true">
@@ -51,6 +46,14 @@
             android:exported="true"
             android:label="@string/title_activity_bienvenida"
             android:theme="@style/AppTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
 
         </activity>
     </application>

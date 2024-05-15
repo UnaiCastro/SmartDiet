@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Info
 
+
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -11,6 +12,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -19,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -46,6 +49,9 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+
+import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 
 
 class InfoFragment : Fragment() {
@@ -160,6 +166,12 @@ class InfoFragment : Fragment() {
         }
         editCont.setOnClickListener{
             editarCont()
+        }
+
+        val btn = view.findViewById<Button>(R.id.BTNHistorico)
+        btn.setOnClickListener {
+            val i= Intent(context,HistoricoActivity::class.java)
+            startActivity(i)
         }
     }
 

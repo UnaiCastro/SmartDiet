@@ -6,17 +6,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.tfg.smartdiet.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.databinding.ActivityBienvenidaBinding
 //import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
+
 //import com.tfg.smartdiet.iu.PaginaPrincipal.PrimeraPantalla.PrincipalFragment
+
 import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
 class BienvenidaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBienvenidaBinding
+    private lateinit var auth:FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -42,8 +47,15 @@ class BienvenidaActivity : AppCompatActivity() {
         }
 
         binding.BienvenidaBtnInicioSesion.setOnClickListener {
-            val i = Intent(this,InicioSesionActivity::class.java)
-            startActivity(i)
+            auth= FirebaseAuth.getInstance()
+            if (auth.currentUser!=null){
+                val i =Intent(this,MainActivity::class.java)
+                startActivity(i)
+            }else{
+                val i = Intent(this,InicioSesionActivity::class.java)
+                startActivity(i)
+            }
+
         }
     }
 
