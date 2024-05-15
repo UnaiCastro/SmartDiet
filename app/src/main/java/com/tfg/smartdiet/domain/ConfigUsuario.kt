@@ -1,9 +1,7 @@
 package com.tfg.smartdiet.domain
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 
 //Método usado para las preferencias del usuario
@@ -22,8 +20,26 @@ class ConfigUsuario(private val prefs: SharedPreferences)  {
         editor.putBoolean("SESION",true)
         editor.apply()
     }
-    val getMail: String
-        get() = prefs.getString("USUARIO","") ?: ""
+    fun setTema(tema: String){
+        val editor = prefs.edit()
+        editor.putString("TEMA",tema)
+        editor.apply()
+        if(tema == "NORMAL"){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
+
+    fun initTema(): String? {
+        val tema = prefs.getString("TEMA","NORMAL")
+        if(tema == "NORMAL"){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        return tema
+    }
 
 }
 

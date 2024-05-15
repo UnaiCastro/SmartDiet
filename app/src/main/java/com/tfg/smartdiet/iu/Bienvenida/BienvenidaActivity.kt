@@ -26,6 +26,7 @@ class BienvenidaActivity : AppCompatActivity() {
             ActivityBienvenidaBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
+        conf.initTema()
         if (!conf.sesionAbierta()) {
             initListener()
         }

@@ -40,7 +40,8 @@
                 android:text="Actualizar imagen de perfil"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
 
             <TextView
                 android:id="@+id/nombreInfo"
@@ -49,7 +50,8 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="Error"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
 
             <Button
                 android:id="@+id/editarNombreInfo"
@@ -59,7 +61,8 @@
                 android:text="Editar nombre"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
 
             <TextView
                 android:id="@+id/correoInfo"
@@ -68,7 +71,8 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="Error"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
 
             <Button
                 android:id="@+id/editarMailInfo"
@@ -78,7 +82,8 @@
                 android:text="Editar correo"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
 
 
             <Button
@@ -89,7 +94,41 @@
                 android:text="Cambiar contraseña"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <Button
+                android:id="@+id/idiomaInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cambiar idioma"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/temaInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modo oscuro"
+                android:layout_marginTop="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/notisInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notificaciones activadas"
+                android:layout_marginTop="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"
+                />
 
         </LinearLayout>
     </ScrollView>

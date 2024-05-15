@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,10 +22,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -35,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
+import com.tfg.smartdiet.domain.ConfigUsuario
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
@@ -63,6 +67,7 @@ class InfoFragment : Fragment() {
     private lateinit var correoUsuario: TextView
     private lateinit var editCorreo: Button
     private lateinit var storage:StorageReference
+    private lateinit var cambiarTema: SwitchCompat
     private val pickImageLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
@@ -122,10 +127,26 @@ class InfoFragment : Fragment() {
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
         editCorreo = view.findViewById(R.id.editarMailInfo)
         editCont = view.findViewById(R.id.cambiarContrInfo)
+        cambiarTema = view.findViewById(R.id.temaInfo)
         setNombre(view)
         setCorreo(view)
         setFoto()
-
+        val conf =
+            this.context?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
+        if (conf != null) {
+            if (conf.initTema()=="OSCURO"){
+                cambiarTema.setChecked(true)
+            }else{
+                cambiarTema.setChecked(false)
+            }
+        }
+        cambiarTema.setOnClickListener{
+            if (!cambiarTema.isChecked){
+                conf?.setTema("NORMAL")
+            }else{
+                conf?.setTema("OSCURO")
+            }
+        }
 
         pd = ProgressDialog(this.context)
         editNom.setOnClickListener{
@@ -481,9 +502,10 @@ class InfoFragment : Fragment() {
         }.addOnFailureListener {
             // Obtener la URL de descarga de la imagen subida
             Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-
         }
     }
+
+
 
     private fun setFoto(){
         db = FirebaseFirestore.getInstance()
@@ -518,5 +540,14 @@ class InfoFragment : Fragment() {
                 }
 
         }
+    }
+
+    private fun cambiarTema(tema:String){
+        val conf =
+            this.context?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
+        if (conf != null) {
+            conf.setTema(tema)
+        }
+
     }
 }
