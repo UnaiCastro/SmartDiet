@@ -146,4 +146,5 @@
     <color name="anillo_proteinas">#800000</color>
     <color name="anillo_grasas">#3B5323</color>
     <color name="anillo_carbs">#4169E1</color>
+    <color name="anillo_fondo">#251915</color>
 </resources>
