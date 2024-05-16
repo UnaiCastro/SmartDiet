@@ -119,7 +119,7 @@
     <string name="porridge_recipe_ingredient_3">Frutos secos a elegir</string>
     <string name="porridge_recipe_ingredient_4">Fruta fresca o congelada</string>
     <string name="porridge_recipe_ingredient_5">Topping a elegir como crema de cacahuete</string>
-    <string name="porridge_recipe_timer">Tiempo Preparación: 7 minutos | | Tiempo Cocción: 0 minutos</string>
+    <string name="porridge_recipe_timer">Tiempo Preparación: 7 minutos \n Tiempo Cocción: 0 minutos</string>
     <string name="porridge_recipe_instruction_title">Instrucciones:</string>
     <string name="porridge_recipe_instruction_1">En un bol grande, crear una base de entre 150-200 gramos
     de yogurt griego natural.</string>
@@ -133,14 +133,16 @@
         aporte de grasas</string>
     <string name="protein_milkshake_recipe_ingredient_2">Scope de proteínas</string>
     <string name="protein_milkshake_recipe_ingredient_3">Avena</string>
-    <string name="protein_milkshake_recipe_timer">Tiempo Preparación: 2 minutos | | Tiempo Cocción: 0 minutos</string>
+    <string name="protein_milkshake_recipe_timer">Tiempo Preparación: 2 minutos \n Tiempo Cocción: 0 minutos</string>
     <string name="protein_milkshake_recipe_instruction_title">Instrucciones:</string>
     <string name="protein_milkshake_recipe_instruction_1">En un bol grande, crear una base de entre 150-200 gramos
     de yogurt griego natural.</string>
     <string name="protein_milkshake_recipe_instruction_2">Añadir a la base de yogurt, muesli o avena, fruta,
     frutos secos y finalizar el bowl con el topping elegido.</string>
 
+    <!-- Layout: fragment_protein_milkshake_detail.xml -->
+    <string name=""></string>
 
+    <!-- Layout: fragment_porridge_detail.xml -->
     <string name=""></string>
 </resources>
-
