@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">SmartDiet</string>
+    <string name="app_name" translatable="false">SmartDiet</string>
     <string name="title_activity_bienvenida" translatable="false">BienvenidaActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label" translatable="false">First Fragment</string>
     <string name="second_fragment_label" translatable="false">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
 
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -45,8 +45,8 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="enter">Entrar</string>
-    <string name="userQuestion">¿No eres usuario?</string>
+    <string name="enter" translatable="false">Entrar</string>
+    <string name="userQuestion" translatable="false">¿No eres usuario?</string>
     <string name="textEnter">Registrate</string>
     <string name="IniciaSesion">Inicia Sesion</string>
     <string name="usuario">Usuario</string>
@@ -140,9 +140,14 @@
     <string name="protein_milkshake_recipe_instruction_2">Añadir a la base de yogurt, muesli o avena, fruta,
     frutos secos y finalizar el bowl con el topping elegido.</string>
 
-    <!-- Layout: fragment_protein_milkshake_detail.xml -->
-    <string name="prueba">prueba</string>
-
     <!-- Layout: fragment_porridge_detail.xml -->
-    <string name="prueba2">prueba</string>
+    <string name="porridge_recipe_title">Porridge de yogur natural y avena</string>
+    <string name="porridge_recipe_source">Fuente de fibra</string>
+    <string name="porridge_recipe_fact">Calories: 110k Cal | Protein: 2g | Carbs: 26g | Vitamin C:
+        67% of the Reference Daily Intake (RDI) | Folate: 15% of the RDI | Potassium: 10% of the
+        RDI | Magnesium: 6% of the RDI</string>
+
+
+
+    <!-- Layout: fragment_protein_milkshake_detail.xml -->
 </resources>
