@@ -132,13 +132,13 @@ class MainActivity : AppCompatActivity() {
 
         // Construct the Dieta object
         val newDieta = Dieta(
-            caloriasAct = "",
+            caloriasAct = "0",
             caloriasObj = defaultCalorias,
-            carbohidratosAct = "",
+            carbohidratosAct = "0",
             carbohidratosObj = defaultCarbohidratos,
-            grasasAct = "",
+            grasasAct = "0",
             grasasObj = defaultGrasas,
-            proteinasAct = "",
+            proteinasAct = "0",
             proteinasObj = defaultProteinas,
             fecha = currentDate,
             userID = userID

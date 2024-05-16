@@ -129,6 +129,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/BTNgestiondietas"
             android:text="Ir a gestión dietas"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNlogout"
+            android:text="Cerrar sesión"/>
     </LinearLayout>
 
 
