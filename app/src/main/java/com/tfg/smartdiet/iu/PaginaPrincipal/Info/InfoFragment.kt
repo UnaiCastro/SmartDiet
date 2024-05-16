@@ -74,7 +74,7 @@ class InfoFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var nombre: TextView
     private lateinit var correoUsuario: TextView
-    private lateinit var editCorreo: Button
+    //private lateinit var editCorreo: Button
     private lateinit var storage:StorageReference
     private lateinit var cambiarTema: SwitchCompat
     private lateinit var editIdioma: Button
@@ -135,7 +135,7 @@ class InfoFragment : Fragment() {
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         editNom = view.findViewById(R.id.editarNombreInfo)
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
-        editCorreo = view.findViewById(R.id.editarMailInfo)
+       // editCorreo = view.findViewById(R.id.editarMailInfo)
         editCont = view.findViewById(R.id.cambiarContrInfo)
         cambiarTema = view.findViewById(R.id.temaInfo)
         editIdioma = view.findViewById(R.id.idiomaInfo)
@@ -163,9 +163,9 @@ class InfoFragment : Fragment() {
         editNom.setOnClickListener{
             editarNom(view)
         }
-        editCorreo.setOnClickListener{
+       /* editCorreo.setOnClickListener{
             editarMail(view)
-        }
+        }*/
         editImgPerfil.setOnClickListener{
             editarFoto()
         }
