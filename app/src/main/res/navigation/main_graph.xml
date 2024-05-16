@@ -20,6 +20,11 @@
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Info.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/gestionDietasFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_gestion_dietas"
+        tools:layout="@layout/fragment_gestion_dietas" />
 
 
 </navigation>

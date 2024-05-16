@@ -14,14 +14,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tituloInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="Mi perfil"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="26sp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -43,23 +42,22 @@
                 android:textSize="20sp" />
 
             <Button
+                style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/actuPerfilInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="Actualizar imagen de perfil"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginHorizontal="10dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nombreInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Error"
+                tools:text="Error"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
 
@@ -70,7 +68,6 @@
                 android:layout_marginTop="20dp"
                 android:text="Editar nombre"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
 
@@ -82,7 +79,6 @@
                 android:layout_marginTop="20dp"
                 android:text="Cambiar contraseña"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
 
@@ -93,7 +89,6 @@
                 android:layout_marginTop="20dp"
                 android:text="Cambiar idioma"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
 
@@ -101,9 +96,8 @@
                 android:id="@+id/temaInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Modo oscuro"
+                android:text="Modo Oscuro"
                 android:layout_marginTop="20dp"
-                android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
                 />
@@ -112,9 +106,8 @@
                 android:id="@+id/notisInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Notificaciones activadas"
+                android:text="Activar Notificaciones"
                 android:layout_marginTop="20dp"
-                android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
                 />
@@ -122,11 +115,21 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BTNHistorico"
-        android:text="Ir al historico"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNHistorico"
+            android:text="Ir al historico"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNgestiondietas"
+            android:text="Ir a gestión dietas"/>
+    </LinearLayout>
 
 
 </FrameLayout>
