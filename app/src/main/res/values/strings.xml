@@ -67,4 +67,82 @@
     <string name="n" translatable="false">No</string>
     <string name="annadir">Añadir</string>
     <string name="cancelar">Cancelar</string>
+
+    <!-- Layout: fragment_ejercicio.xml -->
+    <string name="key_to_weight_loss">CLAVES PARA PERDER PESO</string>
+    <string name="more_exercise_button">CONSEJOS PARA MAXIMIZAR EL ENTRENAMIENTO</string>
+
+    <!-- Layout: fragment_perder_peso.xml -->
+    <string name="key_to_weight_loss_2">CLAVES PARA PERDER PESO</string>
+    <string name="key_to_weight_loss_tip_1">1. La clave para perder peso con éxito es desarrollar
+        hábitos de vida saludables basados en la alimentación y el ejercicio. Puede que no le gusten
+        esas palabras: alimentación y ejercicio. Pero tampoco hay que obsercionarse con ellas.
+        Alimentación sólo significa comer sano y con menos calorías. <br></br>Hacer ejercicio
+        significa ser más activo físicamente.</string>
+    <string name="key_to_weight_loss_tip_2">2. Aunque la gente suele centrarse en la dieta cuando
+        intenta perder peso, mantenerse activo también es un componente esencial de un programa de
+        adelgazamiento. Cuando estás activo, tu cuerpo utiliza energía (calorías) para moverse, lo
+        que ayuda a quemar las calorías que ingieres con los alimentos que comes.</string>
+    <string name="key_to_weight_loss_tip_3">3. Sea cual sea la actividad que elija, hágala con
+        regularidad. Intente realizar al menos 150 minutos semanales de actividad física moderada
+        o 75 minutos semanales de actividad aeróbica intensa, preferiblemente repartidos a lo largo
+        de la semana. Tenga en cuenta que puede necesitar más actividad física para perder peso y
+        mantenerlo.</string>
+
+    <!-- Layout: fragment_maximizar_entrenamientos.xml -->
+    <string name="key_to_maximize_exercise">5 consejos para maximizar tus entrenamientos</string>
+    <string name="key_to_maximize_exercise_tip_1">1. Desayuna sano: Si haces ejercicio por la mañana,
+        levántate lo suficientemente temprano para terminar de desayunar al menos una hora antes de
+        tu entrenamiento.</string>
+    <string name="key_to_maximize_exercise_tip_2">2. Vigile el tamaño de las porciones de comida: Ten
+        cuidado de no excederte cuando se trata de cuánto comes antes del ejercicio.</string>
+    <string name="key_to_maximize_exercise_tip_3">3. Merienda bien: Los tentempiés tomados poco antes
+        del ejercicio probablemente no le aportarán energía adicional si su entrenamiento dura menos
+        de 60 minutos, pero pueden evitarle punzadas de hambre que le distraigan.</string>
+    <string name="key_to_maximize_exercise_tip_4">4. Coma después del ejercicio: Para ayudar a tus
+        músculos a recuperarse y reponer sus reservas de glucógeno, come una comida que contenga
+        carbohidratos y proteínas en las dos horas siguientes a la sesión de ejercicio, si es
+        posible.</string>
+    <string name="key_to_maximize_exercise_tip_5">5. Bebe: No olvide beber líquidos. Necesitas líquidos
+        adecuados antes, durante y después del ejercicio para ayudar a prevenir la deshidratación.</string>
+
+    <!-- Layout: fragment_perder_peso.xml and fragment_maximizar_entrenamientos.xml -->
+    <string name="home_button">INICIO</string>
+    <string name="recipe_button">RECETAS</string>
+    <string name="calorie_button">CALORÍAS</string>
+
+    <!-- Layout: fragment_porridge_recipe.xml -->
+    <string name="porridge_recipe_main_title">Porridge de yogur griego, frutas y frutos secos</string>
+    <string name="porridge_recipe_title">Ingredientes:</string>
+    <string name="porridge_recipe_ingredient_1">150g de Yogurt griego natural</string>
+    <string name="porridge_recipe_ingredient_2">70g de Muesli o avena</string>
+    <string name="porridge_recipe_ingredient_3">Frutos secos a elegir</string>
+    <string name="porridge_recipe_ingredient_4">Fruta fresca o congelada</string>
+    <string name="porridge_recipe_ingredient_5">Topping a elegir como crema de cacahuete</string>
+    <string name="porridge_recipe_timer">Tiempo Preparación: 7 minutos \n Tiempo Cocción: 0 minutos</string>
+    <string name="porridge_recipe_instruction_title">Instrucciones:</string>
+    <string name="porridge_recipe_instruction_1">En un bol grande, crear una base de entre 150-200 gramos
+    de yogurt griego natural.</string>
+    <string name="porridge_recipe_instruction_2">Añadir a la base de yogurt, muesli o avena, fruta,
+    frutos secos y finalizar el bowl con el topping elegido.</string>
+
+    <!-- Layout: fragment_protein_milkshake_recipe.xml -->
+    <string name="protein_milkshake_recipe_main_title">Batido de proteínas postentreno</string>
+    <string name="protein_milkshake_recipe_title">Ingredientes:</string>
+    <string name="protein_milkshake_recipe_ingredient_1">Leche, preferiblemente entera para mayor
+        aporte de grasas</string>
+    <string name="protein_milkshake_recipe_ingredient_2">Scope de proteínas</string>
+    <string name="protein_milkshake_recipe_ingredient_3">Avena</string>
+    <string name="protein_milkshake_recipe_timer">Tiempo Preparación: 2 minutos \n Tiempo Cocción: 0 minutos</string>
+    <string name="protein_milkshake_recipe_instruction_title">Instrucciones:</string>
+    <string name="protein_milkshake_recipe_instruction_1">En un bol grande, crear una base de entre 150-200 gramos
+    de yogurt griego natural.</string>
+    <string name="protein_milkshake_recipe_instruction_2">Añadir a la base de yogurt, muesli o avena, fruta,
+    frutos secos y finalizar el bowl con el topping elegido.</string>
+
+    <!-- Layout: fragment_protein_milkshake_detail.xml -->
+    <string name=""></string>
+
+    <!-- Layout: fragment_porridge_detail.xml -->
+    <string name=""></string>
 </resources>
