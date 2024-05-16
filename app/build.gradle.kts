@@ -67,6 +67,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
 
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+
     // SharedPreferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

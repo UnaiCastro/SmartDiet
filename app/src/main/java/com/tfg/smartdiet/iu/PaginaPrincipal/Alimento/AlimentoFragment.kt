@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.databinding.FragmentSegundaBinding
@@ -14,6 +16,11 @@ class AlimentoFragment : Fragment() {
 
     private var _binding: FragmentSegundaBinding? = null
     private val binding get() = _binding!!
+    private lateinit var aliemntoRV:RecyclerView
+    private lateinit var alimentoAdapter: AlimentoAdapter
+    private val alimentos=obtenerAlimentos()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +42,51 @@ class AlimentoFragment : Fragment() {
     }
 
     private fun initRV() {
+        this.aliemntoRV=binding.AlimentosRV
+        this.aliemntoRV.layoutManager=LinearLayoutManager(context)
+        alimentoAdapter = AlimentoAdapter(this.alimentos)
+        aliemntoRV.adapter=alimentoAdapter
+    }
 
+    private fun obtenerAlimentos(): MutableList<Alimento> {
+        val aliemntosList= mutableListOf<Alimento>()
+        val db=FirebaseFirestore.getInstance()
+        db.collection("alimentos").get().addOnSuccessListener {
+            for (document in it){
+                val agua=document.data["agua"].toString()
+                val calorias=document.data["calorias"].toString()
+                val carbohidratos=document.data["carbohidratos"].toString()
+                val descripcion=document.data["descripcion"].toString()
+                val grasas=document.data["grasas"].toString()
+                val imagen=document.data["imagen"].toString()
+                val minerales=document.data["minerales"].toString()
+                val nombre=document.data["nombre"].toString()
+                val proteinas=document.data["proteinas"].toString()
+                val tipo=document.data["tipo"].toString()
+                val vitaminas=document.data["vitaminas"].toString()
+
+                val alimento=Alimento(
+                    agua,
+                    calorias,
+                    carbohidratos,
+                    descripcion,
+                    grasas,
+                    imagen,
+                    minerales,
+                    nombre,
+                    proteinas,
+                    tipo,
+                    vitaminas
+                )
+                aliemntosList.add(alimento)
+                println(aliemntosList)
+            }
+            alimentoAdapter.apply {
+                setAlimentos(aliemntosList)
+                notifyDataSetChanged()
+            }
+        }
+        return aliemntosList
     }
 
     /*private fun crearAlimentos() {
