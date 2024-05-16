@@ -43,7 +43,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/calorias"
-                        android:textColor="@android:color/black"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true" />
 
@@ -52,7 +51,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0/100"
-                        android:textColor="@android:color/black"
                         android:layout_below="@id/textViewCaloriasName"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp" />
@@ -85,7 +83,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/proteinas"
-                        android:textColor="@android:color/black"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true" />
 
@@ -94,7 +91,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0/100"
-                        android:textColor="@android:color/black"
                         android:layout_below="@id/textViewProteinasName"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp" />
@@ -133,7 +129,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/grasas"
-                        android:textColor="@android:color/black"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true" />
 
@@ -142,7 +137,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0/100"
-                        android:textColor="@android:color/black"
                         android:layout_below="@id/textViewGrasasName"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp" />
@@ -175,7 +169,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/carbs"
-                        android:textColor="@android:color/black"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true" />
 
@@ -184,7 +177,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0/100"
-                        android:textColor="@android:color/black"
                         android:layout_below="@id/textViewCarbohidratosName"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp" />

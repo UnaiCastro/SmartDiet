@@ -34,6 +34,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -173,6 +174,13 @@ class InfoFragment : Fragment() {
             val i= Intent(context,HistoricoActivity::class.java)
             startActivity(i)
         }
+
+        val btnGD = view.findViewById<Button>(R.id.BTNgestiondietas)
+        btnGD.setOnClickListener {
+            val navController = requireActivity().findNavController(R.id.Main_fragmentcontainerview)
+            navController.navigate(R.id.gestionDietasFragment)
+        }
+
     }
 
 
