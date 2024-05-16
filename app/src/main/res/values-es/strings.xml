@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartDiet</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="enter">Entrar</string>
+    <string name="userQuestion">¿No eres usuario?</string>
+    <string name="textEnter">Regístrate</string>
+    <string name="IniciaSesion">Inicia Sesion</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="eresUsuario">¿Eres usuario?</string>
+    <string name="formatoEmail">Formato de email no válido</string>
+    <string name="passwordLength">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="calorias">Caloría</string>
+    <string name="proteinas">Proteínas</string>
+    <string name="grasas">Grasas</string>
+    <string name="carbs">Carbohidratos</string>
+    <string name="introduceDatosRegistro">Introduce los datos del nuevo registro</string>
+    <string name="nombre">Nombre</string>
+    <string name="nuevoRegistro">Registrar nuevos datos</string>
+    <string name="deleteConf">¿Seguro que quieres borrar la entrada?</string>
+    <string name="y">Sí</string>
+    <string name="annadir">Añadir</string>
+    <string name="cancelar">Cancelar</string>
+</resources>
