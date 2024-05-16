@@ -108,10 +108,10 @@ class InfoFragment : Fragment() {
             try {
                 set =
                     view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
-                //set.setImageBitmap(laminiatura)
-                Picasso.get().load(imagenFich).
-                fit().centerCrop().
-                into(set)
+                set.setImageBitmap(laminiatura)
+                //Picasso.get().load(imagenFich).
+                //fit().centerCrop().
+                //into(set)
                 if (laminiatura != null) {
                     subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg")
                 }
