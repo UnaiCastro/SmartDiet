@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/key_to_weight_loss_2"
         tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="38dp" />
+        tools:layout_editor_absoluteY="43dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -41,11 +41,11 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="46dp"
         android:text="@string/home_button"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="623dp" />
+        tools:layout_editor_absoluteY="607dp" />
 
     <Button
         android:id="@+id/button4"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:text="@string/recipe_button"
         tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="623dp" />
+        tools:layout_editor_absoluteY="606dp" />
 
     <Button
         android:id="@+id/button5"
@@ -61,5 +61,5 @@
         android:layout_height="wrap_content"
         android:text="@string/calorie_button"
         tools:layout_editor_absoluteX="278dp"
-        tools:layout_editor_absoluteY="623dp" />
+        tools:layout_editor_absoluteY="605dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

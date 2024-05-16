@@ -47,11 +47,11 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="26dp"
+        android:layout_height="22dp"
         app:srcCompat="@android:drawable/presence_away"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="280dp" />
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="284dp" />
 
     <TextView
         android:id="@+id/textView26"

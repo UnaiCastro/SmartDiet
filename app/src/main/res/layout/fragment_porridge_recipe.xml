@@ -10,8 +10,8 @@
         android:layout_width="350dp"
         android:layout_height="43dp"
         android:text="@string/porridge_recipe_instruction_2"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="445dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="505dp" />
 
     <TextView
         android:id="@+id/textView17"
@@ -19,23 +19,23 @@
         android:layout_height="48dp"
         android:text="@string/porridge_recipe_instruction_1"
         tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="383dp" />
+        tools:layout_editor_absoluteY="443dp" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="52dp"
-        android:layout_height="26dp"
+        android:layout_width="40dp"
+        android:layout_height="28dp"
         app:srcCompat="@android:drawable/presence_away"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="341dp" />
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="338dp" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_instruction_title"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="341dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="402dp" />
 
     <TextView
         android:id="@+id/textView13"
@@ -92,5 +92,13 @@
         android:text="@string/porridge_recipe_ingredient_4"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="250dp" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/porridge_recipe_timer"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="331dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
