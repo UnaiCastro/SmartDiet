@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modifica los objetivos de tu dieta actual"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:gravity="center" />
+
+    <!-- Calorias Objetivo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calorías Objetivo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etCaloriasObj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Calorías Objetivo"
+            android:inputType="number"
+            android:enabled="false"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btnEditCalorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:textSize="14sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Proteinas Objetivo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proteínas Objetivo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etProteinasObj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Proteínas Objetivo"
+            android:inputType="number"
+            android:enabled="false"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btnEditProteinas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:textSize="14sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Grasas Objetivo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grasas Objetivo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etGrasasObj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Grasas Objetivo"
+            android:inputType="number"
+            android:enabled="false"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btnEditGrasas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:textSize="14sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Carbohidratos Objetivo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carbohidratos Objetivo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/etCarbohidratosObj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Carbohidratos Objetivo"
+            android:inputType="number"
+            android:enabled="false"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btnEditCarbohidratos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:textSize="14sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Button to save diet options -->
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

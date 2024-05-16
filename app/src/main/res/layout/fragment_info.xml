@@ -133,11 +133,21 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BTNHistorico"
-        android:text="Ir al historico"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNHistorico"
+            android:text="Ir al historico"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNgestiondietas"
+            android:text="Ir a gestión dietas"/>
+    </LinearLayout>
 
 
 </FrameLayout>
