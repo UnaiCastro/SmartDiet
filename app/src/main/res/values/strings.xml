@@ -142,12 +142,17 @@
 
     <!-- Layout: fragment_porridge_detail.xml -->
     <string name="porridge_recipe_title">Porridge de yogur natural y avena</string>
-    <string name="porridge_recipe_source">Fuente de fibra</string>
-    <string name="porridge_recipe_fact">Calories: 110k Cal | Protein: 2g | Carbs: 26g | Vitamin C:
-        67% of the Reference Daily Intake (RDI) | Folate: 15% of the RDI | Potassium: 10% of the
-        RDI | Magnesium: 6% of the RDI</string>
-
-
+    <string name="porridge_recipe_source">Fuente de fibra \nFuente de oligoalimentos \nFuente
+        de vitaminas</string>
+    <string name="porridge_recipe_fact">Calories: 110k Cal \nProtein: 2g \nCarbs: 26g \nVitamin C:
+        67% of the Reference Daily Intake (RDI) \nFolate: 15% of the RDI \nPotassium: 10% of the
+        RDI \nMagnesium: 6% of the RDI</string>
 
     <!-- Layout: fragment_protein_milkshake_detail.xml -->
+    <string name="protein_milkshake_recipe_title">Batido de proteínas</string>
+    <string name="protein_milkshake_recipe_source">Fuente de fibra \nFuente de oligoalimentos \nFuente
+        de vitaminas</string>
+    <string name="protein_milkshake_recipe_fact">Calories: 110k Cal \nProtein: 2g \nCarbs: 26g \nVitamin C:
+        67% of the Reference Daily Intake (RDI) \nFolate: 15% of the RDI \nPotassium: 10% of the
+        RDI \nMagnesium: 6% of the RDI</string>
 </resources>
