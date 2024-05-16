@@ -10,12 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="25dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/logoBienvenida"
+            android:layout_gravity="center"
+            android:layout_width="275dp"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/logo_smartapp" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/InicioSesionEtUsuario"
@@ -80,15 +87,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-
                 android:text="@string/userQuestion" />
 
             <TextView
                 android:id="@+id/InicioSesionTvTextoSubrayado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textEnter"
-                android:textColor="@color/text_selector" />
+                android:text="@string/textEnter" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

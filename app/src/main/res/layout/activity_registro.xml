@@ -8,9 +8,9 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
+        android:layout_marginTop="100dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,18 +94,17 @@
             android:layout_marginVertical="12dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:text="¿Eres usuario?" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/InicioSesionTvTextoSubrayado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/IniciaSesion"
-                android:textColor="@color/text_selector" />
+                android:text="@string/IniciaSesion" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

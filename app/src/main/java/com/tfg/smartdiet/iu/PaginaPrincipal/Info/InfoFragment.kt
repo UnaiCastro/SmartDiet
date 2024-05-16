@@ -241,7 +241,7 @@ class InfoFragment : Fragment() {
                 }
                 .addOnFailureListener { e ->
                     // Error al obtener el documento
-                    Log.w("TAG", "Error getting document", e)
+                    Log.e("TAG", "Error getting document", e)
                 }
 
         }

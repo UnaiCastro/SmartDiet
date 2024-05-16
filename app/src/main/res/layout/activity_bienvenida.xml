@@ -7,18 +7,17 @@
     tools:context=".iu.Bienvenida.BienvenidaActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="423dp"
-        android:layout_height="600dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/logoBienvenida"
+            android:layout_gravity="center"
             android:layout_width="275dp"
             android:layout_height="300dp"
             app:srcCompat="@drawable/logo_smartapp" />
@@ -29,10 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="#CDC79D"
-            android:elevation="10dp"
-            android:text="Inicio Sesion"
-            android:textColor="#87800E" />
+            android:text="Inicio Sesion" />
 
         <Button
             android:id="@+id/BienvenidaBtnRegistro"
@@ -40,10 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="#CDC79D"
-            android:elevation="10dp"
-            android:text="Registro"
-            android:textColor="#87800E" />
+            android:text="Registro" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
