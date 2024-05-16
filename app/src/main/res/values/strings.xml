@@ -141,8 +141,8 @@
     frutos secos y finalizar el bowl con el topping elegido.</string>
 
     <!-- Layout: fragment_protein_milkshake_detail.xml -->
-    <string name=""></string>
+    <string name="prueba">prueba</string>
 
     <!-- Layout: fragment_porridge_detail.xml -->
-    <string name=""></string>
+    <string name="prueba2">prueba</string>
 </resources>
