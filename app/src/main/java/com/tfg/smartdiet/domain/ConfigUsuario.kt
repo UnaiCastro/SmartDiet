@@ -21,6 +21,12 @@ class ConfigUsuario(private val prefs: SharedPreferences)  {
         editor.putBoolean("SESION",true)
         editor.apply()
     }
+
+    fun cerrarSesion(){
+        val editor = prefs.edit()
+        editor.putBoolean("SESION",false)
+        editor.apply()
+    }
     fun setTema(tema: String){
         val editor = prefs.edit()
         editor.putString("TEMA",tema)

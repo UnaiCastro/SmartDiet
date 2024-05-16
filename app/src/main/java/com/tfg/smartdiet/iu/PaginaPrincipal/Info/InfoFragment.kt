@@ -46,6 +46,7 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.domain.ConfigUsuario
+import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
@@ -188,6 +189,15 @@ class InfoFragment : Fragment() {
         btnGD.setOnClickListener {
             val navController = requireActivity().findNavController(R.id.Main_fragmentcontainerview)
             navController.navigate(R.id.gestionDietasFragment)
+        }
+
+        val btnCerrarSesion = view.findViewById<Button>(R.id.BTNlogout)
+        btnCerrarSesion.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
+            auth.signOut()
+            val i= Intent(context,BienvenidaActivity::class.java)
+            startActivity(i)
+            conf?.cerrarSesion()
         }
 
     }
