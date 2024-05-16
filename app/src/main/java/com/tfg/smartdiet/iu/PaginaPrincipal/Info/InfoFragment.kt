@@ -21,10 +21,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -72,9 +75,10 @@ class InfoFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var nombre: TextView
     private lateinit var correoUsuario: TextView
-    private lateinit var editCorreo: Button
+    //private lateinit var editCorreo: Button
     private lateinit var storage:StorageReference
     private lateinit var cambiarTema: SwitchCompat
+    private lateinit var editIdioma: Button
     private val pickImageLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
@@ -132,9 +136,10 @@ class InfoFragment : Fragment() {
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         editNom = view.findViewById(R.id.editarNombreInfo)
         editImgPerfil = view.findViewById(R.id.actuPerfilInfo)
-        editCorreo = view.findViewById(R.id.editarMailInfo)
+       // editCorreo = view.findViewById(R.id.editarMailInfo)
         editCont = view.findViewById(R.id.cambiarContrInfo)
         cambiarTema = view.findViewById(R.id.temaInfo)
+        editIdioma = view.findViewById(R.id.idiomaInfo)
         setNombre(view)
         setCorreo(view)
         setFoto()
@@ -159,16 +164,20 @@ class InfoFragment : Fragment() {
         editNom.setOnClickListener{
             editarNom(view)
         }
-        editCorreo.setOnClickListener{
+       /* editCorreo.setOnClickListener{
             editarMail(view)
-        }
+        }*/
         editImgPerfil.setOnClickListener{
             editarFoto()
         }
         editCont.setOnClickListener{
             editarCont()
         }
-
+        editIdioma.setOnClickListener{
+            if (conf != null) {
+                cambiarIdioma(conf)
+            }
+        }
         val btn = view.findViewById<Button>(R.id.BTNHistorico)
         btn.setOnClickListener {
             val i= Intent(context,HistoricoActivity::class.java)
@@ -562,12 +571,35 @@ class InfoFragment : Fragment() {
         }
     }
 
-    private fun cambiarTema(tema:String){
-        val conf =
-            this.context?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
-        if (conf != null) {
-            conf.setTema(tema)
+    private fun cambiarIdioma(conf:ConfigUsuario){
+        val idiomaInit = this.context?.let { conf.initIdioma(it) }
+        val builder = AlertDialog.Builder(this.context)
+        builder.setTitle("Cambiar idioma") //cambiar por strings
+        val layout = LinearLayout(this.context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(10, 10, 10, 10)
+        val grupo = RadioGroup(this.context)
+        val espanol = RadioButton(this.context)
+        espanol.text = "Español"
+        val ingles = RadioButton(this.context)
+        ingles.text = "Inglés"
+        grupo.addView(espanol)
+        grupo.addView(ingles)
+        layout.addView(grupo)
+        builder.setView(layout)
+        if(idiomaInit=="es"){
+            grupo.check(espanol.id)
+        }else{
+            grupo.check(ingles.id)
         }
+        builder.setPositiveButton("Actualizar") { dialog, _ ->
+            if(espanol.isChecked){
+                conf.setIdioma("es",this.requireContext())
+            }else{
+                conf.setIdioma("en",this.requireContext())
+            }
 
+        }
+        builder.show()
     }
 }

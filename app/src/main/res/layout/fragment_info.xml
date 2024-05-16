@@ -31,6 +31,16 @@
                 android:layout_marginTop="40dp"
                 android:src="@drawable/ic_users" />
 
+            <TextView
+                android:id="@+id/correoInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Error"
+                android:textSize="20sp" />
+
             <Button
                 style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/actuPerfilInfo"
@@ -57,26 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Editar nombre"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/correoInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                tools:text="Error"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"/>
-
-            <Button
-                android:id="@+id/editarMailInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Editar correo"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">SmartDiet</string>
-    <string name="title_activity_bienvenida">BienvenidaActivity</string>
+    <string name="title_activity_bienvenida" translatable="false">BienvenidaActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="lorem_ipsum">
+    <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
@@ -44,13 +44,13 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="enter">Entrar</string>
     <string name="userQuestion">¿No eres usuario?</string>
     <string name="textEnter">Registrate</string>
     <string name="IniciaSesion">Inicia Sesion</string>
     <string name="usuario">Usuario</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="password">Contraseña</string>
     <string name="eresUsuario">¿Eres usuario?</string>
     <string name="formatoEmail">Formato de email no válido</string>
@@ -64,7 +64,7 @@
     <string name="nuevoRegistro">Registrar nuevos datos</string>
     <string name="deleteConf">¿Seguro que quieres borrar la entrada?</string>
     <string name="y">Sí</string>
-    <string name="n">No</string>
+    <string name="n" translatable="false">No</string>
     <string name="annadir">Añadir</string>
     <string name="cancelar">Cancelar</string>
 </resources>
