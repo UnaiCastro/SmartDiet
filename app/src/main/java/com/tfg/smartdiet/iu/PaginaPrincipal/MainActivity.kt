@@ -1,12 +1,21 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal
 
+import android.Manifest
 import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -34,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavegador: BottomNavigationView
     private lateinit var db: FirebaseFirestore
     private val logtag = "MainActivity"
+    private val CHANNEL_ID = "123"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,10 +52,26 @@ class MainActivity : AppCompatActivity() {
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         initNavigation()
+
+        // Create the notification channel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "notificaciones"
+            val descriptionText = "canal de notificaciones"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
         db = FirebaseFirestore.getInstance()
 
-        checkAndCreateDieta()
-        setResetTrigger(0,0) //Cambiar la hora del reset
+        checkAndHandleActiveDiet()
+        //setResetTrigger(0,0) //Cambiar la hora del reset
     }
 
     private fun initNavigation() {
@@ -55,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavegador.setupWithNavController(navController)
     }
 
+    //este reset no se usa
     private fun setResetTrigger(hours: Int, minutes: Int) {
         val calendar = Calendar.getInstance()
 
@@ -89,12 +116,16 @@ class MainActivity : AppCompatActivity() {
         Log.d(logtag, "Reset scheduled for ${calendar.time}")
     }
 
-    private fun checkAndCreateDieta() {
-        // Retrieve the current user's ID
-        val currentUserID = FirebaseAuth.getInstance().currentUser?.uid
+    private fun checkAndHandleActiveDiet() {
+        // Get the current userid
+        val userID = FirebaseAuth.getInstance().currentUser?.uid
 
-        // Ensure that current user ID is not null
-        currentUserID?.let { userID ->
+
+        // Ensure that current user is not null
+        userID?.let { userID ->
+            // Get today's date
+            val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+
             // Get the user document reference
             val userDocRef = db.collection("users").document(userID)
 
@@ -106,18 +137,122 @@ class MainActivity : AppCompatActivity() {
                     // If dietaActID is null, create a new diet
                     if (dietaActID == null) {
                         createNewDietaForUser(userID)
-                        Log.i(logtag, "El usuario $userID no tiene dieta, se crea una nueva")
-                    }
-                    else{
-                        Log.i(logtag, "El usuario $userID ya tiene dieta")
-                    }
+                        Log.i(logtag, "El usuario ${userID} no tiene dieta, se crea una nueva")
+                    } else {
+                        // Retrieve the dieta document
+                        db.collection("dietas").document(dietaActID).get()
+                            .addOnSuccessListener { dietaDocumentSnapshot ->
+                                val dietaFecha = dietaDocumentSnapshot.getString("fecha")
 
+                                // Check if the dieta's date matches today's date
+                                if (dietaFecha == currentDate) {
+                                    Log.i(logtag, "La dieta activa para el usuario ${userID} es de hoy.")
+                                } else {
+                                    Log.i(logtag, "La dieta activa para el usuario ${userID} no es de hoy, guardándola y creando nueva.")
+                                    handleExpiredActiveDiet(userID, dietaActID)
+
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(logtag, "Error retrieving dieta document: ${e.message}")
+                            }
+                    }
                 }
                 .addOnFailureListener { e ->
                     Log.e(logtag, "Error retrieving user document: ${e.message}")
                 }
+        } ?: run {
+            Log.e(logtag, "Current user is null.")
         }
     }
+
+    private fun handleExpiredActiveDiet(userID: String, oldDietaID: String) {
+        // Get the objective values of the expired diet
+        db.collection("dietas").document(oldDietaID).get()
+            .addOnSuccessListener { dietaDocumentSnapshot ->
+                val previousDietaValues = dietaDocumentSnapshot.data?.mapValues { it.value.toString() } ?: mapOf()
+
+                // Get today's date
+                val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+
+                // Construct the new Dieta object with the same objective values
+                val newDieta = Dieta(
+                    caloriasAct = "0",
+                    caloriasObj = previousDietaValues["caloriasObj"] ?: "0",
+                    carbohidratosAct = "0",
+                    carbohidratosObj = previousDietaValues["carbohidratosObj"] ?: "0",
+                    grasasAct = "0",
+                    grasasObj = previousDietaValues["grasasObj"] ?: "0",
+                    proteinasAct = "0",
+                    proteinasObj = previousDietaValues["proteinasObj"] ?: "0",
+                    fecha = currentDate,
+                    userID = userID
+                )
+
+                // Convert Dieta object to map
+                val dietaMap = newDieta.toMap()
+
+                // Add the new dieta data to Firestore
+                db.collection("dietas")
+                    .add(dietaMap)
+                    .addOnSuccessListener { newDietaDocRef ->
+                        Log.i(logtag, "Se ha creado una nueva dieta para el usuario $userID con los mismos valores objetivos que la dieta expirada.")
+
+                        // Update the user document with the new active dieta ID
+                        updateUserWithDietaActID(userID, newDietaDocRef.id)
+
+                        // Send local notification with previous dieta values
+                        sendLocalNotification(previousDietaValues)
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e(logtag, "Error al añadir la nueva dieta para el usuario $userID: ${e.message}")
+                    }
+            }
+            .addOnFailureListener { e ->
+                Log.e(logtag, "Error retrieving expired dieta document: ${e.message}")
+            }
+    }
+
+
+    private fun sendLocalNotification(previousDietaValues: Map<String, String>) {
+        // Extract the date from the previous dieta values
+        val oldDietaDate = previousDietaValues["fecha"] ?: ""
+
+        // Format the notification content
+        val notificationContent = buildString {
+            append("Calorías: ${previousDietaValues["caloriasAct"]}/${previousDietaValues["caloriasObj"]}\n")
+            append("Proteínas: ${previousDietaValues["proteinasAct"]}/${previousDietaValues["proteinasObj"]}\n")
+            append("Grasas: ${previousDietaValues["grasasAct"]}/${previousDietaValues["grasasObj"]}\n")
+            append("Carbohidratos: ${previousDietaValues["carbohidratosAct"]}/${previousDietaValues["carbohidratosObj"]}")
+        }
+
+        // Create the notification
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_info)
+            .setContentTitle("Tu dieta del $oldDietaDate")
+            .setContentText(notificationContent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        // Show the notification
+        val notificationId = 100
+        val context = applicationContext
+        with(NotificationManagerCompat.from(context)) {
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Handle the case where the permission is not granted
+                // You can request permission here or handle it in the calling component
+                return
+            }
+            notify(notificationId, notificationBuilder.build())
+        }
+    }
+
+
+
+
 
 
     private fun createNewDietaForUser(userID: String) {

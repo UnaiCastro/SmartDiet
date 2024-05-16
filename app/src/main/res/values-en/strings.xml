@@ -12,7 +12,7 @@
     <string name="eresUsuario">Are you a user?</string>
     <string name="formatoEmail">Invalid email format</string>
     <string name="passwordLength">Password must be at least 6 characters</string>
-    <string name="calorias">Calorie</string>
+    <string name="calorias">Calories</string>
     <string name="proteinas">Proteins</string>
     <string name="grasas">Fats</string>
     <string name="carbs">Carbohydrates</string>
