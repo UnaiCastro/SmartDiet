@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Mi perfil"
+                android:text="@string/miPerfil"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -46,7 +46,7 @@
                 android:id="@+id/actuPerfilInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actualizar imagen de perfil"
+                android:text="@string/ActualizarImgPerfil"
                 android:textAlignment="center"
                 android:textSize="15sp"
                 android:layout_marginHorizontal="10dp"/>
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Editar nombre"
+                android:text="@string/editarNombre"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Cambiar contraseña"
+                android:text="@string/cambiarPassword"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Cambiar idioma"
+                android:text="@string/cambiarIdioma"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"/>
@@ -96,7 +96,7 @@
                 android:id="@+id/temaInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Modo Oscuro"
+                android:text="@string/modoOscuro"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
@@ -106,7 +106,7 @@
                 android:id="@+id/notisInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activar Notificaciones"
+                android:text="@string/activarNotificaciones"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
@@ -123,17 +123,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/BTNHistorico"
-            android:text="Ir al historico"/>
+            android:text="@string/historico"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/BTNgestiondietas"
-            android:text="Ir a gestión dietas"/>
+            android:text="@string/gestionDietas"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/BTNlogout"
-            android:text="Cerrar sesión"/>
+            android:text="@string/logout"/>
     </LinearLayout>
 
 

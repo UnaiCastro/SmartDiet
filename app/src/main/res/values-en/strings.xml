@@ -12,7 +12,7 @@
     <string name="eresUsuario">Are you a user?</string>
     <string name="formatoEmail">Invalid email format</string>
     <string name="passwordLength">Password must be at least 6 characters</string>
-    <string name="calorias">Calorie</string>
+    <string name="calorias">Calories</string>
     <string name="proteinas">Proteins</string>
     <string name="grasas">Fats</string>
     <string name="carbs">Carbohydrates</string>
@@ -23,4 +23,22 @@
     <string name="y">Yes</string>
     <string name="annadir">Add</string>
     <string name="cancelar">Cancel</string>
+    <string name="toastDietaActualizada">Diet successfully updated</string>
+    <string name="CaloriasObj">Calorie Goal</string>
+    <string name="PorteinasObj">Protein Goal</string>
+    <string name="GrasasObj">Fat Goal</string>
+    <string name="CarbsObj">Carbohydrate Goal</string>
+    <string name="editar">Edit</string>
+    <string name="guardar">Save</string>
+    <string name="tituloGestionDietas">Adjust your current diet goals</string>
+    <string name="logout">Logout</string>
+    <string name="historico">Diet Log</string>
+    <string name="gestionDietas">Diet Management</string>
+    <string name="activarNotificaciones">Enable Notifications</string>
+    <string name="modoOscuro">Dark Mode</string>
+    <string name="cambiarIdioma">Change language</string>
+    <string name="cambiarPassword">Change password</string>
+    <string name="editarNombre">Edit username</string>
+    <string name="ActualizarImgPerfil">Update profile picture</string>
+    <string name="miPerfil">My profile</string>
 </resources>

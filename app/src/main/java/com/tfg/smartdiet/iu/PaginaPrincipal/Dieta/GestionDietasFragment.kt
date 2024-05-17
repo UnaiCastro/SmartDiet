@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.FragmentGestionDietasBinding
 import com.tfg.smartdiet.domain.Dieta
 import java.text.SimpleDateFormat
@@ -200,7 +201,7 @@ class GestionDietasFragment : Fragment() {
                                 disableEditing()
 
                                 // Show a toast message indicating successful save
-                                Toast.makeText(requireContext(), "Dieta actualizada con éxito", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(),getString(R.string.toastDietaActualizada) , Toast.LENGTH_SHORT).show()
 
                                 // Navigate back to the previous fragment
                                 requireActivity().supportFragmentManager.popBackStack()

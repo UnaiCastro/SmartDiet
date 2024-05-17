@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <!-- Barra de progreso para calorías -->
             <RelativeLayout
@@ -101,7 +102,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <!-- Barra de progreso para grasas -->
             <RelativeLayout
@@ -184,13 +186,6 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <!-- RecyclerView con las entradas del día -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewEntries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
-
         <!-- Botón para ingresar datos -->
         <Button
             android:id="@+id/BotonB"
@@ -200,5 +195,14 @@
             android:text="@string/nuevoRegistro"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"/>
+
+        <!-- RecyclerView con las entradas del día -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEntries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
