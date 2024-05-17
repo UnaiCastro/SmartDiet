@@ -113,7 +113,7 @@
 
     <!-- Layout: fragment_porridge_recipe.xml -->
     <string name="porridge_recipe_main_title">Porridge de yogur griego, frutas y frutos secos</string>
-    <string name="porridge_recipe_title">Ingredientes:</string>
+    <string name="porridge_recipe_title_ingredientes">Ingredientes:</string>
     <string name="porridge_recipe_ingredient_1">150g de Yogurt griego natural</string>
     <string name="porridge_recipe_ingredient_2">70g de Muesli o avena</string>
     <string name="porridge_recipe_ingredient_3">Frutos secos a elegir</string>
@@ -128,7 +128,7 @@
 
     <!-- Layout: fragment_protein_milkshake_recipe.xml -->
     <string name="protein_milkshake_recipe_main_title">Batido de proteínas postentreno</string>
-    <string name="protein_milkshake_recipe_title">Ingredientes:</string>
+    <string name="protein_milkshake_recipe_title_ingredientes">Ingredientes:</string>
     <string name="protein_milkshake_recipe_ingredient_1">Leche, preferiblemente entera para mayor
         aporte de grasas</string>
     <string name="protein_milkshake_recipe_ingredient_2">Scope de proteínas</string>
