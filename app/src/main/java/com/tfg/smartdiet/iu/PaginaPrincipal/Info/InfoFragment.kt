@@ -43,6 +43,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.domain.ConfigUsuario
@@ -58,6 +59,7 @@ import java.util.Locale
 
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
+import java.io.IOException
 
 
 class InfoFragment : Fragment() {
@@ -107,7 +109,9 @@ class InfoFragment : Fragment() {
                 .currentUser?.uid
             val imagenFich =
                 File(eldirectorio, "$nombrefichero.jpg")
-            val os: OutputStream
+                // Crear un archivo temporal en el directorio de almacenamiento
+
+
             try {
                 set =
                     view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
@@ -116,7 +120,7 @@ class InfoFragment : Fragment() {
                 //fit().centerCrop().
                 //into(set)
                 if (laminiatura != null) {
-                    subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg")
+                    subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg",true)
                 }
             } catch (e: Exception) {
                 Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
@@ -491,7 +495,7 @@ class InfoFragment : Fragment() {
             // Mostrar el Bitmap en un ImageView
             //view?.findViewById<ImageView>(R.id.imgPerfilInfo)?.setImageBitmap(bitmap)
             Picasso.get().load(selectedImageUri.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
-            subirFoto(selectedImageUri,bitmap, "$nombrefichero.jpg")
+            subirFoto(selectedImageUri,bitmap, "$nombrefichero.jpg",false)
             // Cerrar la InputStream
             inputStream?.close()
         } catch (e: java.lang.Exception) {
@@ -511,7 +515,7 @@ class InfoFragment : Fragment() {
         requestPermissions(cameraPermission, CAMERA_REQUEST)
     }
 
-    private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String){
+    private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String, camara:Boolean){
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
         //val nuevoNomFoto = nomFoto.split(".")[0]
@@ -524,11 +528,18 @@ class InfoFragment : Fragment() {
         val userId = auth.currentUser?.uid!!
         //val perfilRef = storageRef.child("perfil/$nomFoto")
         val perfilRef = storageRef.child("perfil/$nomFoto")
-
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
         // Subir la imagen al almacenamiento de Firebase Storage
-        val uploadTask = perfilRef.putFile(uri)
+        var uploadTask: UploadTask
+        if(!camara) {
+            uploadTask = perfilRef.putFile(uri)
+        }else{
+            uploadTask = perfilRef.putBytes(data)
+        }
         uploadTask.addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
+            perfilRef.downloadUrl.addOnSuccessListener { uri ->
                 // Guardar la URL de descarga en el documento del usuario en Firestore
                 val imageUrl = "perfil/$nomFoto"
 
@@ -552,6 +563,8 @@ class InfoFragment : Fragment() {
 
 
 
+
+
     private fun setFoto(){
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -565,10 +578,22 @@ class InfoFragment : Fragment() {
                         val foto = documentSnapshot.getString("foto")
                         
                         if (foto != null) {
+                            val storage = FirebaseStorage.getInstance()
+                            val storageRef = storage.reference
+                            val pathReference = storageRef.child(foto) // 'foto' es la ruta de tu imagen en Firebase Storage
 
-                            set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
-                            Picasso.get().load(foto.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
-                            Log.d("TAG", "La foto del usuario es: $foto")
+// Obtén la URL de descarga
+                            pathReference.downloadUrl.addOnSuccessListener { uri ->
+                                val imageUrl = uri.toString()
+                                // Encuentra tu ImageView
+                                val imageView: ImageView = view?.findViewById(R.id.imgPerfilInfo)!!
+                                // Usa Picasso para cargar la imagen desde la URL
+                                Picasso.get().load(imageUrl).fit().into(imageView)
+                                Log.d("TAG", "La foto del usuario es: $imageUrl")
+                            }.addOnFailureListener {
+                                Log.d("TAG", "No se ha encontrado: $foto")
+                            }
+
                         } else {
 
                             set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
