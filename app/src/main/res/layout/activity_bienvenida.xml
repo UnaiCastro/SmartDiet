@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Inicio Sesion" />
+            android:text="@string/IniciaSesion" />
 
         <Button
             android:id="@+id/BienvenidaBtnRegistro"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Registro" />
+            android:text="@string/registrate" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -5,7 +5,7 @@
     <string name="previous">Anterior</string>
     <string name="enter">Entrar</string>
     <string name="userQuestion">¿No eres usuario?</string>
-    <string name="textEnter">Regístrate</string>
+    <string name="registrate">Regístrate</string>
     <string name="IniciaSesion">Inicia Sesion</string>
     <string name="usuario">Usuario</string>
     <string name="password">Contraseña</string>
@@ -58,4 +58,17 @@
     <string name="str_camb_idioma">Cambiar idioma</string>
     <string name="str_oscuro">Modo oscuro</string>
     <string name="str_notis">Activar notificaciones</string>
+    <string name="ingresaCorreoYContraValidos">Por favor, ingresa un correo electrónico y una contraseña válidos.</string>
+    <string name="hasingresadoinvalidos">Has ingresado un correo o contraseña inválidos.</string>
+    <string name="errorIntentaNuevamente">Ha ocurrido un error. Por favor, intenta nuevamente.</string>
+    <string name="errorAutenticacion">Error de autenticación</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="seleccioneGenero">Seleccione su genero</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
+    <string name="cualEsTuObjetivo">¿Cuál es tu objetivo?</string>
+    <string name="perderGrasa">Perder grasa</string>
+    <string name="aumentarVolumen">Aumentar volumen</string>
+    <string name="estarEnForma">Estar en forma</string>
+    <string name="peso">Peso</string>
 </resources>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityInicioSesionBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
@@ -45,7 +46,7 @@ class InicioSesionActivity : AppCompatActivity() {
         val contrasena = binding.InicioSesionEtContrasena.editText?.text.toString()
 
         if (correoUsuario.isEmpty() || contrasena.isEmpty()) {
-            showErrorMessageDialog("Por favor, ingresa un correo electrónico y una contraseña válidos.")
+            showErrorMessageDialog(getString(R.string.ingresaCorreoYContraValidos))
             return
         }
 
@@ -73,17 +74,17 @@ class InicioSesionActivity : AppCompatActivity() {
 
     private fun handleAuthError(exception: Exception?) {
         if (exception is FirebaseAuthInvalidCredentialsException || exception is FirebaseAuthInvalidUserException) {
-            showErrorMessageDialog("Has ingresado un correo o contraseña inválidos")
+            showErrorMessageDialog(getString(R.string.hasingresadoinvalidos))
         } else {
-            showErrorMessageDialog("Ha ocurrido un error. Por favor, intenta nuevamente.")
+            showErrorMessageDialog(getString(R.string.errorIntentaNuevamente))
         }
     }
 
     private fun showErrorMessageDialog(message: String) {
         AlertDialog.Builder(this)
-            .setTitle("Error de autenticación")
+            .setTitle(getString(R.string.errorAutenticacion))
             .setMessage(message)
-            .setPositiveButton("Aceptar", null)
+            .setPositiveButton(getString(R.string.aceptar), null)
             .show()
     }
 }
