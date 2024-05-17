@@ -57,6 +57,7 @@ import java.util.Locale
 
 
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
+import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 
 
 class InfoFragment : Fragment() {
@@ -110,10 +111,10 @@ class InfoFragment : Fragment() {
             try {
                 set =
                     view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
-                //set.setImageBitmap(laminiatura)
-                Picasso.get().load(imagenFich).
-                fit().centerCrop().
-                into(set)
+                set.setImageBitmap(laminiatura)
+                //Picasso.get().load(imagenFich).
+                //fit().centerCrop().
+                //into(set)
                 if (laminiatura != null) {
                     subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg")
                 }
@@ -146,6 +147,11 @@ class InfoFragment : Fragment() {
         setFoto()
         val conf =
             this.context?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
+        if (conf != null) {
+            conf.initTema()
+            context?.let { conf.initIdioma(it) }
+        }
+
         if (conf != null) {
             if (conf.initTema()=="OSCURO"){
                 cambiarTema.setChecked(true)
@@ -206,15 +212,15 @@ class InfoFragment : Fragment() {
     //Editar nombre
     private fun editarNom(vista: View) {
         val builder = AlertDialog.Builder(this.context)
-        builder.setTitle("Cambiar nombre") //cambiar por strings
+        builder.setTitle(resources.getString(R.string.str_cambiar_nom)) //cambiar por strings
         val layout = LinearLayout(this.context)
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         val editText = EditText(this.context)
-        editText.hint = "Actualiza tu nombre"
+        editText.hint = resources.getString(R.string.str_actu_nom)
         layout.addView(editText)
         builder.setView(layout)
-        builder.setPositiveButton("Actualizar") { dialog, _ ->
+        builder.setPositiveButton(resources.getString(R.string.str_actualizar)) { dialog, _ ->
             val value = editText.text.toString().trim()
             if (value.isNotEmpty()) {
                 pd.show()
@@ -230,12 +236,12 @@ class InfoFragment : Fragment() {
                     )
                     userRef.update(nuevoNombre as Map<String, Any>).addOnSuccessListener {
                         pd.dismiss()
-                        Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context, resources.getString(R.string.str_actualizado), Toast.LENGTH_LONG).show()
                         setNombre(vista)
                     }
                     .addOnFailureListener {
                         pd.dismiss()
-                        Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context, resources.getString(R.string.str_error), Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -350,21 +356,21 @@ class InfoFragment : Fragment() {
 
     private fun editarCont() {
         val builder = AlertDialog.Builder(this.context)
-        builder.setTitle("Cambiar contraseña") //cambiar por strings
+        builder.setTitle(resources.getString(R.string.str_camb_cont)) //cambiar por strings
         val layout = LinearLayout(this.context)
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         val editContActu = EditText(this.context)
-        editContActu.hint = "Introduce tu contraseña actual"
+        editContActu.hint = resources.getString(R.string.str_intro_cont_actu)
         layout.addView(editContActu)
         val editCon = EditText(this.context)
-        editCon.hint = "Introduce una nueva contraseña"
+        editCon.hint = resources.getString(R.string.str_introduce_nueva_cont)
         layout.addView(editCon)
         val editCon2 = EditText(this.context)
-        editCon2.hint = "Confirma la contraseña"
+        editCon2.hint = resources.getString(R.string.str_confirm_contra)
         layout.addView(editCon2)
         builder.setView(layout)
-        builder.setPositiveButton("Actualizar") { dialog, _ ->
+        builder.setPositiveButton(resources.getString(R.string.str_actualizar)) { dialog, _ ->
             val antCont = editContActu.text.toString().trim()
             val newCont = editCon.text.toString().trim()
             val newCont2 = editCon2.text.toString().trim()
@@ -387,7 +393,7 @@ class InfoFragment : Fragment() {
                                     pd.dismiss()
                                     Toast.makeText(
                                         this.context,
-                                        "Se ha cambiado la contraseña",
+                                        resources.getString(R.string.str_toast_camb_cont),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }.addOnFailureListener { e ->
@@ -395,7 +401,7 @@ class InfoFragment : Fragment() {
                                     Log.e("TAG", "Error al actualizar la contraseña: ${e.message}", e)
                                     Toast.makeText(
                                         this.context,
-                                        "Error al actualizar la contraseña: ${e.message}",
+                                        resources.getString(R.string.str_error),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
@@ -404,7 +410,7 @@ class InfoFragment : Fragment() {
                             Log.e("TAG", "Error al reautenticar al usuario: ${e.message}", e)
                             Toast.makeText(
                                 this.context,
-                                "Error al reautenticar al usuario: ${e.message}",
+                                resources.getString(R.string.str_error),
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -414,13 +420,13 @@ class InfoFragment : Fragment() {
                     pd.dismiss()
                     Toast.makeText(
                         this.context,
-                        "Error: Credencial de autenticación nula",
+                        resources.getString(R.string.str_error),
                         Toast.LENGTH_LONG
                     ).show()
                 }
             }else{
                 pd.dismiss()
-                Toast.makeText(this.context, "La contraseña debe tener 6 caracteres como mínimo y coincidir", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, resources.getString(R.string.str_toast_cont_seis), Toast.LENGTH_LONG).show()
             }
         }
         builder.show()
@@ -428,15 +434,15 @@ class InfoFragment : Fragment() {
 
     private fun editarFoto(){
         val builder = AlertDialog.Builder(this.context)
-        builder.setTitle("Actualizar imagen de perfil")
+        builder.setTitle(resources.getString(R.string.str_actu_perfil))
         val layout = LinearLayout(this.context)
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         builder.setView(layout)
         builder.setItems(
             arrayOf<CharSequence>(
-                "Galería",
-                "Cámara"
+                resources.getString(R.string.str_galeria),
+                resources.getString(R.string.str_camara)
             )
         ) { dialog: DialogInterface?, which: Int ->
             when (which) {
@@ -460,7 +466,7 @@ class InfoFragment : Fragment() {
                             Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                         takePictureLauncher.launch(cameraIntent)
                     }catch(e:Exception){
-                        Toast.makeText(this.context, "No tienes permisos para usar la cámara", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context, resources.getString(R.string.str_permiso_camara), Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -510,37 +516,37 @@ class InfoFragment : Fragment() {
         val storageRef = storage.reference
         //val nuevoNomFoto = nomFoto.split(".")[0]
 
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        //val baos = ByteArrayOutputStream()
+        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
         //val data = baos.toByteArray()
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid!!
+        //val perfilRef = storageRef.child("perfil/$nomFoto")
         val perfilRef = storageRef.child("perfil/$nomFoto")
 
         // Subir la imagen al almacenamiento de Firebase Storage
         val uploadTask = perfilRef.putFile(uri)
-
         uploadTask.addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 // Guardar la URL de descarga en el documento del usuario en Firestore
-                val imageUrl = uri.toString()
+                val imageUrl = "perfil/$nomFoto"
 
                 val userRef = db.collection("users").document(userId)
                 userRef.update("foto", imageUrl)
                     .addOnSuccessListener {
                         Log.d("TAG", "URL de imagen actualizada exitosamente en Firestore")
-                        Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context, resources.getString(R.string.str_actualizado), Toast.LENGTH_LONG).show()
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context, resources.getString(R.string.str_error), Toast.LENGTH_LONG).show()
                     }
             }.addOnFailureListener {
-                Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, resources.getString(R.string.str_error), Toast.LENGTH_LONG).show()
             }
         }.addOnFailureListener {
             // Obtener la URL de descarga de la imagen subida
-            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.context, resources.getString(R.string.str_error), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -557,7 +563,9 @@ class InfoFragment : Fragment() {
                     if (documentSnapshot.exists()) {
                         // Obtener el valor actual del campo "nombreUsuario"
                         val foto = documentSnapshot.getString("foto")
+                        
                         if (foto != null) {
+
                             set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
                             Picasso.get().load(foto.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
                             Log.d("TAG", "La foto del usuario es: $foto")
@@ -584,15 +592,15 @@ class InfoFragment : Fragment() {
     private fun cambiarIdioma(conf:ConfigUsuario){
         val idiomaInit = this.context?.let { conf.initIdioma(it) }
         val builder = AlertDialog.Builder(this.context)
-        builder.setTitle("Cambiar idioma") //cambiar por strings
+        builder.setTitle(resources.getString(R.string.str_idioma)) //cambiar por strings
         val layout = LinearLayout(this.context)
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(10, 10, 10, 10)
         val grupo = RadioGroup(this.context)
         val espanol = RadioButton(this.context)
-        espanol.text = "Español"
+        espanol.text = resources.getString(R.string.str_es)
         val ingles = RadioButton(this.context)
-        ingles.text = "Inglés"
+        ingles.text = resources.getString(R.string.str_en)
         grupo.addView(espanol)
         grupo.addView(ingles)
         layout.addView(grupo)
@@ -602,7 +610,7 @@ class InfoFragment : Fragment() {
         }else{
             grupo.check(ingles.id)
         }
-        builder.setPositiveButton("Actualizar") { dialog, _ ->
+        builder.setPositiveButton(resources.getString(R.string.str_actualizar)) { dialog, _ ->
             if(espanol.isChecked){
                 conf.setIdioma("es",this.requireContext())
             }else{

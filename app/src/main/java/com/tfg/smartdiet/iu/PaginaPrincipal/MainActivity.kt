@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityMainBinding
+import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
 import com.tfg.smartdiet.domain.ResetWorker
 import java.text.SimpleDateFormat
@@ -48,6 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val conf = ConfigUsuario(getSharedPreferences("Configuracion", MODE_PRIVATE))
+        conf.initTema()
+        conf.initIdioma(applicationContext)
         binding =
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)

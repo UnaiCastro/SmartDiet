@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@layout/hoy_widget"
+    android:initialLayout="@layout/hoy_widget"
+    android:minWidth="152dp"
+    android:minHeight="260dp"
+    android:previewImage="@drawable/logo_smartapp"
+    android:previewLayout="@layout/hoy_widget"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="7"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"
+    />

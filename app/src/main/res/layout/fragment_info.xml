@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="@string/miPerfil"
+                android:text="@string/str_mi_perfil"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -42,14 +42,14 @@
                 android:textSize="20sp" />
 
             <Button
-                style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/actuPerfilInfo"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ActualizarImgPerfil"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/str_actu_perfil"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:layout_marginHorizontal="10dp"/>
+                android:textSize="15sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nombreInfo"
@@ -65,52 +65,50 @@
                 android:id="@+id/editarNombreInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/editarNombre"
+                android:text="@string/str_edit_nom"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"/>
+                android:textSize="20sp" />
 
 
             <Button
                 android:id="@+id/cambiarContrInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/cambiarPassword"
+                android:text="@string/str_edit_cont"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"/>
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/idiomaInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/cambiarIdioma"
+                android:text="@string/str_camb_idioma"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"/>
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/temaInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/modoOscuro"
-                android:layout_marginTop="20dp"
-                android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:layout_marginTop="20dp"
+                android:text="@string/str_oscuro"
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/notisInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activarNotificaciones"
-                android:layout_marginTop="20dp"
-                android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:layout_marginTop="20dp"
+                android:text="@string/str_notis"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
