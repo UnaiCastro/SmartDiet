@@ -43,6 +43,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.domain.ConfigUsuario
@@ -58,6 +59,7 @@ import java.util.Locale
 
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
+import java.io.IOException
 
 
 class InfoFragment : Fragment() {
@@ -107,7 +109,9 @@ class InfoFragment : Fragment() {
                 .currentUser?.uid
             val imagenFich =
                 File(eldirectorio, "$nombrefichero.jpg")
-            val os: OutputStream
+                // Crear un archivo temporal en el directorio de almacenamiento
+
+
             try {
                 set =
                     view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
@@ -116,7 +120,7 @@ class InfoFragment : Fragment() {
                 //fit().centerCrop().
                 //into(set)
                 if (laminiatura != null) {
-                    subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg")
+                    subirFoto(imagenFich.toUri(),laminiatura, "$nombrefichero.jpg",true)
                 }
             } catch (e: Exception) {
                 Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
@@ -491,7 +495,7 @@ class InfoFragment : Fragment() {
             // Mostrar el Bitmap en un ImageView
             //view?.findViewById<ImageView>(R.id.imgPerfilInfo)?.setImageBitmap(bitmap)
             Picasso.get().load(selectedImageUri.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
-            subirFoto(selectedImageUri,bitmap, "$nombrefichero.jpg")
+            subirFoto(selectedImageUri,bitmap, "$nombrefichero.jpg",false)
             // Cerrar la InputStream
             inputStream?.close()
         } catch (e: java.lang.Exception) {
@@ -511,7 +515,7 @@ class InfoFragment : Fragment() {
         requestPermissions(cameraPermission, CAMERA_REQUEST)
     }
 
-    private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String){
+    private fun subirFoto(uri: Uri, bitmap:Bitmap, nomFoto:String, camara:Boolean){
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
         //val nuevoNomFoto = nomFoto.split(".")[0]
@@ -524,9 +528,16 @@ class InfoFragment : Fragment() {
         val userId = auth.currentUser?.uid!!
         //val perfilRef = storageRef.child("perfil/$nomFoto")
         val perfilRef = storageRef.child("perfil/$nomFoto")
-
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
         // Subir la imagen al almacenamiento de Firebase Storage
-        val uploadTask = perfilRef.putFile(uri)
+        var uploadTask: UploadTask
+        if(!camara) {
+            uploadTask = perfilRef.putFile(uri)
+        }else{
+            uploadTask = perfilRef.putBytes(data)
+        }
         uploadTask.addOnSuccessListener {
             perfilRef.downloadUrl.addOnSuccessListener { uri ->
                 // Guardar la URL de descarga en el documento del usuario en Firestore
@@ -549,6 +560,8 @@ class InfoFragment : Fragment() {
             Toast.makeText(this.context, resources.getString(R.string.str_error), Toast.LENGTH_LONG).show()
         }
     }
+
+
 
 
 
