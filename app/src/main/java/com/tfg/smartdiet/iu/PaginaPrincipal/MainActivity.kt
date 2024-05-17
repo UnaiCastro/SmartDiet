@@ -218,6 +218,7 @@ class MainActivity : AppCompatActivity() {
         // Extract the date from the previous dieta values
         val oldDietaDate = previousDietaValues["fecha"] ?: ""
 
+        // TODO: cambiar a strings values
         // Format the notification content
         val notificationContent = buildString {
             append("Calorías: ${previousDietaValues["caloriasAct"]}/${previousDietaValues["caloriasObj"]}\n")
