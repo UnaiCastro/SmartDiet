@@ -528,7 +528,7 @@ class InfoFragment : Fragment() {
         // Subir la imagen al almacenamiento de Firebase Storage
         val uploadTask = perfilRef.putFile(uri)
         uploadTask.addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
+            perfilRef.downloadUrl.addOnSuccessListener { uri ->
                 // Guardar la URL de descarga en el documento del usuario en Firestore
                 val imageUrl = "perfil/$nomFoto"
 
@@ -565,10 +565,22 @@ class InfoFragment : Fragment() {
                         val foto = documentSnapshot.getString("foto")
                         
                         if (foto != null) {
+                            val storage = FirebaseStorage.getInstance()
+                            val storageRef = storage.reference
+                            val pathReference = storageRef.child(foto) // 'foto' es la ruta de tu imagen en Firebase Storage
 
-                            set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
-                            Picasso.get().load(foto.toString()).fit().into(view?.findViewById<ImageView>(R.id.imgPerfilInfo))
-                            Log.d("TAG", "La foto del usuario es: $foto")
+// Obtén la URL de descarga
+                            pathReference.downloadUrl.addOnSuccessListener { uri ->
+                                val imageUrl = uri.toString()
+                                // Encuentra tu ImageView
+                                val imageView: ImageView = view?.findViewById(R.id.imgPerfilInfo)!!
+                                // Usa Picasso para cargar la imagen desde la URL
+                                Picasso.get().load(imageUrl).fit().into(imageView)
+                                Log.d("TAG", "La foto del usuario es: $imageUrl")
+                            }.addOnFailureListener {
+                                Log.d("TAG", "No se ha encontrado: $foto")
+                            }
+
                         } else {
 
                             set = view?.findViewById<ImageView>(R.id.imgPerfilInfo)!!
