@@ -308,9 +308,16 @@ class MainActivity : AppCompatActivity() {
             .update("dietaActID", dietaID)
             .addOnSuccessListener {
                 Log.i(logtag, "Se ha actualizado el dietaActID del usuario")
+                // Reload the fragment
+                reloadFragment()
             }
             .addOnFailureListener { e ->
                 Log.e(logtag, "Error al actualizar dietaActID del usuario: ${e.message}")
             }
+    }
+    private fun reloadFragment() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.Main_fragmentcontainerview) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.navigate(navController.graph.id)
     }
 }

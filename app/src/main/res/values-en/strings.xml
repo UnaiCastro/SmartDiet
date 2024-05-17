@@ -35,7 +35,7 @@
     <string name="logout">Logout</string>
     <string name="historico">Diet Log</string>
     <string name="gestionDietas">Diet Management</string>
-    <string name="tituloNotificacion">Your diet from</string>
+    <string name="tituloNotificacion">Your diet for</string>
     <string name="str_cambiar_nom">Change your name</string>
     <string name="str_actu_nom">Update your name</string>
     <string name="str_actualizar">Update</string>
