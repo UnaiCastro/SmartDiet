@@ -174,5 +174,6 @@
     <string name="editarNombre">Editar nombre</string>
     <string name="ActualizarImgPerfil">Actualizar imagen de perfil</string>
     <string name="miPerfil">Mi perfil</string>
+    <string name="tituloNotificacion">Tu dieta del</string>
 
 </resources>

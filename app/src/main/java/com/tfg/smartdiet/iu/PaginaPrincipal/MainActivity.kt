@@ -218,19 +218,18 @@ class MainActivity : AppCompatActivity() {
         // Extract the date from the previous dieta values
         val oldDietaDate = previousDietaValues["fecha"] ?: ""
 
-        // TODO: cambiar a strings values
         // Format the notification content
         val notificationContent = buildString {
-            append("Calorías: ${previousDietaValues["caloriasAct"]}/${previousDietaValues["caloriasObj"]}\n")
-            append("Proteínas: ${previousDietaValues["proteinasAct"]}/${previousDietaValues["proteinasObj"]}\n")
-            append("Grasas: ${previousDietaValues["grasasAct"]}/${previousDietaValues["grasasObj"]}\n")
-            append("Carbohidratos: ${previousDietaValues["carbohidratosAct"]}/${previousDietaValues["carbohidratosObj"]}")
+            append(getString(R.string.calorias) + ": ${previousDietaValues["caloriasAct"]}/${previousDietaValues["caloriasObj"]}\n")
+            append(getString(R.string.proteinas) + ": ${previousDietaValues["proteinasAct"]}/${previousDietaValues["proteinasObj"]}\n")
+            append(getString(R.string.grasas) + ": ${previousDietaValues["grasasAct"]}/${previousDietaValues["grasasObj"]}\n")
+            append(getString(R.string.carbs) + ": ${previousDietaValues["carbohidratosAct"]}/${previousDietaValues["carbohidratosObj"]}")
         }
 
         // Create the notification
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_info)
-            .setContentTitle("Tu dieta del $oldDietaDate")
+            .setContentTitle(getString(R.string.tituloNotificacion) + " $oldDietaDate")
             .setContentText(notificationContent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 

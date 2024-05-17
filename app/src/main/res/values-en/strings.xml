@@ -41,4 +41,5 @@
     <string name="editarNombre">Edit username</string>
     <string name="ActualizarImgPerfil">Update profile picture</string>
     <string name="miPerfil">My profile</string>
+    <string name="tituloNotificacion">Your diet from</string>
 </resources>
