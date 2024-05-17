@@ -23,4 +23,22 @@
     <string name="y">Sí</string>
     <string name="annadir">Añadir</string>
     <string name="cancelar">Cancelar</string>
+    <string name="toastDietaActualizada">Dieta actualizada con éxito</string>
+    <string name="CaloriasObj">Calorías Objetivo</string>
+    <string name="PorteinasObj">Proteínas Objetivo</string>
+    <string name="GrasasObj">Grasas Objetivo</string>
+    <string name="CarbsObj">Carbohidratos Objetivo</string>
+    <string name="editar">Editar</string>
+    <string name="guardar">Guardar</string>
+    <string name="tituloGestionDietas">Modifica los objetivos de tu dieta actual</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="historico">Histórico</string>
+    <string name="gestionDietas">Gestión de dietas</string>
+    <string name="activarNotificaciones">Activar Notificaciones</string>
+    <string name="modoOscuro">Modo Oscuro</string>
+    <string name="cambiarIdioma">Cambiar idioma</string>
+    <string name="cambiarPassword">Cambiar contraseña</string>
+    <string name="editarNombre">Editar nombre</string>
+    <string name="ActualizarImgPerfil">Actualizar imagen de perfil</string>
+    <string name="miPerfil">Mi perfil</string>
 </resources>

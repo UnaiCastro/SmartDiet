@@ -78,7 +78,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
             initRecyclerView()
             initUI()
             initListener()
-            checkReset()
+            //checkReset()
             Log.i("DietaFragment_DB", "ID dieta actual: ${this.dietaActID}")
         }
 //        crearDietaUsuario() // SOLO USAR UNA VEZ PARA AÑADIR DIETA DE PRUEBA
@@ -253,7 +253,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     }
 
 
-
+    // No se usa
     private fun checkReset(){
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val resetRequired = sharedPreferences.getBoolean("reset", false)
