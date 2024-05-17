@@ -32,6 +32,7 @@ class BienvenidaActivity : AppCompatActivity() {
         setContentView(binding.root)
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
         conf.initTema()
+        conf.initIdioma(applicationContext)
         if (!conf.sesionAbierta()) {
             initListener()
         }

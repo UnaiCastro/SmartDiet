@@ -23,4 +23,27 @@
     <string name="y">Yes</string>
     <string name="annadir">Add</string>
     <string name="cancelar">Cancel</string>
+    <string name="str_cambiar_nom">Change your name</string>
+    <string name="str_actu_nom">Update your name</string>
+    <string name="str_actualizar">Update</string>
+    <string name="str_actualizado">Updated</string>
+    <string name="str_camb_cont">Change your password</string>
+    <string name="str_intro_cont_actu">Insert  your current password</string>
+    <string name="str_introduce_nueva_cont">Insert a new password</string>
+    <string name="str_confirm_contra">Confirm password</string>
+    <string name="str_toast_camb_cont">Your password has been changed</string>
+    <string name="str_toast_cont_seis">Password must have at least 6 characters and coincide</string>
+    <string name="str_actu_perfil">Update your profile picture</string>
+    <string name="str_galeria">Gallery</string>
+    <string name="str_permiso_camara">" You don't have permissions to use the camera"</string>
+    <string name="str_idioma">Change language</string>
+    <string name="str_es">Spanish</string>
+    <string name="str_en">English</string>
+    <string name="str_camara">Camera</string>
+    <string name="str_mi_perfil">My profile</string>
+    <string name="str_edit_nom">Change your name</string>
+    <string name="str_edit_cont">Change password</string>
+    <string name="str_camb_idioma">Change language</string>
+    <string name="str_oscuro">Dark mode</string>
+    <string name="str_notis">Activate notifications</string>
 </resources>

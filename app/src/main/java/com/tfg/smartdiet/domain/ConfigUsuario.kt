@@ -68,6 +68,7 @@ class ConfigUsuario(private val prefs: SharedPreferences)  {
         configuration.setLocale(locale)
         configuration.setLayoutDirection(locale)
         context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+        setIdioma(idioma,context)
         return idioma
     }
 
