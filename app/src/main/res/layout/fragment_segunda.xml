@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".iu.PaginaPrincipal.Alimento.AlimentoFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -11,42 +12,44 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
             android:layout_width="match_parent"
+            app:singleSelection="true"
             android:layout_height="wrap_content">
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
+                android:id="@+id/chip_verdura"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Verdura"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_2"
+                android:id="@+id/chip_fruta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:text="Fruta"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_3"
+                android:id="@+id/chip_granos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:text="Granos"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_4"
+                android:id="@+id/chip_lacteos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:text="Lacteos"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_5"
+                android:id="@+id/chip_proteinas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:text="`Proteina`"/>
+                android:text="Proteina"/>
 
         </com.google.android.material.chip.ChipGroup>
 

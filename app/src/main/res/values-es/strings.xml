@@ -46,7 +46,7 @@
     <string name="str_toast_camb_cont">Se ha cambiado la contraseña</string>
     <string name="str_toast_cont_seis">La contraseña debe tener 6 caracteres como mínimo y coincidir</string>
     <string name="str_actu_perfil">Actualizar imagen de perfil</string>
-    <string name="str_galeria">Camera</string>
+    <string name="str_galeria">Galería</string>
     <string name="str_permiso_camara">No tienes permisos para usar la cámara</string>
     <string name="str_idioma">Cambiar idioma</string>
     <string name="str_es">Español</string>

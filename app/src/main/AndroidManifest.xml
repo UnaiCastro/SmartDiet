@@ -59,6 +59,9 @@
             android:label="@string/title_activity_bienvenida"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".iu.PaginaPrincipal.Alimento.AlimentoInformacionActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
