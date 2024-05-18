@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.InicioSesion
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,10 +13,20 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityInicioSesionBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
+import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
 class InicioSesionActivity : AppCompatActivity() {
+    companion object {
+        fun logOut(context:Activity) {
+            val intent = Intent(context, InicioSesionActivity::class.java).apply {
+                flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            } // navegamos a inicio
+            context.startActivity(intent)
+            context.finish()
+        }
+    }
 
     private lateinit var binding: ActivityInicioSesionBinding
     private lateinit var auth:FirebaseAuth

@@ -7,12 +7,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -32,6 +32,8 @@ import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
 import com.tfg.smartdiet.domain.ResetWorker
+import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
+import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -46,14 +48,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private val logtag = "MainActivity"
     private val CHANNEL_ID = "123"
-    private var dietCreationInitiated = false
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i(logtag, "MainActivity: onCreate")
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", MODE_PRIVATE))
         conf.initTema()
         conf.initIdioma(applicationContext)
@@ -61,11 +59,7 @@ class MainActivity : AppCompatActivity() {
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         initNavigation()
-
-        // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        // Retrieve the flag value
-        dietCreationInitiated = sharedPreferences.getBoolean("dietCreationInitiated", false)
+        configureUI()
 
         // Create the notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -82,28 +76,38 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
 
+        db = FirebaseFirestore.getInstance()
+
+        checkAndHandleActiveDiet()
         //setResetTrigger(0,0) //Cambiar la hora del reset
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.i(logtag, "MainActivity: onStart")
-        db = FirebaseFirestore.getInstance()
-        Log.i(logtag, "MainActivity: onStart, flag dietCreationInitiated: $dietCreationInitiated")
-        if (!dietCreationInitiated) {
-            dietCreationInitiated = true
-            checkAndHandleActiveDiet()
-            // Save the updated flag value in SharedPreferences
-            editor = sharedPreferences.edit()
-            editor.putBoolean("dietCreationInitiated", dietCreationInitiated)
-            editor.apply()
+    private fun configureUI() {
+        binding.topAppBar.setOnMenuItemClickListener {menuItem ->
+            when(menuItem.itemId) {
+                R.id.historicoDieta -> {
+                    HistoricoActivity.navigateTo(this)
+                    true
+                }
+                R.id.cerrarSesion -> {
+                    InicioSesionActivity.logOut(this)
+                    true
+                }
+                R.id.recursosRecetas -> {
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionDetalleRecetaPorridge)
+                    true
+                }
+                R.id.vistaAlimentos -> {
+                    //NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
+                    true
+                } else -> {
+                    false
+                }
+            }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.i(logtag, "MainActivity: onResume")
-    }
+
 
     private fun initNavigation() {
         val navHost =
@@ -167,7 +171,7 @@ class MainActivity : AppCompatActivity() {
 
                     // If dietaActID is null, create a new diet
                     if (dietaActID == null) {
-                        createNewDietaForUser()
+                        createNewDietaForUser(userID)
                         Log.i(logtag, "El usuario ${userID} no tiene dieta, se crea una nueva")
                     } else {
                         // Retrieve the dieta document
@@ -178,7 +182,6 @@ class MainActivity : AppCompatActivity() {
                                 // Check if the dieta's date matches today's date
                                 if (dietaFecha == currentDate) {
                                     Log.i(logtag, "La dieta activa para el usuario ${userID} es de hoy.")
-                                    setDietCreationInitiatedToFalse()
                                 } else {
                                     Log.i(logtag, "La dieta activa para el usuario ${userID} no es de hoy, guardándola y creando nueva.")
                                     handleExpiredActiveDiet(userID, dietaActID)
@@ -232,11 +235,9 @@ class MainActivity : AppCompatActivity() {
 
                         // Update the user document with the new active dieta ID
                         updateUserWithDietaActID(userID, newDietaDocRef.id)
-                        val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
-                        if(conf.getNotis()=="ON") {
-                            // Send local notification with previous dieta values
-                            sendLocalNotification(previousDietaValues)
-                        }
+
+                        // Send local notification with previous dieta values
+                        sendLocalNotification(previousDietaValues)
                     }
                     .addOnFailureListener { e ->
                         Log.e(logtag, "Error al añadir la nueva dieta para el usuario $userID: ${e.message}")
@@ -285,77 +286,50 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun createNewDietaForUser() {
-        // Get the current user
-        val currentUser = FirebaseAuth.getInstance().currentUser
-
-        currentUser?.let { user ->
-            val userID = user.uid
-            // Fetch user attributes from Firestore or wherever they are stored
-            // For example, you might have a 'users' collection in Firestore where user details are stored
-            val userDocRef = db.collection("users").document(userID)
-
-            // Retrieve user attributes
-            userDocRef.get()
-                .addOnSuccessListener { userDocumentSnapshot ->
-                    val peso = userDocumentSnapshot.getString("peso") // Assuming weight is stored as a string
-                    val objetivo = userDocumentSnapshot.getString("objetivo")
-                    val genero = userDocumentSnapshot.getString("genero")
-                    Log.d(logtag, "Peso usuario: $peso")
-                    Log.d(logtag, "Peso objetivo: $objetivo")
-                    Log.d(logtag, "Peso genero: $genero")
 
 
-                    if (peso != null && objetivo != null && genero != null) {
-                        val goals = calculateGoals(peso, genero, objetivo)
-                        Log.i(logtag, "Calculated Goals: $goals")
 
-                        // Create the new dieta with calculated goals
-                        val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-                        val newDieta = Dieta(
-                            caloriasAct = "0",
-                            caloriasObj = goals["caloriasObj"].toString(),
-                            carbohidratosAct = "0",
-                            carbohidratosObj = goals["carbohidratosObj"].toString(),
-                            grasasAct = "0",
-                            grasasObj = goals["grasasObj"].toString(),
-                            proteinasAct = "0",
-                            proteinasObj = goals["proteinasObj"].toString(),
-                            fecha = currentDate,
-                            userID = userID
-                        )
 
-                        // Convert Dieta object to map
-                        val dietaMap = newDieta.toMap()
+    private fun createNewDietaForUser(userID: String) {
+        // Define default values for the new diet
+        val defaultCalorias = "2000"
+        val defaultProteinas = "100"
+        val defaultGrasas = "50"
+        val defaultCarbohidratos = "100"
 
-                        // Add the dieta data to Firestore
-                        db.collection("dietas")
-                            .add(dietaMap)
-                            .addOnSuccessListener { dietaDocRef ->
-                                Log.i(logtag, "Se ha añadido la dieta al usuario: $userID")
+        // Get today's date
+        val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
-                                // Update the user document with the new dietaActID
-                                updateUserWithDietaActID(userID, dietaDocRef.id)
+        // Construct the Dieta object
+        val newDieta = Dieta(
+            caloriasAct = "0",
+            caloriasObj = defaultCalorias,
+            carbohidratosAct = "0",
+            carbohidratosObj = defaultCarbohidratos,
+            grasasAct = "0",
+            grasasObj = defaultGrasas,
+            proteinasAct = "0",
+            proteinasObj = defaultProteinas,
+            fecha = currentDate,
+            userID = userID
+        )
 
-                                // Reset the flag to false
-                                setDietCreationInitiatedToFalse()
-                            }
-                            .addOnFailureListener { e ->
-                                Log.e(logtag, "Error al añadir la dieta al usuario: $userID, ${e.message}")
-                            }
-                    } else {
-                        Log.e(logtag, "One or more user attributes are null.")
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e(logtag, "Error retrieving user attributes: ${e.message}")
-                }
-        } ?: run {
-            Log.e(logtag, "Current user is null.")
-        }
+        // Convert Dieta object to map
+        val dietaMap = newDieta.toMap()
+
+        // Add the dieta data to Firestore
+        db.collection("dietas")
+            .add(dietaMap)
+            .addOnSuccessListener { dietaDocRef ->
+                Log.i(logtag, "Se ha añadido la dieta al usuario: $userID")
+
+                // Update the user document with the new dietaActID
+                updateUserWithDietaActID(userID, dietaDocRef.id)
+            }
+            .addOnFailureListener { e ->
+                Log.e(logtag, "Error al añadir la dieta al usuario: $userID, ${e.message}")
+            }
     }
-
-
 
 
     private fun updateUserWithDietaActID(userID: String, dietaID: String) {
@@ -365,65 +339,9 @@ class MainActivity : AppCompatActivity() {
             .update("dietaActID", dietaID)
             .addOnSuccessListener {
                 Log.i(logtag, "Se ha actualizado el dietaActID del usuario")
-
-                setDietCreationInitiatedToFalse()
-
-                reloadFragment()
             }
             .addOnFailureListener { e ->
                 Log.e(logtag, "Error al actualizar dietaActID del usuario: ${e.message}")
             }
     }
-    private fun reloadFragment() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.Main_fragmentcontainerview) as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.navigate(navController.graph.id)
-    }
-
-    private fun setDietCreationInitiatedToFalse() {
-        // Reset the flag to false
-        dietCreationInitiated = false
-        // Save the updated flag value in SharedPreferences
-        editor = sharedPreferences.edit()
-        editor.putBoolean("dietCreationInitiated", dietCreationInitiated)
-        editor.apply()
-    }
-
-    private fun calculateGoals(weight: String, gender: String, objective: String): Map<String, Int> {
-        val weightKg = weight.substringBefore(" kg").toInt()
-
-        val calorieGoal: Int
-        val proteinGoal: Int
-        val fatGoal: Int
-        val carbGoal: Int
-
-        when {
-            objective == "Adelgazar" -> {
-                calorieGoal = (weightKg * 22.0).toInt()
-                proteinGoal = (weightKg * 2.2).toInt()
-                fatGoal = (calorieGoal * 0.25 / 9).toInt()
-                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
-            }
-            objective == "Aumentar volumen" -> {
-                calorieGoal = (weightKg * 24.0).toInt()
-                proteinGoal = (weightKg * 2.5).toInt()
-                fatGoal = (calorieGoal * 0.3 / 9).toInt()
-                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
-            }
-            else -> { // Estar en forma
-                calorieGoal = (weightKg * 23.0).toInt()
-                proteinGoal = (weightKg * 2.0).toInt()
-                fatGoal = (calorieGoal * 0.3 / 9).toInt()
-                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
-            }
-        }
-
-        return mapOf(
-            "caloriasObj" to calorieGoal,
-            "proteinasObj" to proteinGoal,
-            "grasasObj" to fatGoal,
-            "carbohidratosObj" to carbGoal
-        )
-    }
-
 }

@@ -26,5 +26,13 @@
         android:label="fragment_gestion_dietas"
         tools:layout="@layout/fragment_gestion_dietas" />
 
-
+    <fragment
+        android:id="@+id/detalleRecetaPorridge"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
+        android:label="fragment_porridge_detail"
+        tools:layout="@layout/fragment_porridge_detail" />
+    <action
+        android:id="@+id/actionDetalleRecetaPorridge"
+        app:destination="@id/detalleRecetaPorridge"
+        app:popUpTo="@id/dietaFragment" />
 </navigation>

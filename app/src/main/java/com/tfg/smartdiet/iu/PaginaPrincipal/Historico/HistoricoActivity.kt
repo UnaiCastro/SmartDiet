@@ -1,5 +1,7 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Historico
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
@@ -8,6 +10,13 @@ import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityHistoricoBinding
 
 class HistoricoActivity : AppCompatActivity() {
+    companion object {
+        fun navigateTo(context:Context) {
+            val intent = Intent(context, HistoricoActivity::class.java) // navegamos a historico
+            context.startActivity(intent)
+        }
+    }
+
     private lateinit var binding: ActivityHistoricoBinding
     private lateinit var adapter: FragmentPageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
