@@ -39,6 +39,8 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,13 +50,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private val logtag = "MainActivity"
     private val CHANNEL_ID = "123"
+    private lateinit var auth:FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", MODE_PRIVATE))
         conf.initTema()
-        conf.initIdioma(applicationContext)
+        /*conf.initIdioma(applicationContext)*/
         binding =
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
@@ -77,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         db = FirebaseFirestore.getInstance()
-
+        auth = FirebaseAuth.getInstance()
         checkAndHandleActiveDiet()
         //setResetTrigger(0,0) //Cambiar la hora del reset
     }
@@ -107,7 +110,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.cerrarSesion -> {
                     // Activity
-                    InicioSesionActivity.logOut(this)
+                    val conf =
+                        this?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
+                    auth = FirebaseAuth.getInstance()
+                    auth.signOut()
+                    val i= Intent(this,BienvenidaActivity::class.java)
+                    startActivity(i)
+                    conf?.cerrarSesion()
                     true
                 } else -> {
                     false

@@ -18,15 +18,6 @@ import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 import com.tfg.smartdiet.iu.Registro.RegistroActivity
 
 class InicioSesionActivity : AppCompatActivity() {
-    companion object {
-        fun logOut(context:Activity) {
-            val intent = Intent(context, InicioSesionActivity::class.java).apply {
-                flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            } // navegamos a inicio
-            context.startActivity(intent)
-            context.finish()
-        }
-    }
 
     private lateinit var binding: ActivityInicioSesionBinding
     private lateinit var auth:FirebaseAuth

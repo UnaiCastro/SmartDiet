@@ -1,9 +1,14 @@
 package com.tfg.smartdiet.domain
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
+import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
 import java.util.Locale
 
 //Método usado para las preferencias del usuario
@@ -48,27 +53,31 @@ class ConfigUsuario(private val prefs: SharedPreferences)  {
         return tema
     }
 
-    fun setIdioma(idioma: String, context: Context){
+    fun setIdioma(idioma: String, context: Context) {
+        val locale = Locale(idioma)
         val editor = prefs.edit();
         editor.putString("PREF_IDIOMA", idioma);
         editor.apply();
-        val locale = Locale(idioma)
+
         Locale.setDefault(locale)
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
         configuration.setLayoutDirection(locale)
         context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+        Log.d("TAG", "Se ha cambiado el idioma a $idioma")
     }
 
     fun initIdioma(context:Context): String{
         val idioma = prefs.getString("PREF_IDIOMA","es")!!
-        val locale = Locale(idioma)
+/*        val locale = Locale(idioma)
         Locale.setDefault(locale)
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
         configuration.setLayoutDirection(locale)
-        context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+        context.resources.updateConfiguration(configuration, context.resources.displayMetrics)*/
+        Log.d("TAG", "El idioma de la aplicación es $idioma")
         setIdioma(idioma,context)
+
         return idioma
     }
 

@@ -71,13 +71,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val conf =
-            this.context?.let { ConfigUsuario(it.getSharedPreferences("Configuracion", Context.MODE_PRIVATE)) }
-        if (conf != null) {
-            conf.initTema()
-            context?.let { conf.initIdioma(it) }
-        }
-        obtenerDietaActual { dietaActID ->
+         obtenerDietaActual { dietaActID ->
             this.dietaActID = dietaActID
             dietaActID?.let {
                 setDietaObjectives(it)

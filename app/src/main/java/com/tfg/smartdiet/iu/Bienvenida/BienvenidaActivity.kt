@@ -1,8 +1,13 @@
 package com.tfg.smartdiet.iu.Bienvenida
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.tfg.smartdiet.R
@@ -29,9 +34,9 @@ class BienvenidaActivity : AppCompatActivity() {
         binding =
             ActivityBienvenidaBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
-        val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
+        val conf = ConfigUsuario(this.applicationContext.getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
         conf.initTema()
-        conf.initIdioma(applicationContext)
+        conf.initIdioma(this)
         if (!conf.sesionAbierta()) {
             initListener()
         }
