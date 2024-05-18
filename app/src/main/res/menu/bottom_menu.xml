@@ -3,20 +3,20 @@
     <item
         android:id="@+id/dietaFragment"
         android:icon="@drawable/ic_casa"
-        android:title="Dieta">
+        android:title="@string/dieta">
 
     </item>
     <item
         android:id="@+id/alimentosFragment"
         android:icon="@drawable/ic_alimentos"
-        android:title="Alimentos">
+        android:title="@string/alimentos">
 
     </item>
 
     <item
         android:id="@+id/infoFragment"
         android:icon="@drawable/ic_info"
-        android:title="Informacion">
+        android:title="@string/info">
 
     </item>
 </menu>

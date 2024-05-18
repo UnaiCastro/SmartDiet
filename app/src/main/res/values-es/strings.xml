@@ -77,4 +77,7 @@
     <string name="tipo">Tipo</string>
     <string name="errorRegistro">Error de registro</string>
     <string name="porFavorCierreSesion">Por favor, cierre sesión</string>
+    <string name="dieta">Dieta</string>
+    <string name="alimentos">Alimentos</string>
+    <string name="info">Información</string>
 </resources>
