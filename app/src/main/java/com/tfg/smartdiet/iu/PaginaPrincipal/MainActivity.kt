@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity() {
 
                     // If dietaActID is null, create a new diet
                     if (dietaActID == null) {
-                        createNewDietaForUser(userID)
+                        createNewDietaForUser()
                         Log.i(logtag, "El usuario ${userID} no tiene dieta, se crea una nueva")
                     } else {
                         // Retrieve the dieta document
@@ -283,50 +283,77 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun createNewDietaForUser() {
+        // Get the current user
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        currentUser?.let { user ->
+            val userID = user.uid
+            // Fetch user attributes from Firestore or wherever they are stored
+            // For example, you might have a 'users' collection in Firestore where user details are stored
+            val userDocRef = db.collection("users").document(userID)
+
+            // Retrieve user attributes
+            userDocRef.get()
+                .addOnSuccessListener { userDocumentSnapshot ->
+                    val peso = userDocumentSnapshot.getString("peso") // Assuming weight is stored as a string
+                    val objetivo = userDocumentSnapshot.getString("objetivo")
+                    val genero = userDocumentSnapshot.getString("genero")
+                    Log.d(logtag, "Peso usuario: $peso")
+                    Log.d(logtag, "Peso objetivo: $objetivo")
+                    Log.d(logtag, "Peso genero: $genero")
 
 
+                    if (peso != null && objetivo != null && genero != null) {
+                        val goals = calculateGoals(peso, genero, objetivo)
+                        Log.i(logtag, "Calculated Goals: $goals")
 
+                        // Create the new dieta with calculated goals
+                        val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                        val newDieta = Dieta(
+                            caloriasAct = "0",
+                            caloriasObj = goals["caloriasObj"].toString(),
+                            carbohidratosAct = "0",
+                            carbohidratosObj = goals["carbohidratosObj"].toString(),
+                            grasasAct = "0",
+                            grasasObj = goals["grasasObj"].toString(),
+                            proteinasAct = "0",
+                            proteinasObj = goals["proteinasObj"].toString(),
+                            fecha = currentDate,
+                            userID = userID
+                        )
 
-    private fun createNewDietaForUser(userID: String) {
-        // Define default values for the new diet
-        val defaultCalorias = "2000"
-        val defaultProteinas = "100"
-        val defaultGrasas = "50"
-        val defaultCarbohidratos = "100"
+                        // Convert Dieta object to map
+                        val dietaMap = newDieta.toMap()
 
-        // Get today's date
-        val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                        // Add the dieta data to Firestore
+                        db.collection("dietas")
+                            .add(dietaMap)
+                            .addOnSuccessListener { dietaDocRef ->
+                                Log.i(logtag, "Se ha añadido la dieta al usuario: $userID")
 
-        // Construct the Dieta object
-        val newDieta = Dieta(
-            caloriasAct = "0",
-            caloriasObj = defaultCalorias,
-            carbohidratosAct = "0",
-            carbohidratosObj = defaultCarbohidratos,
-            grasasAct = "0",
-            grasasObj = defaultGrasas,
-            proteinasAct = "0",
-            proteinasObj = defaultProteinas,
-            fecha = currentDate,
-            userID = userID
-        )
+                                // Update the user document with the new dietaActID
+                                updateUserWithDietaActID(userID, dietaDocRef.id)
 
-        // Convert Dieta object to map
-        val dietaMap = newDieta.toMap()
-
-        // Add the dieta data to Firestore
-        db.collection("dietas")
-            .add(dietaMap)
-            .addOnSuccessListener { dietaDocRef ->
-                Log.i(logtag, "Se ha añadido la dieta al usuario: $userID")
-
-                // Update the user document with the new dietaActID
-                updateUserWithDietaActID(userID, dietaDocRef.id)
-            }
-            .addOnFailureListener { e ->
-                Log.e(logtag, "Error al añadir la dieta al usuario: $userID, ${e.message}")
-            }
+                                // Reset the flag to false
+                                setDietCreationInitiatedToFalse()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(logtag, "Error al añadir la dieta al usuario: $userID, ${e.message}")
+                            }
+                    } else {
+                        Log.e(logtag, "One or more user attributes are null.")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e(logtag, "Error retrieving user attributes: ${e.message}")
+                }
+        } ?: run {
+            Log.e(logtag, "Current user is null.")
+        }
     }
+
+
 
 
     private fun updateUserWithDietaActID(userID: String, dietaID: String) {
@@ -359,4 +386,42 @@ class MainActivity : AppCompatActivity() {
         editor.putBoolean("dietCreationInitiated", dietCreationInitiated)
         editor.apply()
     }
+
+    private fun calculateGoals(weight: String, gender: String, objective: String): Map<String, Int> {
+        val weightKg = weight.substringBefore(" kg").toInt()
+
+        val calorieGoal: Int
+        val proteinGoal: Int
+        val fatGoal: Int
+        val carbGoal: Int
+
+        when {
+            objective == "Adelgazar" -> {
+                calorieGoal = (weightKg * 22.0).toInt()
+                proteinGoal = (weightKg * 2.2).toInt()
+                fatGoal = (calorieGoal * 0.25 / 9).toInt()
+                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
+            }
+            objective == "Aumentar volumen" -> {
+                calorieGoal = (weightKg * 24.0).toInt()
+                proteinGoal = (weightKg * 2.5).toInt()
+                fatGoal = (calorieGoal * 0.3 / 9).toInt()
+                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
+            }
+            else -> { // Estar en forma
+                calorieGoal = (weightKg * 23.0).toInt()
+                proteinGoal = (weightKg * 2.0).toInt()
+                fatGoal = (calorieGoal * 0.3 / 9).toInt()
+                carbGoal = ((calorieGoal - (proteinGoal * 4) - (fatGoal * 9)) / 4).toInt()
+            }
+        }
+
+        return mapOf(
+            "caloriasObj" to calorieGoal,
+            "proteinasObj" to proteinGoal,
+            "grasasObj" to fatGoal,
+            "carbohidratosObj" to carbGoal
+        )
+    }
+
 }

@@ -29,9 +29,13 @@ class PreguntasRegistroActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.PREntrar.setOnClickListener {
-            Log.i("PreguntasRegistro","$peso,$sexo,$objetivo")
-            val i =Intent(this, InicioSesionActivity::class.java)
-            startActivity(i)
+            val data = Intent().apply {
+                putExtra("peso", peso)
+                putExtra("sexo", sexo)
+                putExtra("objetivo", objetivo)
+            }
+            setResult(RESULT_OK, data)
+            finish()
         }
         binding.rsWidth.addOnChangeListener { _, value, _ ->
             val df = DecimalFormat("#.##")
@@ -39,19 +43,20 @@ class PreguntasRegistroActivity : AppCompatActivity() {
             binding.tvWidth.text = "$peso kg"
         }
         binding.HombreB.setOnClickListener {
-            sexo=binding.HombreB.text.toString()
+            sexo = binding.HombreB.text.toString()
         }
         binding.MujerB.setOnClickListener {
-            sexo=binding.MujerB.text.toString()
+            sexo = binding.MujerB.text.toString()
         }
         binding.PerderGRasaB.setOnClickListener {
-            objetivo=binding.PerderGRasaB.text.toString()
+            objetivo = binding.PerderGRasaB.tag.toString()
         }
         binding.AumentarVolumenB.setOnClickListener {
-            objetivo=binding.AumentarVolumenB.text.toString()
+            objetivo = binding.AumentarVolumenB.tag.toString()
         }
         binding.EstarFormaB.setOnClickListener {
-            objetivo=binding.EstarFormaB.text.toString()
+            objetivo = binding.EstarFormaB.tag.toString()
         }
     }
+
 }

@@ -48,18 +48,22 @@
                 android:id="@+id/PerderGRasaB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/perderGrasa"/>
+                android:text="@string/perderGrasa"
+                android:tag="perderGrasa"/>
             <RadioButton
                 android:id="@+id/AumentarVolumenB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/aumentarVolumen"/>
+                android:text="@string/aumentarVolumen"
+                android:tag="aumentarVolumen"/>
             <RadioButton
                 android:id="@+id/EstarFormaB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/estarEnForma"/>
+                android:text="@string/estarEnForma"
+                android:tag="estarEnForma"/>
         </RadioGroup>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/viewWidth"
