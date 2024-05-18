@@ -89,16 +89,22 @@ class MainActivity : AppCompatActivity() {
                     HistoricoActivity.navigateTo(this)
                     true
                 }
-                R.id.cerrarSesion -> {
-                    InicioSesionActivity.logOut(this)
+                R.id.gestionDietas -> {
+                    // Fragment
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionGestionDietas)
                     true
                 }
                 R.id.recursosRecetas -> {
+                    // Fragment
                     NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionDetalleRecetaPorridge)
                     true
                 }
                 R.id.vistaAlimentos -> {
                     //NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
+                    true
+                }
+                R.id.cerrarSesion -> {
+                    InicioSesionActivity.logOut(this)
                     true
                 } else -> {
                     false

@@ -198,11 +198,11 @@ class InfoFragment : Fragment() {
             startActivity(i)
         }*/
 
-        val btnGD = view.findViewById<Button>(R.id.BTNgestiondietas)
+        /*val btnGD = view.findViewById<Button>(R.id.BTNgestiondietas)
         btnGD.setOnClickListener {
             val navController = requireActivity().findNavController(R.id.Main_fragmentcontainerview)
             navController.navigate(R.id.gestionDietasFragment)
-        }
+        }*/
 
        /* val btnCerrarSesion = view.findViewById<Button>(R.id.cerrarSesion)
         btnCerrarSesion.setOnClickListener {
@@ -609,5 +609,4 @@ class InfoFragment : Fragment() {
     private fun desactivarNotis(noti: String, conf:ConfigUsuario){
         conf.setNotis(noti)
     }
-
 }
