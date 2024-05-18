@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityRegistroBinding
@@ -77,13 +81,37 @@ class RegistroActivity : AppCompatActivity() {
                 startActivityForResult(i, PREGUNTAS_REGISTRO_REQUEST_CODE)
 
             } else {
+                handleAuthError(task.exception)
                 Log.i("Registro", "${task.result}")
             }
 
-        }.addOnFailureListener {
-            Log.e("Registro", "${it.message}")
+        }.addOnFailureListener { exception ->
+            handleAuthError(exception)
+            Log.e("Registro", "${exception.message}")
         }
 
+    }
+
+    private fun handleAuthError(exception: Exception?) {
+        if (exception is FirebaseAuthInvalidCredentialsException ||
+            exception is FirebaseAuthInvalidUserException ||
+            exception is FirebaseAuthUserCollisionException
+        ) {
+            // Handle specific error types
+            showErrorMessageDialog(getString(R.string.hasingresadoinvalidos))
+        } else {
+            // Handle other errors
+            showErrorMessageDialog(getString(R.string.errorIntentaNuevamente))
+        }
+    }
+
+
+    private fun showErrorMessageDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.errorRegistro))
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.aceptar), null)
+            .show()
     }
 
     private fun registrarUsuarioEnFirestore(

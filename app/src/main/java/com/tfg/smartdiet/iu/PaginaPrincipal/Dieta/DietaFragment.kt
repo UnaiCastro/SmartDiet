@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.tfg.smartdiet.R
 
 
@@ -86,6 +89,17 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
             //checkReset()
             Log.i("DietaFragment_DB", "ID dieta actual: ${this.dietaActID}")
         }
+
+        val callback = object :
+            OnBackPressedCallback(true) { //Funcion para que el boton e atras no funcione y solamente se pueda salir dandole a cerrar sesion
+            override fun handleOnBackPressed() {
+                // Mostrar un Toast con el mensaje
+                Toast.makeText(requireContext(), getString(R.string.porFavorCierreSesion), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        // Agregar el callback al lifecycle owner del fragmento
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 //        crearDietaUsuario() // SOLO USAR UNA VEZ PARA AÑADIR DIETA DE PRUEBA
     }
 
@@ -448,6 +462,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         allEntries.clear()
         entryIds.clear()
         db.collection("entries")
+            .orderBy("hora", Query.Direction.ASCENDING)
             .whereEqualTo("dietaActID", dietaID)
             .get()
             .addOnSuccessListener { documents ->

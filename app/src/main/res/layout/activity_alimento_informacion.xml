@@ -55,6 +55,14 @@
                 android:layout_height="wrap_content"
                 android:text="Calorias:"/>
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/AlimentoInforProteinas"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:text="Proteinas:"/>
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/AlimentoInforGrasas"
                 android:layout_marginHorizontal="16dp"
                 android:layout_width="wrap_content"
@@ -70,14 +78,6 @@
                 android:textSize="20sp"
                 android:layout_height="wrap_content"
                 android:text="Carbohidratos:"/>
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/AlimentoInforProteinas"
-                android:layout_marginHorizontal="16dp"
-                android:layout_width="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:textSize="20sp"
-                android:layout_height="wrap_content"
-                android:text="Proteinas:"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/AlimentoInforAgua"
                 android:layout_marginHorizontal="16dp"

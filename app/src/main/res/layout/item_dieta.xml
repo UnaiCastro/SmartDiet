@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calorias"
+                android:text="@string/calorias"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,20 +61,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Carbohidratos"
+                android:text="@string/proteinas"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemCarbos"
+                android:id="@+id/ItemProtes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="200/200" />
+                tools:text="100/100" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -85,7 +86,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Grasas"
+                android:text="@string/grasas"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -109,20 +110,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Proteinas"
+                android:text="@string/carbs"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemProtes"
+                android:id="@+id/ItemCarbos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="100/100" />
+                tools:text="200/200" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

@@ -71,4 +71,10 @@
     <string name="aumentarVolumen">Aumentar volumen</string>
     <string name="estarEnForma">Estar en forma</string>
     <string name="peso">Peso</string>
+    <string name="agua">Agua</string>
+    <string name="minerales">Minerales</string>
+    <string name="vitaminas">Vitaminas</string>
+    <string name="tipo">Tipo</string>
+    <string name="errorRegistro">Error de registro</string>
+    <string name="porFavorCierreSesion">Por favor, cierre sesión</string>
 </resources>

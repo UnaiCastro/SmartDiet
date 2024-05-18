@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.tfg.smartdiet.databinding.FragmentDietasCompletadasBinding
 import com.tfg.smartdiet.domain.Dieta
 
@@ -60,7 +61,7 @@ class DietasCompletadasFragment : Fragment() {
         auth= FirebaseAuth.getInstance()
         val dietasCompletadasList= mutableListOf<Dieta>()
         val user=auth.currentUser!!.uid
-        db.collection("dietas").whereEqualTo("userID", user).get().addOnSuccessListener {
+        db.collection("dietas").orderBy("fecha", Query.Direction.DESCENDING).whereEqualTo("userID", user).get().addOnSuccessListener {
             for (document in it.documents){
                 val calAct = document.data!!["caloriasAct"].toString()
                 val calObj = document.data!!["caloriasObj"].toString()

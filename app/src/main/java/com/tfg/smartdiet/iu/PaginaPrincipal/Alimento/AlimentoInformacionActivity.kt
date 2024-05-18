@@ -31,16 +31,16 @@ class AlimentoInformacionActivity : AppCompatActivity() {
         val vitaminas = intent.getStringExtra("vitaminas").toString()
 
         Glide.with(this).load(imagen).into(binding.AlimentoInforFoto)
-        binding.AlimentoInforAgua.text="Agua: $agua"
-        binding.AlimentoInforCalorias.text="Calorias: $calorias"
-        binding.AlimentoInforGrasas.text="Grasas: $grasas"
-        binding.AlimentoInforCarbohidratos.text="Carbohidratos: $carbohidratos"
+        binding.AlimentoInforAgua.text=getString(R.string.agua) + ": $agua"
+        binding.AlimentoInforCalorias.text=getString(R.string.calorias) + ": $calorias"
+        binding.AlimentoInforGrasas.text=getString(R.string.grasas) + ": $grasas"
+        binding.AlimentoInforCarbohidratos.text=getString(R.string.carbs) + ": $carbohidratos"
         binding.AlimentoInforDescripcion.text="$descripcion"
-        binding.AlimentoInforMinerales.text="Minerales: $minerales"
+        binding.AlimentoInforMinerales.text=getString(R.string.minerales) + ": $minerales"
         binding.AlimentoInforNombre.text="$nombre"
-        binding.AlimentoInforProteinas.text="Proteinas: $proteinas"
-        binding.AlimentoInforVitaminas.text="Vitaminas: $vitaminas"
-        binding.AlimentoInforTipo.text="Tipo: $tipo"
+        binding.AlimentoInforProteinas.text=getString(R.string.proteinas) + ": $proteinas"
+        binding.AlimentoInforVitaminas.text=getString(R.string.vitaminas) + ": $vitaminas"
+        binding.AlimentoInforTipo.text=getString(R.string.tipo) + ": $tipo"
 
 
 

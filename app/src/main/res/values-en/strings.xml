@@ -72,4 +72,10 @@
     <string name="aumentarVolumen">Increase volume</string>
     <string name="estarEnForma">Get fit</string>
     <string name="peso">Weight</string>
+    <string name="agua">Water</string>
+    <string name="minerales">Minerals</string>
+    <string name="vitaminas">Vitamins</string>
+    <string name="tipo">Type</string>
+    <string name="errorRegistro">Sign in error</string>
+    <string name="porFavorCierreSesion">Please, logout</string>
 </resources>

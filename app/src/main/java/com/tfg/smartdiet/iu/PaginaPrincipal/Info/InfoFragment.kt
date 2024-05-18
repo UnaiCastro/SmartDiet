@@ -16,6 +16,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SwitchCompat
@@ -213,6 +215,17 @@ class InfoFragment : Fragment() {
             conf?.cerrarSesion()
         }
 
+        val callback = object :
+            OnBackPressedCallback(true) { //Funcion para que el boton e atras no funcione y solamente se pueda salir dandole a cerrar sesion
+            override fun handleOnBackPressed() {
+                // Mostrar un Toast con el mensaje
+                Toast.makeText(requireContext(), getString(R.string.porFavorCierreSesion), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        // Agregar el callback al lifecycle owner del fragmento
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
     }
 
 
@@ -325,12 +338,15 @@ class InfoFragment : Fragment() {
         layout.setPadding(10, 10, 10, 10)
         val editContActu = EditText(this.context)
         editContActu.hint = resources.getString(R.string.str_intro_cont_actu)
+        editContActu.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         layout.addView(editContActu)
         val editCon = EditText(this.context)
         editCon.hint = resources.getString(R.string.str_introduce_nueva_cont)
+        editCon.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         layout.addView(editCon)
         val editCon2 = EditText(this.context)
         editCon2.hint = resources.getString(R.string.str_confirm_contra)
+        editCon2.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         layout.addView(editCon2)
         builder.setView(layout)
         builder.setPositiveButton(resources.getString(R.string.str_actualizar)) { dialog, _ ->
