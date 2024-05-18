@@ -189,11 +189,11 @@ class InfoFragment : Fragment() {
                 cambiarIdioma(conf)
             }
         }
-        val btn = view.findViewById<Button>(R.id.BTNHistorico)
+        /*val btn = view.findViewById<Button>(R.id.BTNHistorico)
         btn.setOnClickListener {
             val i= Intent(context,HistoricoActivity::class.java)
             startActivity(i)
-        }
+        }*/
 
         val btnGD = view.findViewById<Button>(R.id.BTNgestiondietas)
         btnGD.setOnClickListener {
@@ -201,14 +201,14 @@ class InfoFragment : Fragment() {
             navController.navigate(R.id.gestionDietasFragment)
         }
 
-        val btnCerrarSesion = view.findViewById<Button>(R.id.BTNlogout)
+       /* val btnCerrarSesion = view.findViewById<Button>(R.id.cerrarSesion)
         btnCerrarSesion.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             auth.signOut()
             val i= Intent(context,BienvenidaActivity::class.java)
             startActivity(i)
             conf?.cerrarSesion()
-        }
+        }*/
 
     }
 

@@ -12,6 +12,7 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -31,6 +32,8 @@ import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
 import com.tfg.smartdiet.domain.ResetWorker
+import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
+import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -56,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         initNavigation()
+        configureUI()
 
         // Create the notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -77,6 +81,33 @@ class MainActivity : AppCompatActivity() {
         checkAndHandleActiveDiet()
         //setResetTrigger(0,0) //Cambiar la hora del reset
     }
+
+    private fun configureUI() {
+        binding.topAppBar.setOnMenuItemClickListener {menuItem ->
+            when(menuItem.itemId) {
+                R.id.historicoDieta -> {
+                    HistoricoActivity.navigateTo(this)
+                    true
+                }
+                R.id.cerrarSesion -> {
+                    InicioSesionActivity.logOut(this)
+                    true
+                }
+                R.id.recursosRecetas -> {
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionDetalleRecetaPorridge)
+                    true
+                }
+                R.id.vistaAlimentos -> {
+                    //NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
+                    true
+                } else -> {
+                    false
+                }
+            }
+        }
+    }
+
+
 
     private fun initNavigation() {
         val navHost =
