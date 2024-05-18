@@ -1,56 +1,12 @@
 <resources>
-    <string name="app_name">SmartDiet</string>
     <string name="title_activity_bienvenida" translatable="false">BienvenidaActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label" translatable="false">First Fragment</string>
-    <string name="second_fragment_label" translatable="false">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="lorem_ipsum" translatable="false">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="app_name">SmartDiet</string>
     <string name="enter">Entrar</string>
     <string name="userQuestion">¿No eres usuario?</string>
     <string name="registrate">Registrate</string>
     <string name="IniciaSesion">Inicia Sesion</string>
     <string name="usuario">Usuario</string>
-    <string name="email" translatable="false">Email</string>
+    <string name="email">Email</string>
     <string name="password">Contraseña</string>
     <string name="eresUsuario">¿Eres usuario?</string>
     <string name="formatoEmail">Formato de email no válido</string>
@@ -64,98 +20,59 @@
     <string name="nuevoRegistro">Registrar nuevos datos</string>
     <string name="deleteConf">¿Seguro que quieres borrar la entrada?</string>
     <string name="y">Sí</string>
-    <string name="n" translatable="false">No</string>
+    <string name="n">No</string>
     <string name="annadir">Añadir</string>
     <string name="cancelar">Cancelar</string>
 
     <!-- Layout: fragment_ejercicio.xml -->
-    <string name="key_to_weight_loss" translatable="false">CLAVES PARA PERDER PESO</string>
-    <string name="more_exercise_button" translatable="false">CONSEJOS PARA MAXIMIZAR EL ENTRENAMIENTO</string>
+    <string name="key_to_weight_loss">CLAVES PARA PERDER PESO</string>
+    <string name="more_exercise_button">CONSEJOS PARA MAXIMIZAR EL ENTRENAMIENTO</string>
 
     <!-- Layout: fragment_perder_peso.xml -->
-    <string name="key_to_weight_loss_2" translatable="false">3 CLAVES PARA PERDER PESO</string>
-    <string name="key_to_weight_loss_tip_1" translatable="false">1. La clave para perder peso con
-        éxito es desarrollar hábitos de vida saludables basados en la alimentación y el ejercicio.
-        Puede que no le gusten esas palabras: alimentación y ejercicio. Pero tampoco hay que
-        obsercionarse con ellas. Alimentación sólo significa comer sano y con menos calorías.
-        <br></br>Hacer ejercicio significa ser más activo físicamente.</string>
-    <string name="key_to_weight_loss_tip_2" translatable="false">2. Aunque la gente suele centrarse
-        en la dieta cuando intenta perder peso, mantenerse activo también es un componente esencial
-        de un programa de adelgazamiento. Cuando estás activo, tu cuerpo utiliza energía (calorías)
-        para moverse, lo que ayuda a quemar las calorías que ingieres con los alimentos que comes.</string>
-    <string name="key_to_weight_loss_tip_3" translatable="false">3. Sea cual sea la actividad que
-        elija, hágala con regularidad. Intente realizar al menos 150 minutos semanales de actividad
-        física moderada o 75 minutos semanales de actividad aeróbica intensa, preferiblemente
-        repartidos a lo largo de la semana. Tenga en cuenta que puede necesitar más actividad física
-        para perder peso y mantenerlo.</string>
+    <string name="key_to_weight_loss_2">3 CLAVES PARA PERDER PESO</string>
+    <string name="key_to_weight_loss_tip_1">1. La clave para perder peso con         éxito es desarrollar hábitos de vida saludables basados en la alimentación y el ejercicio.         Puede que no le gusten esas palabras: alimentación y ejercicio. Pero tampoco hay que         obsercionarse con ellas. Alimentación sólo significa comer sano y con menos calorías.         <br />Hacer ejercicio significa ser más activo físicamente.</string>
 
     <!-- Layout: fragment_maximizar_entrenamientos.xml -->
-    <string name="key_to_maximize_exercise" translatable="false">5 CONSEJOS PARA MAXIMIZAR TUS
-        ENTRENAMIENTOS</string>
-    <string name="key_to_maximize_exercise_tip_1" translatable="false">1. Desayuna sano: Si haces
-        ejercicio por la mañana, levántate lo suficientemente temprano para terminar de desayunar al
-        menos una hora antes de tu entrenamiento.</string>
-    <string name="key_to_maximize_exercise_tip_2" translatable="false">2. Vigile el tamaño de las
-        porciones de comida: Ten
-        cuidado de no excederte cuando se trata de cuánto comes antes del ejercicio.</string>
-    <string name="key_to_maximize_exercise_tip_3" translatable="false">3. Merienda bien: Los
-        tentempiés tomados poco antes del ejercicio probablemente no le aportarán energía adicional
-        si su entrenamiento dura menos de 60 minutos, pero pueden evitarle punzadas de hambre que le
-        distraigan.</string>
-    <string name="key_to_maximize_exercise_tip_4" translatable="false">4. Coma después del ejercicio:
-        Para ayudar a tus músculos a recuperarse y reponer sus reservas de glucógeno, come una comida
-        que contenga carbohidratos y proteínas en las dos horas siguientes a la sesión de ejercicio,
-        si es posible.</string>
-    <string name="key_to_maximize_exercise_tip_5" translatable="false">5. Bebe: No olvide beber
-        líquidos. Necesitas líquidos adecuados antes, durante y después del ejercicio para ayudar a
-        prevenir la deshidratación.</string>
+    <string name="key_to_maximize_exercise">5 CONSEJOS PARA MAXIMIZAR TUS         ENTRENAMIENTOS</string>
+    <string name="key_to_maximize_exercise_tip_1">1. Desayuna sano: Si haces         ejercicio por la mañana, levántate lo suficientemente temprano para terminar de desayunar al         menos una hora antes de tu entrenamiento.</string>
+    <string name="key_to_maximize_exercise_tip_2">2. Vigile el tamaño de las         porciones de comida: Ten         cuidado de no excederte cuando se trata de cuánto comes antes del ejercicio.</string>
+    <string name="key_to_maximize_exercise_tip_3">3. Merienda bien: Los         tentempiés tomados poco antes del ejercicio probablemente no le aportarán energía adicional         si su entrenamiento dura menos de 60 minutos, pero pueden evitarle punzadas de hambre que le         distraigan.</string>
+    <string name="key_to_maximize_exercise_tip_4">4. Coma después del ejercicio:         Para ayudar a tus músculos a recuperarse y reponer sus reservas de glucógeno, come una comida         que contenga carbohidratos y proteínas en las dos horas siguientes a la sesión de ejercicio,         si es posible.</string>
+    <string name="key_to_maximize_exercise_tip_5">5. Bebe: No olvide beber         líquidos. Necesitas líquidos adecuados antes, durante y después del ejercicio para ayudar a         prevenir la deshidratación.</string>
 
     <!-- Layout: fragment_porridge_recipe.xml -->
-    <string name="porridge_recipe_main_title" translatable="false">DESAYUNO CON AVENA, FRUTA Y YOGUR</string>
-    <string name="porridge_recipe_title_ingredients" translatable="false">Ingredientes:</string>
-    <string name="porridge_recipe_ingredient_1" translatable="false">150g de yogur griego natural</string>
-    <string name="porridge_recipe_ingredient_2" translatable="false">70g de avena o muesli</string>
-    <string name="porridge_recipe_ingredient_3" translatable="false">Frutos secos a elegir</string>
-    <string name="porridge_recipe_ingredient_4" translatable="false">Fruta fresca o congelada a elegir</string>
-    <string name="porridge_recipe_ingredient_5" translatable="false">Topping a elegir como crema de
-        cacahuete</string>
-    <string name="porridge_recipe_timer" translatable="false">Tiempo Preparación: 7 minutos \n Tiempo
-        Cocción: 0 minutos</string>
-    <string name="porridge_recipe_instruction_title" translatable="false">Instrucciones:</string>
-    <string name="porridge_recipe_instruction_1" translatable="false">En un bol grande, crear una base
-        de entre 150-200 gramos de yogurt griego natural.</string>
-    <string name="porridge_recipe_instruction_2" translatable="false">Añadir a la base de yogurt,
-        muesli o avena, fruta, frutos secos y finalizar el bowl con el topping elegido.</string>
+    <string name="porridge_recipe_main_title">DESAYUNO CON AVENA, FRUTA Y YOGUR</string>
+    <string name="porridge_recipe_title_ingredients">Ingredientes:</string>
+    <string name="porridge_recipe_ingredient_1">150g de yogur griego natural</string>
+    <string name="porridge_recipe_ingredient_2">70g de avena o muesli</string>
+    <string name="porridge_recipe_ingredient_3">Frutos secos a elegir</string>
+    <string name="porridge_recipe_ingredient_4">Fruta fresca o congelada a elegir</string>
+    <string name="porridge_recipe_ingredient_5">Topping a elegir como crema de         cacahuete</string>
+    <string name="porridge_recipe_timer">Tiempo Preparación: 7 minutos   Tiempo         Cocción: 0 minutos</string>
+    <string name="porridge_recipe_instruction_title">Instrucciones:</string>
+    <string name="porridge_recipe_instruction_1">En un bol grande, crear una base         de entre 150-200 gramos de yogurt griego natural.</string>
+    <string name="porridge_recipe_instruction_2">Añadir a la base de yogurt,         muesli o avena, fruta, frutos secos y finalizar el bowl con el topping elegido.</string>
 
     <!-- Layout: fragment_protein_milkshake_recipe.xml -->
-    <string name="protein_milkshake_recipe_main_title" translatable="false">Batido de proteínas postentreno</string>
-    <string name="protein_milkshake_recipe_title_ingredientes" translatable="false">Ingredientes:</string>
-    <string name="protein_milkshake_recipe_ingredient_1" translatable="false">Leche, preferiblemente entera para mayor
-        aporte de grasas</string>
-    <string name="protein_milkshake_recipe_ingredient_2" translatable="false">Scope de proteínas</string>
-    <string name="protein_milkshake_recipe_ingredient_3" translatable="false">Avena</string>
-    <string name="protein_milkshake_recipe_timer" translatable="false">Tiempo Preparación: 2 minutos \n Tiempo Cocción: 0 minutos</string>
-    <string name="protein_milkshake_recipe_instruction_title" translatable="false">Instrucciones:</string>
-    <string name="protein_milkshake_recipe_instruction_1" translatable="false">En un bol grande, crear una base de entre 150-200 gramos
-    de yogurt griego natural.</string>
-    <string name="protein_milkshake_recipe_instruction_2" translatable="false">Añadir a la base de yogurt, muesli o avena, fruta,
-    frutos secos y finalizar el bowl con el topping elegido.</string>
+    <string name="protein_milkshake_recipe_main_title">Batido de proteínas postentreno</string>
+    <string name="protein_milkshake_recipe_title_ingredientes">Ingredientes:</string>
+    <string name="protein_milkshake_recipe_ingredient_1">Leche o agua en su defecto</string>
+    <string name="protein_milkshake_recipe_ingredient_2">Scope de proteínas</string>
+    <string name="protein_milkshake_recipe_ingredient_3">Avena</string>
+    <string name="protein_milkshake_recipe_timer">Tiempo Preparación: 2 minutos   Tiempo Cocción: 0 minutos</string>
+    <string name="protein_milkshake_recipe_instruction_title">Instrucciones:</string>
+    <string name="protein_milkshake_recipe_instruction_1">En un bol grande, crear una base de entre 150-200 gramos     de yogurt griego natural.</string>
+    <string name="protein_milkshake_recipe_instruction_2">Añadir a la base de yogurt, muesli o avena, fruta,     frutos secos y finalizar el bowl con el topping elegido.</string>
 
     <!-- Layout: fragment_porridge_detail.xml -->
-    <string name="porridge_recipe_title" translatable="false">Porridge de yogur natural y avena</string>
-    <string name="porridge_recipe_source" translatable="false">Fuente de fibra \nFuente de oligoalimentos
-        \nFuente de vitaminas</string>
-    <string name="porridge_recipe_fact" translatable="false">Calories: 110k Cal \nProtein: 2g \nCarbs:
-        26g \nVitamin C: 67% of the Reference Daily Intake (RDI) \nFolate: 15% of the RDI \nPotassium:
-        10% of the RDI \nMagnesium: 6% of the RDI</string>
+    <string name="porridge_recipe_title">Porridge de yogur natural y avena</string>
+    <string name="porridge_recipe_source">Fuente de fibra  Fuente de oligoalimentos          Fuente de vitaminas</string>
+    <string name="porridge_recipe_fact">Calories: 110k Cal  Protein: 2g  Carbs:         26g  Vitamin C: 67% of the Reference Daily Intake (RDI)  Folate: 15% of the RDI  Potassium:         10% of the RDI  Magnesium: 6% of the RDI</string>
 
     <!-- Layout: fragment_protein_milkshake_detail.xml -->
-    <string name="protein_milkshake_recipe_title" translatable="false">Batido de proteínas</string>
-    <string name="protein_milkshake_recipe_source" translatable="false">Fuente de fibra \nFuente de
-        oligoalimentos \nFuente de vitaminas</string>
-    <string name="protein_milkshake_recipe_fact" translatable="false">Calories: 110k Cal \nProtein:
-        2g \nCarbs: 26g \nVitamin C: 67% of the Reference Daily Intake (RDI) \nFolate: 15% of the RDI
-        \nPotassium: 10% of the RDI \nMagnesium: 6% of the RDI</string>
+    <string name="protein_milkshake_recipe_title">Batido de proteínas</string>
+    <string name="protein_milkshake_recipe_source">Fuente de fibra  Fuente de         oligoalimentos  Fuente de vitaminas</string>
+    <string name="protein_milkshake_recipe_fact">Calories: 110k Cal  Protein:         2g  Carbs: 26g  Vitamin C: 67% of the Reference Daily Intake (RDI)  Folate: 15% of the RDI          Potassium: 10% of the RDI  Magnesium: 6% of the RDI</string>
 
     <string name="toastDietaActualizada">Dieta actualizada con éxito</string>
     <string name="CaloriasObj">Calorías Objetivo</string>
@@ -173,7 +90,7 @@
     <string name="str_actu_nom">Actualiza tu nombre</string>
     <string name="str_actualizar">Actualizar</string>
     <string name="str_actualizado">Actualizado</string>
-    <string name="str_error" translatable="false">Error</string>
+    <string name="str_error">Error</string>
     <string name="str_camb_cont">Cambia tu contraseña</string>
     <string name="str_intro_cont_actu">Introduce tu contraseña actual</string>
     <string name="str_introduce_nueva_cont">Introduce una nueva contraseña</string>
@@ -207,5 +124,9 @@
     <string name="aumentarVolumen">Aumentar volumen</string>
     <string name="estarEnForma">Estar en forma</string>
     <string name="peso">Peso</string>
+    <string name="previous">Anterior</string>
+    <string name="next">Siguiente</string>
+    <string name="key_to_weight_loss_tip_3">3. Sea cual sea la actividad que         elija, hágala con regularidad. Intente realizar al menos 150 minutos semanales de actividad         física moderada o 75 minutos semanales de actividad aeróbica intensa, preferiblemente         repartidos a lo largo de la semana. Tenga en cuenta que puede necesitar más actividad física         para perder peso y mantenerlo.</string>
+    <string name="key_to_weight_loss_tip_2">2. Aunque la gente suele centrarse         en la dieta cuando intenta perder peso, mantenerse activo también es un componente esencial         de un programa de adelgazamiento. Cuando estás activo, tu cuerpo utiliza energía (calorías)         para moverse, lo que ayuda a quemar las calorías que ingieres con los alimentos que comes.</string>
 
 </resources>

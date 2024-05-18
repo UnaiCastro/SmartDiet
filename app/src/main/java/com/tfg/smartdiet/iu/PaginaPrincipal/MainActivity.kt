@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.recursosRecetas -> {
                     // Fragment
-                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionDetalleRecetaPorridge)
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
                     true
                 }
                 R.id.vistaAlimentos -> {
@@ -106,8 +106,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.cerrarSesion -> {
-                    // Activity
-                    InicioSesionActivity.logOut(this)
                     true
                 } else -> {
                     false

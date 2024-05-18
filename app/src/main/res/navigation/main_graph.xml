@@ -9,7 +9,7 @@
         android:id="@+id/dietaFragment"
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
         android:label="fragment_principal"
-        tools:layout="@layout/fragment_principal" />
+        tools:layout="@layout/fragment_principal"/>
 
     <fragment
         android:id="@+id/alimentosFragment"
@@ -38,12 +38,12 @@
         app:popUpTo="@id/dietaFragment"/>
 
     <fragment
-        android:id="@+id/detalleRecetaPorridge"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
-        android:label="fragment_porridge_detail"
-        tools:layout="@layout/fragment_porridge_detail" />
+        android:id="@+id/vistaRecetasFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_vista_recetas"
+        tools:layout="@layout/fragment_vista_recetas"/>
     <action
-        android:id="@+id/actionDetalleRecetaPorridge"
-        app:destination="@id/detalleRecetaPorridge"
-        app:popUpTo="@id/dietaFragment" />
+        android:id="@+id/actionVistaRecetas"
+        app:destination="@id/vistaRecetasFragment"
+        app:popUpTo="@id/dietaFragment"/>
 </navigation>
