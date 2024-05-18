@@ -7,21 +7,12 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="292dp"
+        android:layout_height="46dp"
         android:text="@string/key_to_maximize_exercise"
         android:textSize="17sp"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="41dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="373dp"
-        android:layout_height="84dp"
-        android:text="@string/key_to_maximize_exercise_tip_1"
-        android:textSize="17sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="82dp" />
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="42dp" />
 
     <TextView
         android:id="@+id/textView7"
@@ -29,17 +20,17 @@
         android:layout_height="62dp"
         android:text="@string/key_to_maximize_exercise_tip_2"
         android:textSize="17sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="184dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="210dp" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView6"
         android:layout_width="373dp"
-        android:layout_height="104dp"
-        android:text="@string/key_to_maximize_exercise_tip_3"
+        android:layout_height="84dp"
+        android:text="@string/key_to_maximize_exercise_tip_1"
         android:textSize="17sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="260dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="108dp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -47,8 +38,8 @@
         android:layout_height="112dp"
         android:text="@string/key_to_maximize_exercise_tip_4"
         android:textSize="17sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="381dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="407dp" />
 
     <TextView
         android:id="@+id/textView10"
@@ -56,32 +47,17 @@
         android:layout_height="81dp"
         android:text="@string/key_to_maximize_exercise_tip_5"
         android:textSize="17sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="511dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="537dp" />
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_button"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="622dp" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recipe_button"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="622dp" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calorie_button"
-        tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="622dp" />
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="373dp"
+        android:layout_height="104dp"
+        android:text="@string/key_to_maximize_exercise_tip_3"
+        android:textSize="17sp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="286dp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -111,12 +87,12 @@
         android:id="@+id/group2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="textView6,textView5,textView7,textView8,textView9,textView10,button6,button7,button8" />
+        app:constraint_referenced_ids="textView6,textView5,textView7,textView8,textView9,textView10" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="textView6,textView5,textView7,textView8,textView9,textView10,button6,button7,button8" />
+        app:constraint_referenced_ids="textView6,textView5,textView7,textView8,textView9,textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
