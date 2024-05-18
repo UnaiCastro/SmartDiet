@@ -10,11 +10,16 @@
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
         android:label="fragment_principal"
         tools:layout="@layout/fragment_principal" />
+
     <fragment
         android:id="@+id/alimentosFragment"
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Alimento.AlimentoFragment"
         android:label="fragment_segunda"
-        tools:layout="@layout/fragment_segunda" />
+        tools:layout="@layout/fragment_segunda"/>
+    <action
+        android:id="@+id/actionVistaAlimentos"
+        app:destination="@id/alimentosFragment"
+        app:popUpTo="@id/dietaFragment"/>
 
     <fragment
         android:id="@+id/infoFragment"
@@ -27,7 +32,6 @@
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
         android:label="fragment_gestion_dietas"
         tools:layout="@layout/fragment_gestion_dietas"/>
-
     <action
         android:id="@+id/actionGestionDietas"
         app:destination="@id/gestionDietasFragment"

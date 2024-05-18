@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener {menuItem ->
             when(menuItem.itemId) {
                 R.id.historicoDieta -> {
+                    // Activity
                     HistoricoActivity.navigateTo(this)
                     true
                 }
@@ -100,10 +101,12 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.vistaAlimentos -> {
-                    //NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
+                    // Fragment
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaAlimentos)
                     true
                 }
                 R.id.cerrarSesion -> {
+                    // Activity
                     InicioSesionActivity.logOut(this)
                     true
                 } else -> {
