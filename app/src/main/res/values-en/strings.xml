@@ -78,4 +78,7 @@
     <string name="tipo">Type</string>
     <string name="errorRegistro">Sign in error</string>
     <string name="porFavorCierreSesion">Please, logout</string>
+    <string name="dieta">Diet</string>
+    <string name="alimentos">Foods</string>
+    <string name="info">Information</string>
 </resources>
