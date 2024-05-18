@@ -204,9 +204,11 @@ class MainActivity : AppCompatActivity() {
 
                         // Update the user document with the new active dieta ID
                         updateUserWithDietaActID(userID, newDietaDocRef.id)
-
-                        // Send local notification with previous dieta values
-                        sendLocalNotification(previousDietaValues)
+                        val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
+                        if(conf.getNotis()=="ON") {
+                            // Send local notification with previous dieta values
+                            sendLocalNotification(previousDietaValues)
+                        }
                     }
                     .addOnFailureListener { e ->
                         Log.e(logtag, "Error al añadir la nueva dieta para el usuario $userID: ${e.message}")

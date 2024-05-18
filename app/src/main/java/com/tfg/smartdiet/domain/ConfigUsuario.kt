@@ -72,5 +72,14 @@ class ConfigUsuario(private val prefs: SharedPreferences)  {
         return idioma
     }
 
+    fun getNotis(): String {
+        return prefs.getString("NOTIFICACION","ON")!!
+    }
+
+    fun setNotis(noti: String){
+        val editor = prefs.edit();
+        editor.putString("NOTIFICACION", noti);
+        editor.apply();
+    }
 }
 

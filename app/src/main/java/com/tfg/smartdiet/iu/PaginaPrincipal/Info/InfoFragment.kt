@@ -21,14 +21,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
 
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -42,7 +40,6 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import com.tfg.smartdiet.R
@@ -51,23 +48,14 @@ import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
-import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
-import com.tfg.smartdiet.iu.PaginaPrincipal.MainActivity
-import java.io.IOException
-
 
 class InfoFragment : Fragment() {
     private companion object {
         private const val CAMERA_REQUEST = 100
-        private const val STORAGE_REQUEST = 200
-        private const val IMAGEPICK_GALLERY_REQUEST = 300
-        private const val IMAGE_PICKCAMERA_REQUEST = 400
     }
     private lateinit var cameraPermission: Array<String>
     private lateinit var set: ImageView
@@ -80,8 +68,8 @@ class InfoFragment : Fragment() {
     private lateinit var nombre: TextView
     private lateinit var correoUsuario: TextView
     //private lateinit var editCorreo: Button
-    private lateinit var storage:StorageReference
     private lateinit var cambiarTema: SwitchCompat
+    private lateinit var desNotis: SwitchCompat
     private lateinit var editIdioma: Button
     private val pickImageLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
@@ -146,6 +134,7 @@ class InfoFragment : Fragment() {
         editCont = view.findViewById(R.id.cambiarContrInfo)
         cambiarTema = view.findViewById(R.id.temaInfo)
         editIdioma = view.findViewById(R.id.idiomaInfo)
+        desNotis = view.findViewById(R.id.notisInfo)
         setNombre(view)
         setCorreo(view)
         setFoto()
@@ -158,11 +147,25 @@ class InfoFragment : Fragment() {
 
         if (conf != null) {
             if (conf.initTema()=="OSCURO"){
-                cambiarTema.setChecked(true)
+                cambiarTema.isChecked = true
             }else{
-                cambiarTema.setChecked(false)
+                cambiarTema.isChecked = false
             }
         }
+        if (conf != null) {
+            desNotis.isChecked = conf.getNotis()=="ON"
+        }
+
+        desNotis.setOnClickListener{
+            if (conf != null) {
+                if (desNotis.isChecked) {
+                    desactivarNotis("ON", conf)
+                }else{
+                    desactivarNotis("OFF", conf)
+                }
+            }
+        }
+
         cambiarTema.setOnClickListener{
             if (!cambiarTema.isChecked){
                 conf?.setTema("NORMAL")
@@ -314,50 +317,6 @@ class InfoFragment : Fragment() {
         }
     }
 
-    private fun editarMail(vista: View) {
-        val builder = AlertDialog.Builder(this.context)
-        builder.setTitle("Cambiar correo") //cambiar por strings
-        val layout = LinearLayout(this.context)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setPadding(10, 10, 10, 10)
-        val editText = EditText(this.context)
-        editText.hint = "Actualiza tu correo"
-        layout.addView(editText)
-        builder.setView(layout)
-        builder.setPositiveButton("Actualizar") { dialog, _ ->
-            val value = editText.text.toString().trim()
-            val emailRegex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
-            if (!emailRegex.matches(value)) {
-                Toast.makeText(this.context, "Introduce un correo válido", Toast.LENGTH_LONG).show()
-            }else if(value.isNotEmpty()) {
-                pd.show()
-
-                // Here we are updating the new name
-                db = FirebaseFirestore.getInstance()
-                auth = FirebaseAuth.getInstance()
-                val userId = auth.currentUser?.uid
-                if (userId != null) {
-                    val userRef = db.collection("users").document(userId)
-                    val nuevoCorreo = hashMapOf(
-                        "correo" to value
-                    )
-                    //auth.currentUser?.verifyBeforeUpdateEmail(value)
-                    userRef.update(nuevoCorreo as Map<String, Any>).addOnSuccessListener {
-                        pd.dismiss()
-                        Toast.makeText(this.context, " Actualizado ", Toast.LENGTH_LONG).show()
-                        setCorreo(vista)
-                    }
-                        .addOnFailureListener {
-                            pd.dismiss()
-                            Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
-                        }
-                }
-
-            }
-        }
-        builder.show()
-    }
-
     private fun editarCont() {
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle(resources.getString(R.string.str_camb_cont)) //cambiar por strings
@@ -483,7 +442,7 @@ class InfoFragment : Fragment() {
             // Obtener la InputStream de la imagen seleccionada
             val inputStream: InputStream? =
                 this.context?.contentResolver?.openInputStream(selectedImageUri)
-            var nombreArchivo: String? = null
+            //var nombreArchivo: String? = null
             // Decodificar la InputStream en un Bitmap
             val timeStamp = SimpleDateFormat(
                 "yyyyMMdd_HHmmss",
@@ -532,11 +491,10 @@ class InfoFragment : Fragment() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
         // Subir la imagen al almacenamiento de Firebase Storage
-        var uploadTask: UploadTask
-        if(!camara) {
-            uploadTask = perfilRef.putFile(uri)
+        val uploadTask: UploadTask = if(!camara) {
+            perfilRef.putFile(uri)
         }else{
-            uploadTask = perfilRef.putBytes(data)
+            perfilRef.putBytes(data)
         }
         uploadTask.addOnSuccessListener {
             perfilRef.downloadUrl.addOnSuccessListener { uri ->
@@ -644,5 +602,9 @@ class InfoFragment : Fragment() {
 
         }
         builder.show()
+    }
+
+    private fun desactivarNotis(noti: String, conf:ConfigUsuario){
+        conf.setNotis(noti)
     }
 }
