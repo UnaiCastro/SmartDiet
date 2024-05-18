@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Build
@@ -45,10 +46,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private val logtag = "MainActivity"
     private val CHANNEL_ID = "123"
+    private var dietCreationInitiated = false
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(logtag, "MainActivity: onCreate")
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", MODE_PRIVATE))
         conf.initTema()
         conf.initIdioma(applicationContext)
@@ -56,6 +61,11 @@ class MainActivity : AppCompatActivity() {
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
         initNavigation()
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        // Retrieve the flag value
+        dietCreationInitiated = sharedPreferences.getBoolean("dietCreationInitiated", false)
 
         // Create the notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -72,10 +82,27 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        db = FirebaseFirestore.getInstance()
-
-        checkAndHandleActiveDiet()
         //setResetTrigger(0,0) //Cambiar la hora del reset
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(logtag, "MainActivity: onStart")
+        db = FirebaseFirestore.getInstance()
+        Log.i(logtag, "MainActivity: onStart, flag dietCreationInitiated: $dietCreationInitiated")
+        if (!dietCreationInitiated) {
+            dietCreationInitiated = true
+            checkAndHandleActiveDiet()
+            // Save the updated flag value in SharedPreferences
+            editor = sharedPreferences.edit()
+            editor.putBoolean("dietCreationInitiated", dietCreationInitiated)
+            editor.apply()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(logtag, "MainActivity: onResume")
     }
 
     private fun initNavigation() {
@@ -151,6 +178,7 @@ class MainActivity : AppCompatActivity() {
                                 // Check if the dieta's date matches today's date
                                 if (dietaFecha == currentDate) {
                                     Log.i(logtag, "La dieta activa para el usuario ${userID} es de hoy.")
+                                    setDietCreationInitiatedToFalse()
                                 } else {
                                     Log.i(logtag, "La dieta activa para el usuario ${userID} no es de hoy, guardándola y creando nueva.")
                                     handleExpiredActiveDiet(userID, dietaActID)
@@ -308,7 +336,9 @@ class MainActivity : AppCompatActivity() {
             .update("dietaActID", dietaID)
             .addOnSuccessListener {
                 Log.i(logtag, "Se ha actualizado el dietaActID del usuario")
-                // Reload the fragment
+
+                setDietCreationInitiatedToFalse()
+
                 reloadFragment()
             }
             .addOnFailureListener { e ->
@@ -319,5 +349,14 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.Main_fragmentcontainerview) as NavHostFragment
         val navController = navHostFragment.navController
         navController.navigate(navController.graph.id)
+    }
+
+    private fun setDietCreationInitiatedToFalse() {
+        // Reset the flag to false
+        dietCreationInitiated = false
+        // Save the updated flag value in SharedPreferences
+        editor = sharedPreferences.edit()
+        editor.putBoolean("dietCreationInitiated", dietCreationInitiated)
+        editor.apply()
     }
 }

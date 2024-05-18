@@ -170,11 +170,17 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
             .setView(dialogView)
             .setTitle(getString(R.string.nuevoRegistro))
             .setPositiveButton(getString(R.string.annadir)) { _, _ ->
-                val newNombre =dialogView.findViewById<EditText>(R.id.etNombre).text.toString()
-                val newCalorias = dialogView.findViewById<EditText>(R.id.etNewCalorias).text.toString().toInt()
-                val newProteinas = dialogView.findViewById<EditText>(R.id.etNewProteinas).text.toString().toInt()
-                val newGrasas = dialogView.findViewById<EditText>(R.id.etNewGrasas).text.toString().toInt()
-                val newCarbohidratos = dialogView.findViewById<EditText>(R.id.etNewCarbohidratos).text.toString().toInt()
+                val newNombre = dialogView.findViewById<EditText>(R.id.etNombre).text.toString()
+                val newCaloriasText = dialogView.findViewById<EditText>(R.id.etNewCalorias).text.toString()
+                val newProteinasText = dialogView.findViewById<EditText>(R.id.etNewProteinas).text.toString()
+                val newGrasasText = dialogView.findViewById<EditText>(R.id.etNewGrasas).text.toString()
+                val newCarbohidratosText = dialogView.findViewById<EditText>(R.id.etNewCarbohidratos).text.toString()
+
+                // Convert empty input fields
+                val newCalorias = if (newCaloriasText.isNotEmpty()) newCaloriasText.toInt() else 0
+                val newProteinas = if (newProteinasText.isNotEmpty()) newProteinasText.toInt() else 0
+                val newGrasas = if (newGrasasText.isNotEmpty()) newGrasasText.toInt() else 0
+                val newCarbohidratos = if (newCarbohidratosText.isNotEmpty()) newCarbohidratosText.toInt() else 0
 
                 // Store the new entry data in a HashMap
                 val newEntryData: HashMap<String, Any> = hashMapOf(
@@ -193,7 +199,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                 // Add the new entry
                 addEntry(newEntryData)
 
-
                 // Actualizar las variables con los nuevos valores
                 calorias += newCalorias
                 proteinas += newProteinas
@@ -208,6 +213,7 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
         dialog.show()
     }
+
 
     override fun onItemLongClick(position: Int) {
         showDeleteConfirmationDialog(position)
