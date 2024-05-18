@@ -599,7 +599,9 @@ class InfoFragment : Fragment() {
             }else{
                 conf.setIdioma("en",this.requireContext())
             }
-
+            val intent = requireActivity().intent
+            requireActivity().finish()
+            requireActivity().startActivity(intent)
         }
         builder.show()
     }
@@ -607,4 +609,5 @@ class InfoFragment : Fragment() {
     private fun desactivarNotis(noti: String, conf:ConfigUsuario){
         conf.setNotis(noti)
     }
+
 }
