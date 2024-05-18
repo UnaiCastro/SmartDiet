@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Dieta
 
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.FragmentGestionDietasBinding
+import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -47,7 +49,6 @@ class GestionDietasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         db = FirebaseFirestore.getInstance()
         setupUI()
 

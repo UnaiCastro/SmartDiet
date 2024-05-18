@@ -1,11 +1,13 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Alimento
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tfg.smartdiet.databinding.ItemAlimentoBinding
 import com.tfg.smartdiet.domain.Alimento
+import com.tfg.smartdiet.domain.ConfigUsuario
 
 class AlimentoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val binding = ItemAlimentoBinding.bind(itemView)

@@ -1,5 +1,6 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Alimento
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tfg.smartdiet.databinding.FragmentSegundaBinding
 import com.tfg.smartdiet.domain.Alimento
+import com.tfg.smartdiet.domain.ConfigUsuario
 
 class AlimentoFragment : Fragment() {
 

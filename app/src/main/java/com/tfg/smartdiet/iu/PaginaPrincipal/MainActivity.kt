@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val conf = ConfigUsuario(getSharedPreferences("Configuracion", MODE_PRIVATE))
         conf.initTema()
-        conf.initIdioma(applicationContext)
+        /*conf.initIdioma(applicationContext)*/
         binding =
             ActivityMainBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
