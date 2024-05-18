@@ -1,6 +1,7 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal.Historico
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,7 @@ class DietasCompletadasFragment : Fragment() {
         dietasRV.layoutManager = LinearLayoutManager(context)
         dietaAdapter = DietaAdapter(this.dietas)
         dietasRV.adapter = dietaAdapter
+        Log.i("DietasCompletadas", "estoy en initRV")
 
 
     }
@@ -58,7 +60,7 @@ class DietasCompletadasFragment : Fragment() {
         auth= FirebaseAuth.getInstance()
         val dietasCompletadasList= mutableListOf<Dieta>()
         val user=auth.currentUser!!.uid
-        db.collection("dietas").get().addOnSuccessListener {
+        db.collection("dietas").whereEqualTo("userID", user).get().addOnSuccessListener {
             for (document in it.documents){
                 val calAct = document.data!!["caloriasAct"].toString()
                 val calObj = document.data!!["caloriasObj"].toString()
@@ -70,12 +72,23 @@ class DietasCompletadasFragment : Fragment() {
                 val proObj = document.data!!["proteinasObj"].toString()
                 val fecha = document.data!!["fecha"].toString()
                 val usuario = document.data!!["userID"].toString()
+                val tolerance = 0.10
+
+                Log.i("DietasCompletadas", "Calorias Actuales: $calAct")
+                Log.i("DietasCompletadas", "Calorias Objetivo: $calObj")
+                Log.i("DietasCompletadas", "Carbohidratos Actuales: $carboAct")
+                Log.i("DietasCompletadas", "Carbohidratos Objetivo: $carboObj")
+                Log.i("DietasCompletadas", "Grasas Actuales: $grasasAct")
+                Log.i("DietasCompletadas", "Grasas Objetivo: $grasasObj")
+                Log.i("DietasCompletadas", "Proteinas Actuales: $proAct")
+                Log.i("DietasCompletadas", "Proteinas Objetivo: $proObj")
+                Log.i("DietasCompletadas", "Fecha: $fecha")
+                Log.i("DietasCompletadas", "Usuario ID: $usuario")
                 if (
-                    calAct.toInt()>=calObj.toInt() &&
-                    carboAct.toInt()>=carboObj.toInt() &&
-                    grasasAct.toInt()>=grasasObj.toInt()  &&
-                    proAct.toInt()>=proObj.toInt() &&
-                    user==usuario
+                    calAct.toInt() in (calObj.toInt() * (1 - tolerance)).toInt()..(calObj.toInt() * (1 + tolerance)).toInt() &&
+                    carboAct.toInt() in (carboObj.toInt() * (1 - tolerance)).toInt()..(carboObj.toInt() * (1 + tolerance)).toInt() &&
+                    grasasAct.toInt() in (grasasObj.toInt() * (1 - tolerance)).toInt()..(grasasObj.toInt() * (1 + tolerance)).toInt() &&
+                    proAct.toInt() in (proObj.toInt() * (1 - tolerance)).toInt()..(proObj.toInt() * (1 + tolerance)).toInt()
                 ){
                     val dieta = Dieta(
                         calAct,

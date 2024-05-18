@@ -75,12 +75,13 @@ class DietasNoCompletadasFragment : Fragment() {
                 val proObj = document.data!!["proteinasObj"].toString()
                 println(proObj)
                 val fecha = document.data!!["fecha"].toString()
-                if (
-                    calAct.toInt()<calObj.toInt() &&
-                    carboAct.toInt()<carboObj.toInt() &&
-                    grasasAct.toInt()<grasasObj.toInt() &&
-                    proAct.toInt()<proObj.toInt()
+                val tolerance = 0.10
 
+                if (
+                    calAct.toInt() !in (calObj.toInt() * (1 - tolerance)).toInt()..(calObj.toInt() * (1 + tolerance)).toInt() ||
+                    carboAct.toInt() !in (carboObj.toInt() * (1 - tolerance)).toInt()..(carboObj.toInt() * (1 + tolerance)).toInt() ||
+                    grasasAct.toInt() !in (grasasObj.toInt() * (1 - tolerance)).toInt()..(grasasObj.toInt() * (1 + tolerance)).toInt() ||
+                    proAct.toInt() !in (proObj.toInt() * (1 - tolerance)).toInt()..(proObj.toInt() * (1 + tolerance)).toInt()
                 ){
                     val dieta = Dieta(
                         calAct,

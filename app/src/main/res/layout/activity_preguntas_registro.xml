@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seleccione su genero"
+            android:text="@string/seleccioneGenero"
             android:layout_gravity="center"/>
         <RadioGroup
             android:layout_width="wrap_content"
@@ -27,19 +27,19 @@
                 android:id="@+id/HombreB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hombre"/>
+                android:text="@string/hombre"/>
             <RadioButton
                 android:id="@+id/MujerB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mujer"/>
+                android:text="@string/mujer"/>
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Que quieres hacer"/>
+            android:text="@string/cualEsTuObjetivo"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -48,18 +48,22 @@
                 android:id="@+id/PerderGRasaB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perder grasa"/>
+                android:text="@string/perderGrasa"
+                android:tag="perderGrasa"/>
             <RadioButton
                 android:id="@+id/AumentarVolumenB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aumentar Volumen"/>
+                android:text="@string/aumentarVolumen"
+                android:tag="aumentarVolumen"/>
             <RadioButton
                 android:id="@+id/EstarFormaB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estar en forma"/>
+                android:text="@string/estarEnForma"
+                android:tag="estarEnForma"/>
         </RadioGroup>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/viewWidth"
@@ -81,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peso"
+                    android:text="@string/peso"
                     android:textAllCaps="true"/>
                 <TextView
                     android:id="@+id/tvWidth"
@@ -106,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:text="Entrar"/>
+            android:text="@string/enter"/>
 
 
 

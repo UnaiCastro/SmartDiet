@@ -18,6 +18,8 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistroBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db:FirebaseFirestore
+    private val PREGUNTAS_REGISTRO_REQUEST_CODE = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +70,11 @@ class RegistroActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(etEmail, etContrasena).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                registrarUsuarioEnFirestore(etNombre,etEmail)
                 //Se guarda la sesión
                 val conf = ConfigUsuario(getSharedPreferences("Configuracion", Context.MODE_PRIVATE))
                 conf.setInicioSesion(etNombre)
                 val i = Intent(this, PreguntasRegistroActivity::class.java)
-                startActivity(i)
+                startActivityForResult(i, PREGUNTAS_REGISTRO_REQUEST_CODE)
 
             } else {
                 Log.i("Registro", "${task.result}")
@@ -87,7 +88,10 @@ class RegistroActivity : AppCompatActivity() {
 
     private fun registrarUsuarioEnFirestore(
         etNombre: String,
-        etEmail: String
+        etEmail: String,
+        etGenero: String,
+        etObjetivo: String,
+        etPeso: String
     ) {
 
         db= FirebaseFirestore.getInstance()
@@ -97,9 +101,15 @@ class RegistroActivity : AppCompatActivity() {
             userID = usuarioID.toString(),
             nombreUsuario = etNombre,
             correo = etEmail,
+            genero = etGenero,
+            objetivo = etObjetivo,
+            peso = etPeso
         ).toMap()
         usuarioID?.let { db.collection("users").document(it).set(user) }?.addOnSuccessListener {
             Log.i("Registro","Creado usuario $usuarioID")
+            val intent = Intent(this, InicioSesionActivity::class.java)
+            startActivity(intent)
+            finish()
         }?.addOnFailureListener {
             Log.e("Registro","Creacion de Usuario $usuarioID fallida ${it.message}")
         }
@@ -109,4 +119,18 @@ class RegistroActivity : AppCompatActivity() {
         val emailRegex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
         return emailRegex.matches(email)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PREGUNTAS_REGISTRO_REQUEST_CODE && resultCode == RESULT_OK) {
+            val etNombre = binding.REgistroEtUsuario.editText?.text.toString()
+            val etEmail = binding.RegistroEtEmail.editText?.text.toString()
+            val etGenero = data?.getStringExtra("sexo") ?: ""
+            val etObjetivo = data?.getStringExtra("objetivo") ?: ""
+            val etPeso = data?.getIntExtra("peso", 0).toString()
+
+            registrarUsuarioEnFirestore(etNombre, etEmail, etGenero, etObjetivo, etPeso)
+        }
+    }
+
 }
