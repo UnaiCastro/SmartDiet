@@ -3,53 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0F192F">
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="33dp" />
+        android:text="@string/protein_milkshake_recipe_title"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="41dp" />
 
     <RatingBar
         android:id="@+id/ratingBar3"
-        android:layout_width="240dp"
-        android:layout_height="49dp"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="87dp" />
+        android:layout_width="145dp"
+        android:layout_height="47dp"
+        android:background="#6EC7A7"
+        android:progressTint="#FFEB3B"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="94dp" />
 
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="101dp" />
+        android:text="@string/protein_milkshake_recipe_source"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="93dp" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="272dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="439dp"
+        android:layout_height="290dp"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="187dp"
+        tools:srcCompat="@drawable/protein_powder" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="464dp" />
+        android:text="VER RECETA"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="446dp" />
 
     <TextView
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="565dp" />
+        android:text="@string/protein_milkshake_recipe_fact"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="516dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

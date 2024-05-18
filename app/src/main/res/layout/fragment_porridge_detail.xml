@@ -1,60 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#0F192F">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_title"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="54dp" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="139dp"
-        android:layout_height="49dp"
-        android:background="#6EC7A7"
-        android:progressTint="#FFEB3B"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="112dp" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_source"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="211dp"
-        tools:layout_editor_absoluteY="112dp" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="444dp"
-        android:layout_height="275dp"
-        app:srcCompat="@drawable/porridge"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="208dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VER RECETA"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="461dp" />
-
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_fact"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="525dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

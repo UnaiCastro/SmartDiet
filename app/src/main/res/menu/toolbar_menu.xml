@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/historicoDieta"
+        android:title="Histórico"
+        app:showAsAction="always"
+        android:titleTextColor="@color/md_theme_primaryContainer"/>
+
+    <item
+        android:id="@+id/gestionDietas"
+        android:title="Objetivos"
+        app:showAsAction="never"
+        android:titleTextColor="@color/md_theme_primaryContainer"/>
+
+    <item
+        android:id="@+id/recursosRecetas"
+        android:title="Recetas"
+        app:showAsAction="never"
+        android:titleTextColor="@color/md_theme_primaryContainer"/>
+
+    <item
+        android:id="@+id/vistaAlimentos"
+        android:title="Alimentos"
+        app:showAsAction="never"
+        android:titleTextColor="@color/md_theme_primaryContainer"/>
+
+    <item
+        android:id="@+id/cerrarSesion"
+        android:title="Cerrar sesión"
+        app:showAsAction="never"
+        android:titleTextColor="@color/md_theme_primaryContainer"/>
+</menu>

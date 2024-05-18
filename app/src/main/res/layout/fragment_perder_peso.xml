@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/key_to_weight_loss_2"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="46dp" />
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="38dp" />
 
     <TextView
         android:id="@+id/textView2"
