@@ -26,7 +26,6 @@ class BienvenidaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        Thread.sleep(3000)
         binding =
             ActivityBienvenidaBinding.inflate(layoutInflater) //Tener la vista y la activity conectadas directamente
         setContentView(binding.root)
