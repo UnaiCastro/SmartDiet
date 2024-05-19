@@ -20,8 +20,8 @@
         android:titleTextColor="@color/md_theme_primaryContainer"/>
 
     <item
-        android:id="@+id/vistaAlimentos"
-        android:title="Alimentos"
+        android:id="@+id/vistaEjercicios"
+        android:title="Ejercicios"
         app:showAsAction="never"
         android:titleTextColor="@color/md_theme_primaryContainer"/>
 

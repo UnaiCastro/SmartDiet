@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_principal"/>
 
     <fragment
-        android:id="@+id/alimentosFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Alimento.AlimentoFragment"
-        android:label="fragment_segunda"
-        tools:layout="@layout/fragment_segunda"/>
+        android:id="@+id/ejerciciosFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.EjercicioFragment"
+        android:label="fragment_ejercicios"
+        tools:layout="@layout/fragment_ejercicio"/>
     <action
-        android:id="@+id/actionVistaAlimentos"
-        app:destination="@id/alimentosFragment"
-        app:popUpTo="@id/dietaFragment"/>
+        android:id="@+id/actionVistaEjercicios"
+        app:destination="@id/ejerciciosFragment"
+        app:popUpTo="@id/ejerciciosFragment"/>
 
     <fragment
         android:id="@+id/infoFragment"
@@ -46,4 +46,40 @@
         android:id="@+id/actionVistaRecetas"
         app:destination="@id/vistaRecetasFragment"
         app:popUpTo="@id/dietaFragment"/>
+
+    <fragment
+        android:id="@+id/porridgeDetail"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_porridge_detail"
+        tools:layout="@layout/fragment_porridge_detail"/>
+
+    <fragment
+        android:id="@+id/porridgeRecipe"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_porridge_recipe"
+        tools:layout="@layout/fragment_porridge_recipe"/>
+
+    <fragment
+        android:id="@+id/proteinMilkshakeDetail"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_protein_milkshake_detail"
+        tools:layout="@layout/fragment_protein_milkshake_detail"/>
+
+    <fragment
+        android:id="@+id/proteinMilkshakeRecipe"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_protein_milkshake_detail"
+        tools:layout="@layout/fragment_protein_milkshake_recipe"/>
+
+    <fragment
+        android:id="@+id/fragmentPerderPeso"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_perder_peso"
+        tools:layout="@layout/fragment_perder_peso"/>
+
+    <fragment
+        android:id="@+id/fragmentMaximizarEntrenamiento"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_maximizar_entrenamiento"
+        tools:layout="@layout/fragment_maximizar_entrenamiento"/>
 </navigation>
