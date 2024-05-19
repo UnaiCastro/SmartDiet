@@ -100,10 +100,11 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     private fun initRecyclerView() {
         recyclerViewEntries = binding.recyclerViewEntries
         recyclerViewEntries.layoutManager = LinearLayoutManager(requireContext())
-        entryAdapter = EntryAdapter(allEntries, this) // Pass the listener to the adapter
+        entryAdapter = EntryAdapter(allEntries, this)
         recyclerViewEntries.adapter = entryAdapter
     }
 
+    // Solo para tests
     private fun addTestEntries() {
         allEntries.addAll(
             listOf(
@@ -123,7 +124,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
                     "carbohidratos" to 35,
                     "hora" to "17:10"
                 )
-                // Add more test entries as needed
             )
         )
 
@@ -131,13 +131,10 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
     }
     private fun addEntry(entryData: HashMap<String, Any>) {
 
-        // Add the entry data to the list
         allEntries.add(entryData)
 
-        // Notify the adapter of the data change
         entryAdapter.notifyDataSetChanged()
 
-        // Añadir en la base de datos
         annadirEntradaEnFirestore(entryData)
 
 
@@ -243,7 +240,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         // Retrieve the entry ID from entryIds based on the position
         val entryIdToDelete = entryIds[position]
 
-        // Log the entryToDelete to verify its contents
         Log.d("DietaFragment_DB", "Entry to delete: $entryToDelete, ID: $entryIdToDelete")
 
         db = FirebaseFirestore.getInstance()
@@ -314,7 +310,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
     private fun obtenerDietaActual(callback: (String?) -> Unit) {
         // Obtener el correo del usuario desde firebase
-
         auth = FirebaseAuth.getInstance()
         val correo = auth.currentUser?.email
 
@@ -341,10 +336,9 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
             }
     }
 
-
+    // Solo para test
     private fun crearDietaUsuario(){
         // Obtener el correo del usuario desde firebase
-
         auth = FirebaseAuth.getInstance()
         val correo = auth.currentUser?.email
 
@@ -507,7 +501,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
 
         // Iterate through each entry in allEntries
         for (entryData in allEntries) {
-            // Log the types of values
             Log.d("DietaFragment_DB", "Type of calorias: ${entryData["calorias"]?.javaClass?.simpleName}")
             Log.d("DietaFragment_DB", "Type of proteinas: ${entryData["proteinas"]?.javaClass?.simpleName}")
             Log.d("DietaFragment_DB", "Type of grasas: ${entryData["grasas"]?.javaClass?.simpleName}")
@@ -521,7 +514,6 @@ class DietaFragment : Fragment(), EntryAdapter.OnItemLongClickListener {
         }
 
 
-        // Log the calculated total values
         Log.i("DietaFragment_DB", "Total Calorias: $totalCalorias")
         Log.i("DietaFragment_DB", "Total Proteinas: $totalProteinas")
         Log.i("DietaFragment_DB", "Total Grasas: $totalGrasas")

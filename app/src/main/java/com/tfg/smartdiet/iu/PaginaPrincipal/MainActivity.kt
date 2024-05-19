@@ -1,23 +1,20 @@
 package com.tfg.smartdiet.iu.PaginaPrincipal
 
 import android.Manifest
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -33,14 +30,13 @@ import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
 import com.tfg.smartdiet.domain.ResetWorker
-import com.tfg.smartdiet.iu.InicioSesion.InicioSesionActivity
+import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
-import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,6 +70,21 @@ class MainActivity : AppCompatActivity() {
         dietCreationInitiated = sharedPreferences.getBoolean("dietCreationInitiated", false)
 
         configureUI()
+
+
+        // Si la versión es 13 o superior: verifica si tienes permiso para enviar notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // Si no tienes permiso, solicítalo
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    11
+                )
+            }
+        }
 
         // Create the notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -326,8 +337,6 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // Handle the case where the permission is not granted
-                // You can request permission here or handle it in the calling component
                 return
             }
             notify(notificationId, notificationBuilder.build())
@@ -341,14 +350,13 @@ class MainActivity : AppCompatActivity() {
 
         currentUser?.let { user ->
             val userID = user.uid
-            // Fetch user attributes from Firestore or wherever they are stored
-            // For example, you might have a 'users' collection in Firestore where user details are stored
+            // Fetch user attributes from Firestore
             val userDocRef = db.collection("users").document(userID)
 
             // Retrieve user attributes
             userDocRef.get()
                 .addOnSuccessListener { userDocumentSnapshot ->
-                    val peso = userDocumentSnapshot.getString("peso") // Assuming weight is stored as a string
+                    val peso = userDocumentSnapshot.getString("peso")
                     val objetivo = userDocumentSnapshot.getString("objetivo")
                     val genero = userDocumentSnapshot.getString("genero")
                     Log.d(logtag, "Peso usuario: $peso")
