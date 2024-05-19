@@ -6,91 +6,172 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView18"
-        android:layout_width="350dp"
-        android:layout_height="43dp"
-        android:text="@string/porridge_recipe_instruction_2"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="445dp" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="352dp"
-        android:layout_height="48dp"
-        android:text="@string/porridge_recipe_instruction_1"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="383dp" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="52dp"
-        android:layout_height="26dp"
-        app:srcCompat="@android:drawable/presence_away"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="341dp" />
-
-    <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_instruction_title"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="341dp" />
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="311dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@android:drawable/presence_away"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="311dp" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_ingredient_2"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="170dp" />
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="166dp" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_ingredient_5"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="284dp" />
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="263dp" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_title"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:text="@string/porridge_recipe_title_ingredients"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="90dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_ingredient_3"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="210dp" />
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="196dp" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_ingredient_1"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="133dp" />
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="134dp" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_main_title"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="36dp" />
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="45dp" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/porridge_recipe_ingredient_4"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="250dp" />
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="229dp" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/ingredients"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="36dp" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/number_one"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="133dp" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/number_two"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/number_three"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/number_four"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="229dp" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/number_five"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="268dp"
+        android:layout_height="49dp"
+        android:text="@string/porridge_recipe_instruction_3"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="511dp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="268dp"
+        android:layout_height="35dp"
+        android:text="@string/porridge_recipe_instruction_1"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="394dp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="268dp"
+        android:layout_height="35dp"
+        android:text="@string/porridge_recipe_instruction_2"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="454dp" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:srcCompat="@drawable/instructions"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="90dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="192dp"
+        android:layout_height="33dp"
+        android:text="@string/porridge_recipe_timer"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="338dp" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        app:srcCompat="@drawable/cooking"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="338dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

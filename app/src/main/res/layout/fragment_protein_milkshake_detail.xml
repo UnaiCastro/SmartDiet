@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="17dp"
         android:text="@string/protein_milkshake_recipe_title"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="41dp" />
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="50dp" />
 
     <RatingBar
         android:id="@+id/ratingBar3"
@@ -21,8 +21,8 @@
         android:layout_height="47dp"
         android:background="#6EC7A7"
         android:progressTint="#FFEB3B"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="94dp" />
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="101dp" />
 
     <TextView
         android:id="@+id/textView30"
@@ -30,13 +30,13 @@
         android:layout_height="wrap_content"
         android:text="@string/protein_milkshake_recipe_source"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="93dp" />
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="101dp" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="439dp"
-        android:layout_height="290dp"
+        android:layout_width="415dp"
+        android:layout_height="292dp"
         tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="187dp"
         tools:srcCompat="@drawable/protein_powder" />
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:text="@string/protein_milkshake_recipe_fact"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="516dp" />
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="519dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

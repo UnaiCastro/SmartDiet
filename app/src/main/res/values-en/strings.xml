@@ -113,4 +113,7 @@
     <string name="protein_milkshake_recipe_source">Source of fiber Source of trace foods Source of vitamins</string>
     <string name="protein_milkshake_recipe_fact">Calories: 110k Cal  Protein:         2g  Carbs: 26g  Vitamin C: 67% of the Reference Daily Intake (RDI)  Folate: 15% of the RDI          Potassium: 10% of the RDI  Magnesium: 6% of the RDI</string>
     <string name="protein_milkshake_recipe_ingredient_1">Milk or water failing that</string>
+    <string name="porridge_recipe_instruction_3">Finish the bowl with the chosen topping such as cream     of peanuts for example to give a touch of flavor to breakfast.</string>
+    <string name="protein_milkshake_recipe_ingredient_4">Egg (Optional)</string>
+    <string name="protein_milkshake_recipe_ingredient_4">E</string>
 </resources>
