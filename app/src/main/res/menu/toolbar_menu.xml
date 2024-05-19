@@ -15,13 +15,7 @@
 
     <item
         android:id="@+id/recursosRecetas"
-        android:title="Recetas"
-        app:showAsAction="never"
-        android:titleTextColor="@color/md_theme_primaryContainer"/>
-
-    <item
-        android:id="@+id/vistaAlimentos"
-        android:title="Alimentos"
+        android:title="@string/recetas"
         app:showAsAction="never"
         android:titleTextColor="@color/md_theme_primaryContainer"/>
 

@@ -36,10 +36,11 @@
         android:layout_height="?attr/actionBarSize"
         app:title="@string/app_name"
         app:menu="@menu/toolbar_menu"
-        app:navigationIcon="@drawable/ic_casa"
+        app:navigationIcon="@drawable/icono"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

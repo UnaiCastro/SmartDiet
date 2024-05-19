@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0F192F" >
 
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/porridge_recipe_title"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="451dp"
+        android:layout_height="278dp"
+        app:srcCompat="@drawable/porridge"
+        tools:layout_editor_absoluteX="-20dp"
+        tools:layout_editor_absoluteY="209dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
+        android:background="#6EC7A7"
+        android:progressTint="#FFEB3B"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/porridge_recipe_source"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="201dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/porridge_recipe_fact"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="527dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VER RECETA"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="465dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

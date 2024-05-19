@@ -9,7 +9,66 @@
         android:id="@+id/dietaFragment"
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
         android:label="fragment_principal"
-        tools:layout="@layout/fragment_principal" />
+        tools:layout="@layout/fragment_principal"/>
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Info.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info"/>
+
+
+
+    <fragment
+        android:id="@+id/gestionDietasFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:label="fragment_gestion_dietas"
+        tools:layout="@layout/fragment_gestion_dietas"/>
+    <action
+        android:id="@+id/actionGestionDietas"
+        app:destination="@id/gestionDietasFragment"/>
+
+
+
+
+    <fragment
+        android:id="@+id/porridgeDetail"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.PorridgeRecipe"
+        android:label="fragment_porridge_detail"
+        tools:layout="@layout/fragment_porridge_detail"/>
+
+    <fragment
+        android:id="@+id/porridgeRecipe"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.PorridgeRecipe"
+        android:label="fragment_porridge_recipe"
+        tools:layout="@layout/fragment_porridge_recipe"/>
+
+    <fragment
+        android:id="@+id/FragmentporridgeRecipe"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.PorridgeRecipe"
+        android:label="fragment_porridge_recipe"
+        tools:layout="@layout/fragment_porridge_recipe"/>
+    <action
+        android:id="@+id/actionPorridgeRecipe"
+        app:destination="@id/porridgeRecipe"/>
+
+    <fragment
+        android:id="@+id/proteinMilkshakeRecipe"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.ProteinMilkshakeRecipe"
+        android:label="fragment_protein_milkshake_detail"
+        tools:layout="@layout/fragment_protein_milkshake_recipe"/>
+    <action
+        android:id="@+id/actionProteinMilkshakeRecipe"
+        app:destination="@id/proteinMilkshakeRecipe"/>
+
+    <fragment
+        android:id="@+id/vistaRecetaFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.VistaRecetaFragment"
+        android:label="fragment_vista_receta"
+        tools:layout="@layout/fragment_vista_receta" />
+    <action
+        android:id="@+id/vistaRecetaFragmentAction"
+        app:destination="@id/vistaRecetaFragment"/>
 
     <fragment
         android:id="@+id/alimentosFragment"
@@ -20,30 +79,4 @@
         android:id="@+id/actionVistaAlimentos"
         app:destination="@id/alimentosFragment"
         app:popUpTo="@id/dietaFragment"/>
-
-    <fragment
-        android:id="@+id/infoFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Info.InfoFragment"
-        android:label="fragment_info"
-        tools:layout="@layout/fragment_info"/>
-
-    <fragment
-        android:id="@+id/gestionDietasFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
-        android:label="fragment_gestion_dietas"
-        tools:layout="@layout/fragment_gestion_dietas"/>
-    <action
-        android:id="@+id/actionGestionDietas"
-        app:destination="@id/gestionDietasFragment"
-        app:popUpTo="@id/dietaFragment"/>
-
-    <fragment
-        android:id="@+id/detalleRecetaPorridge"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.DietaFragment"
-        android:label="fragment_porridge_detail"
-        tools:layout="@layout/fragment_porridge_detail" />
-    <action
-        android:id="@+id/actionDetalleRecetaPorridge"
-        app:destination="@id/detalleRecetaPorridge"
-        app:popUpTo="@id/dietaFragment" />
 </navigation>

@@ -5,92 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="350dp"
-        android:layout_height="43dp"
-        android:text="@string/porridge_recipe_instruction_2"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="445dp" />
+    <!-- Vertical Guideline for Centering -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.27" />
+
+    <!-- Group 1: Protein Milkshake Title -->
+
+    <!-- Group 2: Ingredients Title -->
+
+    <!-- Group 3: Ingredient 1 -->
+
+    <!-- Group 4: Ingredient 2 -->
+
+    <!-- Group 5: Ingredient 3 -->
+
+    <!-- Group 6: Ingredient 4 -->
+
+    <!-- Group 7: Cooking Icon and Timer -->
+
+    <!-- Standalone TextViews -->
 
     <TextView
-        android:id="@+id/textView17"
-        android:layout_width="352dp"
-        android:layout_height="48dp"
-        android:text="@string/porridge_recipe_instruction_1"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="383dp" />
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/porridge_recipe_main_title"
+        app:layout_constraintStart_toEndOf="@id/imageView9"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="52dp"
-        android:layout_height="26dp"
-        app:srcCompat="@android:drawable/presence_away"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:id="@+id/imageView9"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ingredients" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_instruction_title"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/protein_milkshake_recipe_timer"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView37" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/textView28"
+        android:layout_width="251dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/porridge_recipe_instruction_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView27" />
+
+    <TextView
+        android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
         android:text="@string/porridge_recipe_ingredient_2"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="170dp" />
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView23" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_ingredient_5"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="284dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/protein_milkshake_recipe_title_ingredientes"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_title"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="93dp" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_ingredient_3"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="210dp" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/textView27"
+        android:layout_width="250dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="44dp"
         android:text="@string/porridge_recipe_ingredient_1"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="133dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView21" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
+        app:srcCompat="@drawable/instructions" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/porridge_recipe_main_title"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="36dp" />
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/porridge_recipe_ingredient_3"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView24" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/porridge_recipe_ingredient_1"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView21" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:text="@string/porridge_recipe_ingredient_4"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="250dp" />
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView25" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/imageView19"
+        app:srcCompat="@drawable/number_four" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/imageView17"
+        app:srcCompat="@drawable/number_two" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/imageView18"
+        app:srcCompat="@drawable/number_three" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView37"
+        app:srcCompat="@drawable/cooking" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView21"
+        app:srcCompat="@drawable/number_one" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
