@@ -12,16 +12,6 @@
         tools:layout="@layout/fragment_principal"/>
 
     <fragment
-        android:id="@+id/ejerciciosFragment"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.EjercicioFragment"
-        android:label="fragment_ejercicios"
-        tools:layout="@layout/fragment_ejercicio"/>
-    <action
-        android:id="@+id/actionVistaEjercicios"
-        app:destination="@id/ejerciciosFragment"
-        app:popUpTo="@id/ejerciciosFragment"/>
-
-    <fragment
         android:id="@+id/infoFragment"
         android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Info.InfoFragment"
         android:label="fragment_info"
@@ -73,13 +63,17 @@
 
     <fragment
         android:id="@+id/fragmentPerderPeso"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.EjercicioFragment"
         android:label="fragment_perder_peso"
         tools:layout="@layout/fragment_perder_peso"/>
 
     <fragment
         android:id="@+id/fragmentMaximizarEntrenamiento"
-        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.GestionDietasFragment"
-        android:label="fragment_maximizar_entrenamiento"
-        tools:layout="@layout/fragment_maximizar_entrenamiento"/>
+        android:name="com.tfg.smartdiet.iu.PaginaPrincipal.Dieta.EjercicioFragment"
+        android:label="fragment_maximizar_entrenamientos"
+        tools:layout="@layout/fragment_maximizar_entrenamientos"/>
+    <action
+        android:id="@+id/actionVistaEjercicios"
+        app:destination="@id/fragmentPerderPeso"
+        app:popUpTo="@id/fragmentMaximizarEntrenamiento"/>
 </navigation>

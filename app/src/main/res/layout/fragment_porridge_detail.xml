@@ -48,5 +48,13 @@
         android:text="@string/porridge_recipe_fact"
         android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="513dp" />
+        tools:layout_editor_absoluteY="527dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VER RECETA"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="465dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

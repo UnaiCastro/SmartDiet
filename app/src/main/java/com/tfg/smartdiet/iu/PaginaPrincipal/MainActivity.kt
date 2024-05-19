@@ -100,9 +100,9 @@ class MainActivity : AppCompatActivity() {
                     NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaRecetas)
                     true
                 }
-                R.id.vistaAlimentos -> {
+                R.id.vistaEjercicios -> {
                     // Fragment
-                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaAlimentos)
+                    NavHostFragment.findNavController(binding.MainFragmentcontainerview.getFragment()).navigate(R.id.actionVistaEjercicios)
                     true
                 }
                 R.id.cerrarSesion -> {
