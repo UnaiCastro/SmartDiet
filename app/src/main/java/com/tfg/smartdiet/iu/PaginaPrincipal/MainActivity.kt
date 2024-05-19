@@ -29,7 +29,6 @@ import com.tfg.smartdiet.R
 import com.tfg.smartdiet.databinding.ActivityMainBinding
 import com.tfg.smartdiet.domain.ConfigUsuario
 import com.tfg.smartdiet.domain.Dieta
-import com.tfg.smartdiet.domain.ResetWorker
 import com.tfg.smartdiet.iu.Bienvenida.BienvenidaActivity
 import com.tfg.smartdiet.iu.PaginaPrincipal.Historico.HistoricoActivity
 import java.text.SimpleDateFormat
@@ -100,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-        //setResetTrigger(0,0) //Cambiar la hora del reset
     }
 
     override fun onStart() {
@@ -173,40 +171,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavegador.setupWithNavController(navController)
     }
 
-    //este reset no se usa
-    private fun setResetTrigger(hours: Int, minutes: Int) {
-        val calendar = Calendar.getInstance()
-
-        // Set the reset time (hours and minutes)
-        calendar.set(Calendar.HOUR_OF_DAY, hours)
-        calendar.set(Calendar.MINUTE, minutes)
-        calendar.set(Calendar.SECOND, 0)
-
-        // If the reset time has already passed for today, move it to the next day
-        if (calendar.timeInMillis <= System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        val currentTime = Calendar.getInstance().timeInMillis
-        val triggerTimeInMillis = calendar.timeInMillis - currentTime
-
-        // Create the reset worker
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
-            .setRequiresCharging(false)
-            .setRequiresBatteryNotLow(false)
-            .setRequiresDeviceIdle(false)
-            .build()
-
-        val resetWorkRequest = OneTimeWorkRequestBuilder<ResetWorker>()
-            .setInitialDelay(triggerTimeInMillis, TimeUnit.MILLISECONDS)
-            .setConstraints(constraints)
-            .build()
-
-        // Enqueue the reset work request
-        WorkManager.getInstance(this@MainActivity).enqueue(resetWorkRequest)
-        Log.d(logtag, "Reset scheduled for ${calendar.time}")
-    }
 
     private fun checkAndHandleActiveDiet() {
         // Get the current userid
